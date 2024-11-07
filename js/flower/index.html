@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //面向对象
+        //dai.setflower(liu); //调用对象方法
+
+        //js 声明常量对象 对象字面量
+        //对象字面量语法：{属性名1 : 值1, 属性名2 : 值2, ...}
+        const dai = {
+            name : "dai",
+            age :18,
+            hometow : "吉安",
+            hobbies : ['xxx','music'], //数组array ,对象object
+            Boolean :true,//布尔值
+            null : null,//空值
+            undefined : undefined,//未定义值
+            setFlower(target) {
+                target.receiveFlower(dai);
+            }
+
+        };
+        const liu = {
+            name : "liu",
+            age : 19,
+            hometow : "上海",
+            hobbies : ['yyy','reading'],
+            Boolean : false,
+            xq : 40,
+            receiveFlower(sender) {
+                if(liu.xq >90){
+                    console.log("w我liu receive flowe from "+sender.name);
+                }
+                
+            }
+        };
+        const xh = {
+            name : "xh",
+            age : 20,
+            //接口 interface
+            receiveFlower(sender) {
+                if(sender.name === '恒古 ') {
+                    console.log("撒旦撒了");
+                    return;
+                }
+                setTimeout(()=> {
+                    liu.xq = 99;
+                    liu.receiveFlower(sender);
+                },2000);
+            }
+            
+        }
+    </script>
+</body>
+</html>
