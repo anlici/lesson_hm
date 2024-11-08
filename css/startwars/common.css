@@ -1,0 +1,184 @@
+/* Eric Meyer's Reset CSS v2.0 - http://meyerweb.com/eric/tools/css/reset/ */
+/* 扩展版本 */
+/* css reset */
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+
+body {
+    line-height: 1;
+}
+
+ol, ul {
+    list-style: none;
+}
+
+blockquote, q {
+    quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+/* 业务样式 */
+html, body {
+  height: 100vh;
+}
+body {
+  background: #000 url('./images/bg.jpg');
+}
+.starwars {
+  /*800px是透视点到元素的距离。这个值越大，元素看起来就越扁平；值越小，元素看起来就越有立体感。*/
+ /* transform-style 3d 效果 */
+
+
+  perspective: 800px;
+  transform-style: preserve-3d;
+
+  height: 17em;
+  width: 34em;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  /* 移动 自身的大小 */
+  transform: translate(-50%, -50%);
+  /* background: red; */
+}
+
+img {
+  width: 100%;
+}
+.star, .wars, .byline {
+  position: absolute;
+}
+.star {
+  top: -0.75em;
+}
+.wars {
+  bottom: -0.5em;
+}
+.byline {
+  color: #fff;
+  font-size: 2.25em;
+  left: -2em;
+  right: -2em;
+  text-align: center;
+  text-transform: uppercase;
+  top: 42%;
+} 
+
+/* 动作导演 
+   动画名称 + keyframes 定义动作
+*/
+.star {
+   animation: star 5s ease-out infinite;
+}
+.wars {
+  animation: wars 5s ease-out infinite;
+}
+/* 关键帧 */
+
+@keyframes star  { 
+    0% {
+        opacity: 0; /* 初始状态 不可变*/
+        transform: scale(1.5) translateY(-0.75em);
+
+    }
+    20% {
+        opacity: 1;
+    }
+    89% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translateZ(-1000em);
+    }
+}
+
+@keyframes wars  { 
+  0% {
+      opacity: 0; /* 初始状态 不可变*/
+      transform: scale(1.5) translateY(-0.75em);
+
+  }
+  20% {
+      opacity: 1;
+  }
+  90% {
+      opacity: 1;
+      transform: scale(1);
+  }
+  100% {
+      opacity: 0;
+      transform: translateZ(-1000em);
+  }
+}
+
+.byline {
+  /* 线性移动 linear */
+   animation: movie-byline 5s linear infinite;
+}
+
+@keyframes movie-byline {
+  0% {
+     transform: translateZ(5em);
+  }
+ 
+  100% {
+    transform: translateZ(-1em);
+  }
+}
+
+.byline span {
+  /* 旋转 */
+  animation: spin-letters 5s linear infinite;
+  display: inline-block;
+}
+
+@keyframes spin-letters {
+    0%,10% {
+        opacity: 0;
+        transform: rotateY(90deg);
+    }
+    30% {
+        transform: rotateY(0deg);
+        opacity: 1;
+    }
+    95%,100% {
+        opacity: 0;
+    }
+}
