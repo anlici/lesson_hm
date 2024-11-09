@@ -111,9 +111,7 @@ img {
 
    animation: star 5s ease-out infinite;
 }
-.wars {
-  animation: wars 5s ease-out infinite;
-}
+
 /* 关键帧 */
 
 @keyframes star  { 
@@ -134,7 +132,9 @@ img {
         transform: translateZ(-1000em);
     }
 }
-
+.wars {
+  animation: wars 5s ease-out infinite;
+}
 @keyframes wars  { 
   0% {
       opacity: 0; /* 初始状态 不可变*/
