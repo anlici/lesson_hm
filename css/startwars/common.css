@@ -62,8 +62,7 @@ body {
 .starwars {
   /*800px是透视点到元素的距离。这个值越大，元素看起来就越扁平；值越小，元素看起来就越有立体感。*/
  /* transform-style 3d 效果 */
-
-
+/* 背景图铺满全屏  */
   perspective: 800px;
   transform-style: preserve-3d;
 
@@ -81,6 +80,11 @@ img {
   width: 100%;
 }
 .star, .wars, .byline {
+  /* static 静态  relative:相对正常位置进行定位；
+  absolute: 相对于最近的定位祖先元素进行定位；
+  fixed: 固定定位，相对于浏览器窗口进行定位；
+  sticky: 粘性定位，根据用户的滚动位置来定位；
+  */
   position: absolute;
 }
 .star {
@@ -103,6 +107,8 @@ img {
    动画名称 + keyframes 定义动作
 */
 .star {
+  /* ease-out 缓出 */
+
    animation: star 5s ease-out infinite;
 }
 .wars {
@@ -132,6 +138,8 @@ img {
 @keyframes wars  { 
   0% {
       opacity: 0; /* 初始状态 不可变*/
+      /* scale: 1.5缩放 */
+
       transform: scale(1.5) translateY(-0.75em);
 
   }
@@ -149,7 +157,7 @@ img {
 }
 
 .byline {
-  /* 线性移动 linear */
+  /* 线性移动 linear infinite：无限次重复*/
    animation: movie-byline 5s linear infinite;
 }
 
