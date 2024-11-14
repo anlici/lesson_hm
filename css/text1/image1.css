@@ -1,0 +1,29 @@
+.logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: white;
+}
+
+/* SVG 样式 */
+svg {
+    width: 200px;
+    height: 200px;
+}
+
+circle {
+    fill: #00BFFF;
+}
+
+polygon {
+    fill: #FFFFFF;
+    stroke: #00BFFF;
+    stroke-width: 2;
+}
+
+text {
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    color: #00BFFF;
+}

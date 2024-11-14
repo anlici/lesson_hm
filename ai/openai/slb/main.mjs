@@ -9,7 +9,7 @@ const openai = new OpenAI({
   // 国内转发
   baseURL: 'https://api.302.ai/v1'
 });
-// 完成生成 GC 
+// 完成生成 GC create调用接口
 try {
   const response = await openai.completions.create({
     model: 'gpt-3.5-turbo-instruct',

@@ -37,10 +37,17 @@
      ls 展开（Mac），.
      config 配置，
      # 设置全局用户名
-git config --global user.name "John Doe"
+   git config --global user.name "John Doe"
 
 # 设置全局邮箱
-git config --global user.email "john.doe@example.com"
-如果你没有看到.git目录，那是因为这个目录默认是隐藏的，用ls -ah命令就可以看见
+    git config --global user.email "john.doe@example.com"
+    如果你没有看到.git目录，那是因为这个目录默认是隐藏的，用ls -ah命令就可以看见
    - untracked file 未跟踪的文件 还没纳入版本管理
    - on branch main主分支上 默认分支master
+    git log
+    代码提交记录
+   -- oneline 一行显示
+
+   - 暂存区 仓库
+    - 一次性多个文件多次加入暂存区，可以回退，组成一个提交逻辑
+    - 一次commit -m 要规范 讲清楚任务 围绕
