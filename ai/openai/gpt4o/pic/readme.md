@@ -5,8 +5,6 @@
   - 单模态 chatgpt 文本
   - npm i -g openai 全局 openai sdk
 
-
-
   - npm i -g pnpm 全局安装 pnpm
   - 设置为阿里云镜像：npm config set registry https://registry.npmmirror.com 阿里云的 npm 镜像地址
     设置 npm 的源，npm 国外比较慢，国内npm提速

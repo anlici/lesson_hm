@@ -1,0 +1,95 @@
+/*
+ * @author xck
+ * @date 2024-11-17
+ */
+/*css reset*/
+ html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+body {
+    line-height: 1;
+}
+ol, ul {
+    list-style: none;
+}
+blockquote, q {
+    quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+/*通用样式*/
+/* 层叠样式表
+   规则 选择器{
+   属性：属性值；
+   }
+   选择器：标签选择器，类选择器，id选择器，通配符选择器，属性选择器，伪类选择器，伪元素选择器，组合选择器
+   分组选择器 body，html 有“， +  >  ”
+   空格 后代选择器：
+
+
+
+   */
+body,html {
+   height: 100%;
+}
+.page {
+    /*绝对定位，相对最外层body的定位*/
+    position: absolute;
+    top: 0;
+    left:0;
+    right:0;
+    bottom: 0;
+    /* 想看到边框，用背景色 */
+    background-color: aqua;
+    /* 让内容滚动 y方向*/
+    overflow-y: auto;
+
+}
+
+.page__hd {
+    /* 固定定位，相对最外层body的定位 */
+    padding: 40px;
+}
+.page__title {
+    text-align: left;
+    font-size: 20px;
+    font-weight: 400; /*加粗度*/
+
+}
+
+.page__desc {
+    margin-top: 4px;/*外边距*/
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 14px;
+    text-align: left; /*水平居中*/
+}

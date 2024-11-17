@@ -1,0 +1,23 @@
+/*
+* @author:2024-11-17
+*/
+
+.button-sp-area {
+    margin: 15px auto; /* 上下外边距为15px，左右自动 */
+    padding: 15px;/* 内边距为15px */
+}
+
+.weui-btn {
+    display: block;
+    width: 184px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 12px 24px;
+    font-weight: 500;
+    font-size: 17px;
+    text-align: center;
+    line-height: 1.411;
+    text-decoration: none;
+    color: #fff;
+    background-color: #070707;
+}
