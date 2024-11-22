@@ -1,0 +1,16 @@
+{
+  "name": "summ",
+  "version": "1.0.0",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "openai": "^4.72.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "- LLM 开发模板\r   - 代码工程\r    1.pnpm init -y\r    2.将dependencies ：{} 拷贝过去\r      使用npm i\r      node 后端项目的依赖\r     3.\r - 生成文本",
+  "main": "index.js"
+}
