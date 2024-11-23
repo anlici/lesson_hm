@@ -3,34 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>网易英语</title>
+    <title>网易music</title>
+     <!-- 引入 Swiper 库的 CSS 文件，用于实现滑动效果。 -->
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.2/css/swiper.min.css">
     <link rel="stylesheet" href="./common.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-        }
-        /* .box {
-            width: 375px;
-            height: 375px;
-            background-color: red;
-        } */
-    </style>
     
 </head>
 <body>
     <audio id="j-bjm" src="./bgm.mp3" ></audio>
     <div class="next-view-c"></div>
+    <!-- 音乐按钮 点击事件进行控制 -->
     <div class="music-btn off"></div>
 
     <!-- 划页效果 -->
     <div class="swiper-container">
+        <!-- Swiper 容器的包装元素，包含多个滑动页面 -->
         <div class="swiper-wrapper">
             <div class="swiper-slide">
                 <div class="view index">
-                    <div class="logo-c"> 
-                    </div>
+                    <div class="logo-c">  </div>
                 </div>
             </div>
             <div class="swiper-slide"></div>
@@ -38,31 +29,25 @@
 
         </div>
     </div>
+    <!-- 引入 Swiper 库的 JavaScript 文件，用于实现滑动效果 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.2/js/swiper.min.js"></script>
     <script>
         // dom 操作，id 和 类名selector 选择器
+        // id 获取音乐元素j-bjm,通过类选择器获得 music-btn 按钮 
         const audio = document.getElementById('j-bjm');
         const musicBtn = document.querySelector('.music-btn');
-        let isMusicPause = true;
+       
         musicBtn.addEventListener('click',function() {
-            if(isMusicPause) {
+            if(audio.paused) { //暂停
                 audio.play();
-                isMusicPause = false;
             }else {
                 audio.pause();
-                isMusicPause = true;
             }
-            // 或是
-            // if(audio.paused) { //暂停
-            //     audio.play();
-            // }else {
-            //     audio.pause();
-            // }
             musicBtn.classList.toggle('off'); // 切换类名
 
-        })
+        });
 
-        <!-- 滑屏 -->
+        // <!-- 滑屏 使用 Swiper 库创建一个垂直方向的滑动页面 -->
         new Swiper('.swiper-container',{
             direction: 'vertical'
         })

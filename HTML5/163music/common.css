@@ -13,6 +13,8 @@
     left: 25px;
     width: 40px;
     height: 40px;
+    /* no-repeat 不重复 */
+    /* / cover：将背景图片缩放以覆盖整个元素，同时保持其宽高比，可能会导致部分背景图片被裁剪 */
     background: url(./assert/assert/close.png) no-repeat center / cover;
   }
   .music-btn.off {
@@ -30,14 +32,16 @@
     background-color: pink;
   }
   .next-view-c {
-    z-index: 999; /* 层级,高 */
+    z-index: 900; /* 层级,高 ;其他情况不过不建议太高，避免堆叠顺序问题 */
     background:url(http://s5.music.126.net/static_public/5c21db8d4684556c72180904/gx.4ae36e08269404412ecdb99e9453ca17.svg);
     background-size: 100%;
     left: 50%;
     bottom:10px;
     width: 13px;
     height: 86px;
+    /*相对于视口固定位置  */
     position:fixed;
+    /* 结合left,top 来控制位置 ；向左平移 50% 的宽度，使其在水平方向上居中*/
     transform: translate3d(-50%,0,0);
   }
 
@@ -48,8 +52,7 @@
   }
 
   .view.index{
-    background: url(./assert/http://s5.music.126.net/static_public/5c21db8d4684556c72180904/bgg.d78404cec29e5275598b87d1716f0592.png/background.png) ;
-    position: absolute;
+    background: url(http://s5.music.126.net/static_public/5c21db8d4684556c72180904/bgg.d78404cec29e5275598b87d1716f0592.png);
     background-size: cover; /* 背景图片自动缩放,等比例缩放，控制到容器 */
     background-position: center; /* 背景图片居中,容器和图片中间一样 */
   }
