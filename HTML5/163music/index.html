@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>网易英语</title>
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.2/css/swiper.min.css">
+    <link rel="stylesheet" href="./common.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        /* .box {
+            width: 375px;
+            height: 375px;
+            background-color: red;
+        } */
+    </style>
+    
+</head>
+<body>
+    <audio id="j-bjm" src="./bgm.mp3" ></audio>
+    <div class="next-view-c"></div>
+    <div class="music-btn off"></div>
+
+    <!-- 划页效果 -->
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+                <div class="view index">
+                    <div class="logo-c"> 
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-slide"></div>
+            <div class="swiper-slide"></div>
+
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.2/js/swiper.min.js"></script>
+    <script>
+        // dom 操作，id 和 类名selector 选择器
+        const audio = document.getElementById('j-bjm');
+        const musicBtn = document.querySelector('.music-btn');
+        let isMusicPause = true;
+        musicBtn.addEventListener('click',function() {
+            if(isMusicPause) {
+                audio.play();
+                isMusicPause = false;
+            }else {
+                audio.pause();
+                isMusicPause = true;
+            }
+            // 或是
+            // if(audio.paused) { //暂停
+            //     audio.play();
+            // }else {
+            //     audio.pause();
+            // }
+            musicBtn.classList.toggle('off'); // 切换类名
+
+        })
+
+        <!-- 滑屏 -->
+        new Swiper('.swiper-container',{
+            direction: 'vertical'
+        })
+    </script>
+     
+
+   
+</body>
+</html>
