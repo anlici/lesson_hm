@@ -3,7 +3,6 @@ const da1 = {
     paly : function () {
         console.log(this);
         console.log('haha');
-        
     }
 }
 // this 指向实例对象 ds ，打印ds对象
