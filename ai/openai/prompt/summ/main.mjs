@@ -23,7 +23,7 @@ const getCompletion = async(promote,model="gpt-3.5-turbo") =>{
         role:'user',
         content:promote // 内容
     }];
-    // AIGC chat ji
+    // AIGC chat 接口
     const res = await client.chat.completions.create({
         model:model,
         messages:messages,//对话数组
