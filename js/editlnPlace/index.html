@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EditInPlace 哔哩哔哩用户体验打造</title>
+</head>
+<body>
+  <div id="app">
+    <div id="ep1">
+      <span id="content">男德学院一等奖学金获得者</span>
+      <input type="text" id="input" value="男德学院一等奖学金获得者">
+      <input type="button" id="save" value="Save">
+      <input type="button" id="cancel" value="Cancel">
+    </div>
+  </div>
+  <script>
+    // dom 节点 js HTML 节点对象 
+  const content = document.getElementById('content');
+  const input = document.getElementById('input');
+  const save = document.getElementById('save');
+  const cancel = document.getElementById('cancel');
+// 文本状态
+  function convertToText(){
+  input.style.display = 'none';// 输入框
+  save.style.display = 'none';//  隐藏保存按钮
+  cancel.style.display = 'none';//  隐藏取消按钮
+  content.style.display = 'inline';// 显示文字
+  }
+//  编辑状态
+  function convertToEdit(){
+  input.style.display = 'inline';   // 显示输入框
+  save.style.display = 'inline';    // 
+  cancel.style.display = 'inline';  // 
+  content.style.display = 'none';   // 
+  }
+  convertToText();
+
+  content.addEventListener('click',()=>{
+    convertToEdit();
+//  输入框的值等于 文本内容
+    input.value = content.innerText;
+  });
+//  修改后保存
+  save.addEventListener('click',()=>{
+    content.innerText = input.value;
+    convertToText();
+  })
+  // 取消修改
+  cancel.addEventListener('click',()=>{
+    convertToText();
+  })
+
+  </script>
+</body>
+</html>
