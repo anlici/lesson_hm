@@ -19,9 +19,7 @@ EditInPlace.prototype.createElement = function(id) {
   this.parent.appendChild(this.containerElement);
 
   this.staticElement = document.createElement('span');
-  this.staticElement.innerHTML = this.value;// 静态文本等于value
+  this.staticElement.innerText = this.value;// 静态文本等于value
   this.containerElement.appendChild(this.staticElement);// 将静态文本span添加到id为ep1的div中
-  
-  console.log(this.containerElement);
   
 }
