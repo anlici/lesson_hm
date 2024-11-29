@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>css</title>
+    <style>
+        p {
+          color: blue ; /* !important 10000分 ，覆盖所有*/
+        }
+        /* id 级别更高 ，100 ；
+          p：1；
+         类名container ：10分 */
+        #main  p {  
+            color: green;
+        }
+        .container p {
+            color: red;
+        }
+
+    </style>
+
+</head>
+<body>
+    <!-- id 唯一，class进行分类，都是标签的属性 -->
+    <div id="main" class="container">
+        <p>这是一段美好的晚上，被id或是container限定，层叠样式</p>
+        <p style="color: pink;">行内样式，1000分</p>
+    </div>
+    <p>这是外面的风</p>
+</body>
+</html>
