@@ -40,19 +40,21 @@ const main = async () => {
     ]
 // for of es6遍历：
     for(let issue of user_messages) {
-         console.log(issue);
-    
+         const resultPrompt = `请翻译为中文语: ${issue}`;
+         const result = await getCompletion(resultPrompt)
+          console.log(`语句意思是：${result}`);
+        
+    } 
     const prompt = `
-     Tell me what language this is "${issue}"
+     Tell me what language this is "${user_messages}"
      `
      const countryLanguage = await getCompletion(prompt);
 
      const resultPrompt = `
-       帮我翻译以下文字到中文，"${issue}"
+       帮我翻译以下文字到中文，"${countryLanguage}"
        `
       const result = await getCompletion(resultPrompt)
-      console.log(`是${countryLanguage},翻译结果是：${result}`);
-    }
+       console.log(`是${countryLanguage},翻译结果是：${result}`);
 
 }
 main();
