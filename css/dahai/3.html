@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>伪类选择2</title>
+    <style>
+        /* 正在被点击的 */
+        button:active {
+            background-color: red;
+            color: white;
+        }
+        /* 伪类选择不同状态 */
+        p:hover {
+            color: pink;
+            background-color: yellow;
+        }
+        /* 选中 */
+        ::selection {
+            background-color: green;
+            color: white;
+        }
+        input:focus {
+            border:2px solid blue;
+        }
+        /* cheack 选中  */
+        input:checked + label {
+            color: red;
+        }
+        /* 选中一类 */
+        li:nth-child(odd) {
+            background-color: lightgray;
+        }
+        /* 除了最后一个元素li ，其他加间距 */
+        li:not(:last-child) {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>伪类选择器示例</h1>
+        <button>点击我</button>
+        <p>鼠标悬浮在这里</p>
+        <input type="text" placeholder="输入框">
+        <input type="checkbox" id="option1"checked>
+        <label for="option1">选项1</label>
+        <input type="checkbox" id="option2" >
+        <label >选项2</label>
+        <ul>
+          <li>列表项1</li>
+          <li>列表项2</li>
+          <li>列表项3</li>
+          <li>列表项4</li>
+        </ul>
+      </div>
+</body>
+</html>

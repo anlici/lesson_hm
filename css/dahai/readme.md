@@ -31,4 +31,31 @@
     例如：.container ul li:nth-child(odd)  
     一定选择最后一个元素！！
 
+- css 选择器分为几类
+  - 基础选择器：
+    - 标签选择器
+    - 类选择器
+    - id 选择器
+    - 通配符选择器 * 性能不太好
+  - 组合选择器
+    - 后代选择器    空格
+    - 子元素选择器   >
+    - 相邻兄弟选择器 +
+    - 通用兄弟选择器 ~
 
+  - 伪类选择器
+    ::active ::hover ::selection  鼠标事件,可交互
+  - 伪元素选择器
+    ::before ::after
+  - 属性选择器
+    [attr]  [attr=value]  [attr~=value]  [attr|=value]  [attr^=value]  [attr$=value] ？
+    
+  ```js
+  /* cheack 选中  */
+        input:checked + label {
+            color: red;
+        }
+        当页面上有一个 input 元素（如复选框或单选按钮），并且该元素处于选中状态checked时，这个选择器会查找紧挨着该 input 元素的 label 元素。
+  一旦找到这样的 label 元素，就会将其文本颜色设置为红色。
+  ```
+  
