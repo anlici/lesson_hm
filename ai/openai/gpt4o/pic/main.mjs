@@ -51,6 +51,4 @@ try {
         console.log("认证错误");
 }
 }
-
-
  main()
