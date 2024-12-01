@@ -5,11 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>选择器</title>
     <style>
-        /* 兄弟选择器 连着 */
+        /* 相邻兄弟选择器 相近的p进行渲染 */
         h1 + p {
             color: red;
         }
-        /*子元素选择器 container 里面进行加粗 */
+        /* 通用兄弟选择器  所有的兄弟p进行渲染， */
+        /* h1 ~ p {
+            color: green;
+        } */
+        /*子元素选择器 container 里面 p进行加粗 */
         .container > p {
            font-weight: bold ;
         }
@@ -17,7 +21,6 @@
         .container p {
            text-decoration: underline;
        } 
-       
     </style>
 </head>
 <body>
@@ -30,7 +33,6 @@
         <div class="inner">
             <p>这是内部段落</p>
         </div>
-       
     </div>
 </body>
 </html>

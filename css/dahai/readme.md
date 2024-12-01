@@ -5,13 +5,6 @@
    - declaration 声明 ：property 属性 value 值
    
    -  什么是css？
-   ```css
-   /* css rules */
-   h1 {  /* 选择器 */
-     color: red;  /* 声明 */
-     text-align: center;
-   }
-   ```
 - css 层叠样式表，是用来描述页面样式的
   - HTML Dom ，css 选择dom元素运用样式规则
   - css 怎么引入：
@@ -47,15 +40,3 @@
     ::active ::hover ::selection  鼠标事件,可交互
   - 伪元素选择器
     ::before ::after
-  - 属性选择器
-    [attr]  [attr=value]  [attr~=value]  [attr|=value]  [attr^=value]  [attr$=value] ？
-    
-  ```js
-  /* cheack 选中  */
-        input:checked + label {
-            color: red;
-        }
-        当页面上有一个 input 元素（如复选框或单选按钮），并且该元素处于选中状态checked时，这个选择器会查找紧挨着该 input 元素的 label 元素。
-  一旦找到这样的 label 元素，就会将其文本颜色设置为红色。
-  ```
-  
