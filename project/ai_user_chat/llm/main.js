@@ -4,7 +4,7 @@ const OpenAi = require('openai');
 const url = require('url'); // node 内置解析url 模块
 
 const client = new OpenAi({
-    apiKey: 'sk-DQyFVvlYDkVEcwRy1uY6WOkEz0AUhGeQRdSQ0mXKA4JgCp8M',
+    apiKey: 'sk-DQyFVvlYDkVEcwRy1uY6WOkEz0AUhGeQRdSQ0mXKA4JgCp8M', // apiKey  
     baseURL: 'https://api.302.ai/v1'
   });
 
@@ -14,7 +14,7 @@ const getCompletion =  async (prompt, model="gpt-3.5-turbo") => {
       role: 'user',
       content: prompt
     }];
-    // AIGC chat 接口
+    // client实例，AIGC chat 接口
     const response = await client.chat.completions.create({
       model: model,
       messages: messages,
@@ -33,21 +33,20 @@ const server = http.createServer(async (req,res) => {
 
     const parsedUrl = url.parse(req.url, true); // 解析请求的URL，第二个参数为true表示解析查询字符串
     const queryObj = parsedUrl.query; // 获取查询字符串对象
-    console.log(queryObj); 
+ 
     const prompt = `
      ${queryObj.data}
      请根据以上JSON数据内容，回答${queryObj.question}这个问题
      `
+     // 调用 getCompletion 函数，传入构建的提示信息，并等待其返回结果
      const result = await getCompletion(prompt) 
-    // const prompt = query.prompt; // 获取查询字符串中的prompt参数
-    // info 是返回给前端的信息，
-    let info ={
-        result
-    }
+      let info ={
+          result
+      }
     res.statusCode = 200;
     // 响应头 , 告诉浏览器响应的内容类型是json
     res.setHeader('Content-Type','text/json')
-    res.end(JSON.stringify(info))
+    res.end(JSON.stringify(info)) 
  })
  
  server.listen(1314,() => {

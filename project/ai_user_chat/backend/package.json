@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "json-server --watch user.json --port 3000"
+    "dev": "json-server --watch user.json --port 3001"
   },
   "keywords": [],
   "author": "",
