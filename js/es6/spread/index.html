@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>类数组</title>
+</head>
+<body>
+    <!-- p{这是第$个段落}*5-->
+    <p>这是第1个段落</p>
+    <p>这是第2个段落</p>
+    <p>这是第3个段落</p>
+    <p>这是第4个段落</p>
+    <p>这是第5个段落</p>
+    <script>
+       // const nodeList = document.querySelectorAll('p');
+        const nodearr = document.getElementsByTagName('p'); //标签名获取的是类数组
+        // console.log(nodeList);
+        // console.log(nodearr);
+
+        // forEach ,
+        // nodeList.forEach((item)=>{
+        //     // console.log(item.__proto__ === NodeList.prototype);
+        //     //构造函数
+        //     console.log(item.__proto__.constructor);  
+        // })
+        // nodeList.jion(',') // 
+    </script>
+    <script>
+        // 获取 NodeList
+        let nodeList = document.querySelectorAll('p');
+        console.log("NodeList 长度: " + nodeList.length);
+        // 使用 forEach 遍历 NodeList
+        nodeList.forEach((node, index) => {
+            console.log(`第 ${index + 1} 个节点: ${node.textContent}`);
+        });
+        // 将 NodeList 转换为数组
+        let nodeArray = Array.from(nodeList);
+        console.log("转换为数组后的长度: " + nodeArray.length);
+        // 使用 for...of 遍历数组
+        for (let node of nodeArray) {
+            console.log(node.textContent);
+        }
+    </script>
+    
+</body>
+</html>
