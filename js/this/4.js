@@ -11,5 +11,5 @@ function foo() {
 // 使用 bind 方法将 obj.foo 绑定到 obj 上
 setTimeout(obj.foo.bind(obj), 1000);
 function setTimeout(fn, delay) {
-    //fn();//调用位置
+    fn();//调用位置
 }

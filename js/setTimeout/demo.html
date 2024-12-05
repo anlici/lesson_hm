@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>手写定时器</title>
+</head>
+<body>
+    <script>
+        function mySetTimeout(fn,time) {
+            let timer = null;
+            timer = function loop() {
+                setTimeout(() => {
+                    fn();
+                    loop();//递归,循环
+                },time)
+            }
+            loop();// 启动定时器
+            //清除之前通过 setTimeout 函数设置的定时器
+            return () => clearTimeout(timer);
+        }
+        const interval = customSetInterval(() => {
+            console.log("hello world");
+        },1000)
+        
+        setTimeout(() => {
+            interval();
+            console.log("关闭定时器");
+        },5000)
+
+    </script>
+</body>
+</html>

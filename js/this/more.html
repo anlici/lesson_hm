@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>more this</title>
+</head>
+<body>
+    <script>
+        var b = 2
+        var a = {
+            b:1,
+            func1:function(){
+                console.log(this.b)
+            },
+            func2:function(){
+                setTimeout((function(){
+                   // console.log(this.b)
+                   this.func1()
+                   // 手动指向this ，call编译阶段就确定了this指向
+                }).call(a),100)
+            },
+        }
+        a.func1()
+    </script>
+</body>
+</html>

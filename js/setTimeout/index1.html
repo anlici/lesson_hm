@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>setTimeout VS setInterval</title>
+</head>
+<body>
+    <button id="btn">提前关闭setTimeout定时器</button>
+    <button id="btn1">关闭setInterval循环定时器</button>
+    <script>
+       const btn = document.getElementById('btn');
+       btn.addEventListener('click',()=>{
+           clearTimeout(settimeout)
+       })
+       const settimeout = setTimeout(()=>{
+           console.log('我是一次性定时器')
+       },4000)
+
+       const btn1 = document.getElementById('btn1');
+       btn1.addEventListener('click',()=>{
+           clearTimeout(interval)
+       })
+       const interval = setInterval(()=>{
+           console.log('我是循环定时器')
+       },1000)
+
+    </script>
+</body>
+</html>
