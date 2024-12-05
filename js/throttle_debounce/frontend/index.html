@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <label for="unDebounceInput">用户搜索</label>
+        <input type="text"
+            id="unDebounceInput"
+            placeholder="输入需要搜索的用名字">
+    </div>
+    <script>
+       // reset api 接口 ，通往后端接口
+       // fetch 函数
+       const oInput = document.getElementById('unDebounceInput');
+       // keyup 事件, 当用户输入时触发;事件处理函数，this指向oInput事件源
+       oInput.addEventListener('keyup',function() {
+         // console.log('用户输入',this.value);
+         fetch('http://localhost:3001/users')
+             .then(res => res.json())
+             .then(user => {
+                // console.log('user',user);
+                // 过滤用户,
+                const result = user.filter(item => item.name.includes(this.value))
+                console.log(result);
+                
+             })
+       })
+
+    </script>
+</body>
+</html>

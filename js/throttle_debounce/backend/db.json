@@ -1,5 +1,39 @@
 {
-    "users":[
-        
-    ]
+  "users": [
+    {
+      "id": "1",
+      "name": "史铁兵"
+    },
+    {
+      "id": "2",
+      "name": "刘红旗"
+    },
+    {
+      "id": "3",
+      "name": "张三"
+    }
+  ],
+  "posts": [
+    {
+      "id": "1",
+      "title": "API Fox 使用小妙招",
+      "content": "Post 1 content",
+      "userId": 1
+    },
+    {
+      "0": {
+        "id": "2",
+        "title": "JSON-Server 全栈快跑",
+        "content": "react ",
+        "userId": 2
+      },
+      "id": "cf7a"
+    },
+    {
+      "id": "2",
+      "title": "JSON-Server 全栈快跑",
+      "content": "react ",
+      "userId": 2
+    }
+  ]
 }
