@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document1</title>
+    <title>Document2</title>
 </head>
 <body>
     <div>
@@ -12,18 +12,21 @@
             id="unDebounceInput"
             placeholder="输入需要搜索的用名字">
     </div>
-    <ul id="user"> </ul>
+    <ul id="user">
+
+    </ul>
     <script>
-      const oUL = document.querySelector('#user');
-       // reset api 接口 ，通往后端接口// fetch 函数
+       const oUL = document.querySelector('#user');
        const oInput = document.getElementById('unDebounceInput');
-       // keyup 事件, 当用户输入时触发;事件处理函数，this指向oInput事件源
-       oInput.addEventListener('keyup',function() {
+       const debounceNameSearch = debounce(fn,2000);
+       oInput.addEventListener('keyup',debounceNameSearch )
+     
+       function fn() {
         let val = this.value.trim();
         if(val == '') {
             oUL.innerHTML = '';return;// 清空ul
         }
-         fetch('http://localhost:3001/users')
+        fetch('http://localhost:3001/users')
              .then(res => res.json())
              .then(user => {
                 console.log(this);
@@ -32,7 +35,19 @@
                 // Array 在es6中新增的方法
                 oUL.innerHTML = result.map(item => `<li>${item.name}</li>`).join('')
              })
-       })
+         }
+         function debounce(fn,delay) {
+            let timer = null;
+            return function() {
+                if(timer) {
+                    clearTimeout(timer);// 清除定时器
+                }
+            // 指定的时间后执行，使用类数组传递参数
+                timer = setTimeout(() => {
+                    fn.apply(this,arguments)//
+                },delay)
+            }
+         }
     </script>
 </body>
 </html>

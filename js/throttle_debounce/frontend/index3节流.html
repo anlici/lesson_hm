@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Throttle Scroll Example</title>
+</head>
+<body>
+  <button id="btn" class="btn">点击加载</button>
+  <script>
+    function fn() {
+      console.log('Hello', this);
+    }
+
+    // 确保在 DOM 完全加载后获取元素
+    document.addEventListener('DOMContentLoaded', (event) => {
+      const btn = document.getElementById("btn");
+      btn.addEventListener("click", throttle(fn, 1000));
+    });
+
+    function throttle(fn, limit) {
+      let pretime = 0; // 初始化为 0
+
+      return function() {
+        const now = Date.now();
+        if (now - pretime > limit) {
+          fn.apply(this, arguments); // 使用 apply 方法确保 this 正确指向
+          pretime = now;
+        }
+      };
+    }
+  </script>
+</body>
+</html>
