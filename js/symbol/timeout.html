@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 第5次启动，但是同时在1s后调用fn打印，所以在清除前只打印4次
+  
+     function customSetTimeout(fn,time){
+        let intervalID=null
+        function loop(){
+          intervalID= setTimeout(()=>{
+            fn();
+            loop();
+           },time)
+        }
+        loop();
+        return ()=>clearTimeout(intervalID);
+     }
+     const interval=customSetTimeout(function(){
+        console.log('hello world')
+     },1000)
+     
+     setTimeout(()=>{
+        // 调用清除
+        interval();
+     },5000)
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const wes = Symbol('wes');
+        
+        const person = {
+            name: 'wes',
+            name:'wes2',
+            // symbol 作为key 不会被覆盖
+            [wes]:'hello',
+             [wes]:'hello2', //wes被当成键了,当然访问到的是后一个值
+            
+            [Symbol('Mark')]: 'hello2',
+            [Symbol('olivia')]: {gender:'female',age: 22},
+            [Symbol('olivia')]: {gender:'female',age: 22},
+            
+                
+        }
+         console.log(person[wes]);
+       // console.log(person[olivia]); //出错
+        console.log(person[Symbol('Mark')]); //每次创建新symbol都会创建新的symbol
+        // 不会遍历 Symbol 类型的键，因为 Object.entries() 不包含 Symbol 类型的键值对
+        for(let [key,val] of Object.entries(person)){
+            console.log(key,val);
+        }
+        // 获得person的所有symbol
+        const syms = Object.getOwnPropertySymbols(person);
+        console.log(syms);
+        
+        
+        
+        
+    </script>
+</body>
+</html>
