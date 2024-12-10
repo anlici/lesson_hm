@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+<script>
+var a = {
+  name: 'Cherry',
+  fn: function(a, b) {
+    // console.log(this) // 指向a
+    console.log(a + b)
+  }
+}
+// 隐式丢失
+var b = a.fn;
+console.log(a.fn(1,4));
+// + 连接
+b.call(a, [1, 3 ]) // a 1 3，b underfined ，类型转换
+b.apply(a, [1]) // 指定this指向a，传入参数1，2
+b.apply(a, [1, 2]) // a 1 2
+b.call(a, 1, 2) // a 1 2
+// 显式绑定
+var c = a.fn.bind(a, 1); // bind 不会立即执行,返回一个函数
+c(0) // 1
+console.log(a.fn.bind(a,1,2) ); // underfined
+console.log(a.fn.bind(a,1,8)()); // 
+
+
+
+</script>
+</body>
+</html>

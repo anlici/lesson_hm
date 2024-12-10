@@ -1,0 +1,15 @@
+{
+  "name": "database",
+  "version": "1.0.0",
+  "description": "- 姓名、工资、年龄、性别、部门\r   - 选择合适数据库\r     - MySQL 关系型数据库  ![](23B6051D.png)\r       - 外键 表关联\r       - 数据库三大范式\r         - 第一范式 列不可分\r         - 第二范式 表必须有主键\r         - 第三范式 表中不能有冗余字段\r     - mongoDB 非关系数据库\r     - sqlite 轻量级数据库 \r       > sqlite",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "sqlite3":"^5.1.7"
+  }
+}
