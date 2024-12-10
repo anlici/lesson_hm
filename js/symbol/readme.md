@@ -8,3 +8,6 @@
   - Object.keys() 对象键值数组，但是不包括Symbol 类型键名
   - Object.values() 对象值数组，但是不包括Symbol 类型键值
   - Object.entries() 对象键值对数组，但是不包括Symbol 类型键值对
+
+  - call 立即执行，
+  - bind 绑定this，
