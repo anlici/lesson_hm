@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" style="font-size: 75px;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>阿里双一</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+    <script>
+        // () 立即执行函数 阻塞 动态设计html font-size
+        (function () {
+           // console.log(1);
+           function calc() { 
+               const w = document.documentElement.clientWidth;
+               const f = document.documentElement.clientWidth ;
+               // 1rem = 75px
+               document.documentElement.style.fontSize = 75*(f/750) + 'px';
+               console.log(w);
+           }
+           // calc();
+           window.onresize = function () {
+               calc();
+           }
+        })()
+    </script>
+    <!-- 定时刷新 1秒 -->
+    <!-- <meta http-equiv="refresh" content="1"> -->
+</head>
+<body>
+    <div>
+        <div style="width: 10rem;height: 2rem;background-color: red;">二话</div>
+        <!-- <div style="width: 5rem;height: 2rem;background-color: green;display: inline-block;">hello</div><div style="width: 2rem;height: 2rem;background-color: blue;display: inline-block;">希纳斯</div>  -->
+        <div style="font-size: 0;">
+            <!-- 格式化上下文， -->
+            <div style="width: 5rem;height: 2rem;background-color: green;font-size: 20px;color: white;display: inline-block;">继承父元素 为0,覆盖掉</div>
+            <div style="width: 5rem;height: 2rem;background-color: pink;display: inline-block;"></div>
+
+        </div>
+    </div>
+    
+    
+</body>
+</html>

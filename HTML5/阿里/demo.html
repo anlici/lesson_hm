@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- script 阻塞 -->
+    <script>
+        // 动态设置 font-size
+        // () 立即执行函数 阻塞 动态设计html font-size
+        (function () {
+           // console.log(1);
+           function calc() { 
+               const w = document.documentElement.clientWidth;
+               const f = document.documentElement.clientWidth ;
+               // 1rem = 75px
+               document.documentElement.style.fontSize = 75*(f/750) + 'px';
+               console.log(w);
+           }
+           // calc();
+           window.onresize = function () {
+               calc();
+           }
+        })()
+    </script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        html,body {
+            height: 100%;
+        }
+        ul,li {
+            /* list-style是否显示在项目符号前面; */
+            list-style: none;
+        }
+        .item-section {
+            min-height: 100%;
+            background-color: #ee033b;
+            position: relative;
+            font-size: 24px;
+        }
+        .item-section ul {
+            padding: 0.1333333 rem;
+        }
+        .item-section_header img {
+            width: 10rem;
+        }
+        .flag {
+            display: table;
+            width: 100%;
+            margin-bottom :1px;
+            background-color: #fff;
+        }
+        .flag .flag-item {
+            display: table-cell;
+            padding: 0.16rem 0 ;
+            vertical-align: top;
+            background-color: rgb(244, 244, 250);
+        }
+        .flag .flag-item.figure {
+            width: 2.346667rem;
+            height: 2.346667rem;
+        }
+        .flag .flag-title a {
+            color: #000;
+            font-size: 14px;
+            line-height: 1.25;
+            text-align: center;
+            text-decoration: none;
+        }
+       .flag .flag-item.figcaption {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="item-section">
+        <div class="item-section_header">
+            <h2>
+                <img src="https://gw.alicdn.com/mt/TB1PNLZKXXXXXaTXXXXXXXXXXXX-750-481.jpg" alt="">
+            </h2>
+            <ul>
+                <li class="flag">
+                    <a href="#" class="figure flag-item">
+                        <img src="https://placeimg.com/350/350/people/grayscale" alt="">
+                    </a>
+                    <div class="figcation flag-item">
+                        <div class="flag-title">
+                            <a href="#">Carter's1年式灰色长袖连体衣包</a>
+                        </div>
+                    </div>
+                    
+                </li>
+            </ul>
+        </div>
+    </div>
+    
+</body>
+</html>
