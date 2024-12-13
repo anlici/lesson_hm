@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+  <title>LocalStorage</title>
+  <style>
+  * {
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+  box-sizing: border-box;
+  background: url('http://wes.io/hx9M/oh-la-la.jpg') center no-repeat;
+  background-size: cover;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-family: Futura,"Trebuchet MS",Arial,sans-serif;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit; 
+}
+
+svg {
+  fill:white;
+  background: rgba(0,0,0,0.1);
+  padding: 20px;
+  border-radius: 50%;
+  width: 200px;
+  margin-bottom: 50px;
+}
+
+.wrapper {
+  padding: 20px;
+  max-width: 350px;
+  background: rgba(255,255,255,0.95);
+  box-shadow: 0 0 0 10px rgba(0,0,0,0.1);
+}
+
+h2 {
+  text-align: center;
+  margin: 0;
+  font-weight: 200;
+}
+
+.plates {
+  margin: 0;
+  padding: 0;
+  text-align: left;
+  list-style: none;
+}
+
+.plates li {
+  border-bottom: 1px solid rgba(0,0,0,0.2);
+  padding: 10px 0;
+  font-weight: 100;
+  display: flex;
+}
+
+.plates label {
+  flex: 1;
+  cursor: pointer;
+}
+
+.plates input {
+  display: none;
+}
+
+.plates input + label:before {
+  content: '⬜';
+  margin-right: 10px;
+}
+
+.plates input:checked + label:before {
+  content: '🌮';
+}
+
+.add-items {
+  margin-top: 20px;
+}
+
+.add-items input {
+  padding: 10px;
+  outline: 0;
+  border: 1px solid rgba(0,0,0,0.1);
+}
+  </style>
+</head>
+<body>
+<div class="wrapper">
+  <h2>LOCAL TAPAS</h2>
+  <p></p>
+  <ul class="plates">
+    <li>Loading Taps...sad</li>
+  </ul>
+  <form class="add-items">
+    <input type="text" name="item" placeholder="Item Name" 
+      required>
+    <input type="submit" value="+ Add Item">
+  </form>
+  <script>
+    const addItems = document.querySelector('.add-items'); // form
+    const itemsList = document.querySelector('.plates'); // ul
+    // 获取 ，取出转成数组，判断是否有数据
+    const items = JSON.parse(localStorage.getItem("items"))||[];
+    function addItem(e) {
+        e.preventDefault(); // 阻止默认提交
+        console.log(this,e.target); // this 事件发生元素，是form,e.target是submit
+        // 属性选择器，为啥用属性选择器，因为name属性是动态的
+        const text = (this.querySelector("[name=item]")).value.trim(); // 获取表单的value值
+        // 数据 JSON对象
+        const item = {
+            text, // 简写 相当于 text:text，es6
+            done: false
+        }
+        items.push(item);
+        populateList(items,itemsList);
+        localStorage.setItem('items',JSON.stringify(items));// 存储数据
+        this.reset(); // 重置表单
+    }
+    // 渲染数据,比较好维护，耦合性低，可复用
+    function populateList(platesList,itemsList) {
+        // li字符串
+        itemsList.innerHTML = platesList.map((palte,i) => {
+            // data-index 数据属性
+            return `
+            <li>
+                <input type="checkbox" 
+                        data-index=&{i} 
+                        id="item${i}"
+                        ${palte.done ? 'checked' : ''}
+                />
+                <label for="item${i}">${palte.text}</label>
+            </li>   
+            `
+        }
+        ).join(''); // 改 “，” 为 <br>
+    }
+    addItems.addEventListener('submit',addItem) // 函数引用指向地址
+    populateList(items,itemsList); // items 数据渲染到页面
+  </script>
+</div>
+</body>
+</html>
