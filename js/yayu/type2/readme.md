@@ -33,7 +33,7 @@
 - Object -> Primitive Number 怎么转
   - 调用 valueOf()
   - 先valueof方法，如果是原始值，就返回 
-  - 否则，调用toString()返回原始值，返回
+  - 否则，调用toString()返回“，”连接或是本身，返回
   - 如果返回还是返回对象，报错
 
 
@@ -44,3 +44,6 @@
   - String 优先 toString() 
     合情合理
     否则报错 cannot convert to object to primitive value TypeError
+
+- 复杂
+  如果一方是boolean，优先转boolean成
