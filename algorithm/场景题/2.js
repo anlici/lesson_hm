@@ -10,6 +10,7 @@ function arrEqual(arr1,arr2) {
     // false some arr1至少一个元素arr2不存在返回false，indexOf 查item
     return !arr1.some( item => arr2.indexOf(item) === -1);
 }
+// 找到不同，回调函数返回true，外层！逻辑非运算符取反，返回false
 
 console.log([1,2,3].indexOf(1),[1,2,3].indexOf(4)); // 0 -1
 console.log(arrEqual(arr1,arr2));

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue3 Couter</title>
+    <!-- 引入vue3 cdn引入：内容分发网络  -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.4.9/vue.global.js"></script>
+</head>
+<body>
+    <!-- dom appendChild 性能不好，
+         vue3采用挂载点进行更新 -->
+    <div id="root">
+        <!-- vue 应用领地-->
+        <!--数据占位符-->
+        <p>Count:{{count}}</p>
+        <p> {{str}} 走向 {{LLM}} 智能全端</p>
+        <button @click="count++">+</button>
+        <button @click="increment">+1</button>
+        
+    </div>
+    <!-- es6 模块 -->
+    <script type="module" setup lang="ts">
+        const {
+            createApp,
+            ref,
+        } = Vue 
+        // 1.创建应用
+        const app = createApp({
+            // 2.数据   
+            setup() {
+                let count = ref(0);
+                console.log(Object.prototype.toString.call(count));
+                // 响应式对象
+                const str = ref('hello vue3');
+                function increment() {
+                    count.value++;
+                }
+                return {
+                    count,str,
+                    LLM:'Llama3',
+                    increment,
+                }
+            }
+        }).mount('#root') 
+        
+    </script>
+</body>
+</html>
