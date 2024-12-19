@@ -28,12 +28,7 @@ function objectFactory() {
 }
 
 
-function objectFactory2(Fun,...args) {
-    let obj = {};
-    obj.__proto__ = Fun.prototype;
-    Fun.apply(obj,args);
-    return obj;
-}
+
 let awei = objectFactory(Person,'张三',18);
 console.log(awei.name,awei.__proto__);
 awei.sayName();
