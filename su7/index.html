@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3D earth</title>
+<body>
+  <!-- html5 画布  -->
+  <canvas id="webglcanvas"></canvas>
+  <script>
+  // DOM  3D 绘制的容器 
+  const canvas = document.getElementById('webglcanvas')
+  // 绘制的上下文 2d 
+  const ctx = canvas.getContext('2d')
+  // 调用绘制API 
+  ctx.beginPath();
+  // 圆心
+  let x = canvas.width / 2;
+  let y = canvas.height / 2;
+  let radius = 70; // 半径
+  let startAngle = 30;// 开始角度
+  let endAngle =  Math.PI;
+  let counterClickwise = false; // 顺时 false 逆时针 true
+
+  ctx.arc(x, y, radius, startAngle, endAngle, 
+  counterClickwise);
+
+  ctx.fillStyle = 'green';
+  ctx.stokeStyle = 'blue'; // 线条颜色
+  ctx.lineWidth = 2; // 线条宽度
+
+  ctx.fill(); 
+  ctx.stroke(); // 绘制
+
+  ctx.closePath();
+
+
+
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3D 地球</title>
+  <!-- 画地球 选择框架 加速 -->
+  <script src="https://unpkg.com/three@0.128.0/build/three.min.js"></script>
+</head>
+<body>
+  <canvas id="webglcanvas"></canvas>
+  <script>
+  // 3d 地球
+  // 3D 时间就是镜头拍出的世界，导演
+  let canvas, // 3d 容器
+    camera, // 镜头
+    scene, // 场景 
+    renderer, // 渲染器
+    group; // 组 
+    // 物品
+  let mouseX = 0, mouseY = 0; // mousemove 坐标
+  let windowHalfX = window.innerWidth / 2;  // 球心
+  let windowHalfY = window.innerHeight / 2;
+  init();
+
+  // 准备
+  function init() {
+    canvas = document.getElementById('webglcanvas'); // DOM 
+    camera = new THREE.PerspectiveCamera(60,  
+    window.innerWidth / window.innerHeight, 1, 2000); // 实例化 相机
+    // 相机离scene场景
+    camera.position.z = 500;
+
+    scene = new THREE.Scene(); // 实例化 场景
+    scene.background = new THREE.Color(0xffffff); // 背景色
+
+    group = new THREE.Group();// 组
+    scene.add(group);
+    
+    // 纹理加载器
+    let loader = new THREE.TextureLoader(); // 简单的加载器
+    loader.load('land_ocean_ice_cloud_2048.jpg', function(texture) {
+      let geometry = new THREE.SphereGeometry(200, 20, 20); // 球体
+      let material = new THREE.MeshBasicMaterial({ // 材质
+        map: texture
+      });
+      let mesh = new THREE.Mesh(geometry, material); // 网格
+      group.add( mesh );
+      // 渲染器 目标是canvas 
+      renderer = new THREE.WebGLRenderer({
+        canvas: canvas,
+        antialias: true
+      });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      // renderer.render(scene, camera);
+    }) 
+
+    function animate() {
+        requestAnimationFrame(animate);
+        //
+        render();
+    }
+    function render() {
+        camera.position.x +=camera.position.x * 0.05;
+        renderer.render(scene, camera);
+        
+    }
+
+
+  }
+  </script>
+</body>
+</html>

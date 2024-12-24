@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D 地球</title>
+    <style>
+        body { margin: 0; }
+        canvas { display: block; }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+    <script>
+        let camera, scene, renderer, earth, group;
+        let mouseX = 0, mouseY = 0;
+        let windowHalfX = window.innerWidth / 2;
+        let windowHalfY = window.innerHeight / 2;
+
+        init();
+        animate();
+
+        function init() {
+            // 创建场景
+            scene = new THREE.Scene();
+
+            // 创建相机
+            camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 2000);
+            camera.position.z = 1000;
+
+            // 创建渲染器并添加到DOM
+            renderer = new THREE.WebGLRenderer({ antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            document.body.appendChild(renderer.domElement);
+
+            // 添加地球
+            createEarth();
+
+            // 添加光源
+            const light = new THREE.DirectionalLight(0xffffff, 1);
+            light.position.set(500, 500, 500).normalize();
+            scene.add(light);
+
+            // 监听窗口大小改变
+            window.addEventListener('resize', onWindowResize, false);
+        }
+
+        function createEarth() {
+            group = new THREE.Group();
+
+            // 加载地球纹理
+            const textureLoader = new THREE.TextureLoader();
+            const earthTexture = textureLoader.load('https://threejsfundamentals.org/threejs/resources/images/earth.jpg');
+            const normalTexture = textureLoader.load('https://threejsfundamentals.org/threejs/resources/images/normal.jpg');
+
+            // 创建地球几何体和材质
+            const geometry = new THREE.SphereGeometry(200, 32, 32);
+            const material = new THREE.MeshPhongMaterial({
+                map: earthTexture,
+                normalMap: normalTexture
+            });
+
+            // 创建地球网格并添加到组中
+            earth = new THREE.Mesh(geometry, material);
+            group.add(earth);
+
+            // 将组添加到场景中
+            scene.add(group);
+        }
+
+        function onWindowResize() {
+            windowHalfX = window.innerWidth / 2;
+            windowHalfY = window.innerHeight / 2;
+
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+
+            // 旋转地球
+            group.rotation.y += 0.001;
+
+            // 渲染场景
+            renderer.render(scene, camera);
+        }
+    </script>
+</body>
+</html>
