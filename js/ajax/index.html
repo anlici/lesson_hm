@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajax 数据接口</title>
+
+</head>
+<body>
+    <ul id="memberList"></ul>
+
+    <script>
+        const oUL = document.getElementById('memberList');
+        fetch('https://api.github.com/orgs/lemoncode/members') 
+           .then(res => res.json())
+           .then(data => {
+                oUL.innerHTML = data.map(member => `
+                    <li>
+                        <img src="${member.avatar_url}" alt="">
+                        <span>${member.login}</span>
+                    </li>
+                `)
+           }).join('')
+
+    </script>
+</body>
+</html>

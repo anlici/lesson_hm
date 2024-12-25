@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajax 实践</title>
+</head>
+<body>
+    <ul id="memberList"></ul>
+    <script>
+        const oUL = document.getElementById('memberList');
+        // fetch js主动拉取数据，前辈 XMLHttpRequest
+        const xhr = new XMLHttpRequest();
+        xhr.open('get','https://api.github.com/orgs/lemoncode/members' || '',false) ;
+        // readystate 0 未初始化 1 已建立连接 2 已获取响应头 3 正在加载 4 已加载 5 操作完成
+        // status 200 成功 404 未找到 500 服务器错误
+        // onreadystatechange 状态改变时触发
+        xhr.onreadystatechange = function () {
+            if(xhr.readyState === 4 && xhr.status === 200) {
+                const data = JSON.parse(xhr.responseText);
+                oUL.innerHTML = data.map(member => `
+                    <li>
+                        <img src="${member.avatar_url}" alt="">
+                        <span>${member.login}</span>
+                    </li>
+                `).join('')
+            }
+        }
+        xhr.send()
+    </script>
+</body>
+</html>
