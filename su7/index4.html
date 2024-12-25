@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3D 4</title>
+    <title>3D 411</title>
     <style>
         body { margin: 0; }
         canvas { display: block; }
@@ -12,9 +12,16 @@
 </head>
 <body>
     <script>
-        let camera, scene, renderer, earth;
-        let mouseX = 0, mouseY = 0;
+        let canvas, // 3d 容器
+        camera, // 镜头
+        scene, // 场景 
+        renderer, // 渲染器
+        group; // 组 
 
+            // 物品
+        let mouseX = 0, mouseY = 0; // mousemove 坐标
+        let windowHalfX = window.innerWidth / 2;  // 球心
+        let windowHalfY = window.innerHeight / 2;
         init();
         animate();
 
@@ -22,6 +29,9 @@
             // 创建场景
             scene = new THREE.Scene();
             scene.background = new THREE.Color(0xffffff); // 白色背景
+
+            group = new THREE.Group();// 组
+            scene.add(group);
 
             // 创建相机
             camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 2000);
@@ -46,30 +56,35 @@
             document.addEventListener('mousemove', onMouseMove, false);
         }
         function onMouseMove(event) {
-            mouseX = event.clientX - windowHalfX;
-            mouseY = event.clientY - windowHalfY;// y 一半
+
+            mouseX = (event.clientX - windowHalfX)/10;
+            //使鼠标在窗口中心时 mouseY 的值为0，向上移动时为负值，向下移动时为正值。
+            mouseY = (event.clientX - windowHalfX)/10;// y 一半
         }
 
         function createEarth() {
             // 加载地球纹理
             const loader = new THREE.TextureLoader();
+            // 加载指定的纹理图像，并在加载完成后执行回调函数
             loader.load('./earch.jpg', function (texture) {
                 // 创建地球几何体和材质
                 const geometry = new THREE.SphereGeometry(200, 20,20);
                 const material = new THREE.MeshPhongMaterial({
-                    map: texture,
+                    map: texture, // 漫反射贴图
                     shininess: 10 // 高光
                 });
 
                 // 创建地球网格并添加到场景中
                 earth = new THREE.Mesh(geometry, material);
-                scene.add(earth);
+                group.add(earth);
             });
         }
 
         function onWindowResize() {
+            windowHalfX = window.innerWidth / 2;
+            windowHalfY = window.innerHeight / 2;
             camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
+            camera.updateProjectionMatrix();// 更新相机投影矩阵
             renderer.setSize(window.innerWidth, window.innerHeight);
         }
 
@@ -88,6 +103,12 @@
             if (earth) {
                 earth.rotation.y -= 0.005;
             }
+
+            // if (earth) {
+            //     // 旋转地球
+            //     earth.rotation.y += mouseX * 0.001; // 乘以一个小数来调整旋转速度
+            //     earth.rotation.x -= mouseY * 0.005; // 同上，注意这里减去是因为y轴方向相反
+            // }
 
             // 渲染场景
             renderer.render(scene, camera);
