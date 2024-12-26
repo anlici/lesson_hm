@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vuetodos</title>
+    <style>
+        .done {
+            color: gray;
+            text-decoration: line-through;
+        }
+    </style>
+
+</head>
+<body>
+    <div id="app">
+        <h2>{{title}}</h2>
+        <!--keydown -->
+        <input type="text" v-model="title"
+        @keydown.enter="addTodo">
+        <!--展示数据-->
+        <ul>
+            <li v-for="todo in todos" >
+                <span :class="{done:todo.done}">{{todo.title}}</span>
+                <!-- 删除按钮 -->
+                <button @click="todos.splice(todo,1)">删除</button>
+            </li>
+        </ul>
+        
+        
+    </div>
+    <script src="https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/vue/3.2.31/vue.global.min.js"></script>
+    <script>
+        const App = {
+            data() {
+                return {
+                    todos: [
+                        {title:'吃饭',done:true},
+                        {title:'睡觉',done:false},
+                    ],
+                    title: ''
+                }
+            },
+            methods: {
+                addTodo () {
+                    // this.data.todos
+                    this.todos.push({
+                        title:this.title,
+                        done:false
+                    })
+                    this.title = ''
+                }
+            }
+
+        }
+        // mount 挂载到id为app的元素上
+        Vue.createApp(App).mount('#app')
+
+    </script>
+</body>
+</html>

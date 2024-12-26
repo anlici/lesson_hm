@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>dom </title>
 </head>
 <body>
     <h2 id="app"></h2>
@@ -11,11 +11,11 @@
     <script>
         var app = document.getElementById("app");
         var todoInput = document.getElementById("todo-input");
-
-        todoInput.addEventListener('change',function (event) {
+        // change 事件改变
+        todoInput.addEventListener('input',function (event) {
             var val = event.target.value;
             console.log(val,todoInput.value,event,this.value);
-            
+            app.innerHTML = val;
         })
     </script>
 </body>

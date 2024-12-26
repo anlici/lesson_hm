@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue 变化</title>
+</head>
+<body>
+    <div id="app">
+        <!--插值表达式 {{}} 数据-->
+        <h2>{{title}}</h2>
+        <input type="text" id="todo-input" v-model="title">
+        <!--v-bind / :  绑定html属性到vue实例数据-->
+        <img :src="imgUrl" alt="">
+        <!--v-on / @  绑定事件到vue实例方法-->
+        <button @click="changeTitle">change title</button>
+        <!--v-if 条件渲染-->
+        <h2 v-if="flag">hello world</h2>
+        
+        <!--v-for 循环渲染-->
+        <ul>
+            <li v-for="(item,index) in list" :key="index">{{item}}</li>
+        </ul>
+        
+
+    </div>
+    <script src="https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/vue/3.2.31/vue.global.min.js"></script>
+    <script>
+        const App = {
+            data() {
+                return {
+                    flag: false,
+                    list: [1,2,3,4,5],
+                    imgUrl: 'https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/fe-interview/001.png',
+                    title: 'hello world'
+                }
+            },
+            methods: {
+                changeTitle() {
+                    this.title = 'hhhh change'
+                },
+                addItem() {
+                    this.list.push
+                }
+            }
+
+        }
+        // mount 挂载到id为app的元素上
+        Vue.createApp(App).mount('#app')
+
+    </script>
+</body>
+</html>
