@@ -2,7 +2,7 @@
 
 - title data 
   {{title}} 数据驱动的界面
-  inpuut v-model="title" 
+  input v-model="title" 
   input 输入时候， 输入框的值改变了， 和数据项title 不一样 
   @input 麻烦， v-model 专门解决数据双向绑定 
 
