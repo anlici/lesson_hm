@@ -1,22 +1,16 @@
+<!-- Parent.vue -->
 <template>
-  <div>
-    <button @click="count++">Count is: {{ count }}</button>
-    <h1>hello </h1>
-  </div>
+  <Son @sendMessage="receiveMessage" />
+  <p>{{ message }}</p>
 </template>
 
-<script setup lang="ts">
-    import { ref } from 'vue'
-    const count = ref(0)
-</script>
+<script setup>
+import { ref } from 'vue';
+import Son from './Son.vue';
 
-<style >
-.counter {
-  font-weight: bold;
-  text-align: center;
-  margin-top: 50px; 
+const message = ref('');
+
+function receiveMessage(msg) {
+  message.value = msg;
 }
-button {
-  padding: 10px 20px;
-}
-</style>
+</script>

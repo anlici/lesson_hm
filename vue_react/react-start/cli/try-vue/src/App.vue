@@ -6,9 +6,9 @@ import Weather  from './components/Weather.vue';
 
 <template>
    <div>
-   <!-- <Counter />
-   <HelloWorld /> -->
-   <Weather />
+    <Counter /> 
+   <!-- <HelloWorld /> --> 
+   <!-- <Weather /> -->
    
    </div>
 </template>
