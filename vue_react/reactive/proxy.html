@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Propx</title>
+</head>
+<body>
+    <div id="container">1</div>
+    <div id="count">2</div>
+    <button id="button">+1</button>
+    <button id="btn">*2</button>
+    <script>
+        
+        // 匿名函数  立即执行函数 IIFE ->回调函数（
+        (function () {
+            // this 指向window,块级作用域，避免命名冲突
+            // console.log(this);
+            // 观察器
+            function watch(target,func) {
+                // 代理对象 proxy es6 新特性
+                const proxy = new Proxy(target,{
+                   get: function (target,key) {
+                       console.log(target,key);
+                       console.log(`数据${target}被访问${key}了`);
+                       return target[key]
+                   },
+                   set: function (target,key,newValue) {
+                       console.log(`${key} 数据被修改了: ${newValue}`);
+                       target[key] = newValue
+                       func(key,newValue)
+                       return true
+                   }
+                })
+                return proxy
+            }
+            // 暴露给全局
+            this.watch = watch
+        })()
+        let obj = {
+            value:1,
+            count:2
+        }
+        // 
+        var newObj = watch(obj, function (key,newValue) {
+            if (key === 'value') {
+                document.getElementById('container').innerHTML = newValue
+            }
+            if (key === 'count') {
+                document.getElementById('count').innerHTML = newValue
+            }
+        })
+        document.getElementById('button')
+            .addEventListener('click',function () {
+            // 交给代理对象
+            newObj.value++
+        })
+        document.getElementById('btn')
+            .addEventListener('click',function () {
+            // 交给代理对象
+            newObj.count *= 2
+        })
+    </script>
+</body>
+</html>

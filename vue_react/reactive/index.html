@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>响应式api</title>
+</head>
+<body>
+    <div id="container">1</div>
+    <div id="value">2</div>
+    <button id="button">点击加一</button>
+    <button id="btn">点击*2</button>
+    <script>
+        // json 数据对象
+        var obj = {
+            count: 1,
+            value: 2
+        }
+        // 响应式数据
+        let count = 1
+        let value = 2
+        // 渲染函数
+        function render(){
+            document.getElementById('container').innerHTML = obj.count
+            document.getElementById('value').innerHTML = obj.value
+        }
+        // 拦截器 属性定义
+        // Object.defineProperty(obj,'count',{
+        //     get:function(){
+        //         console.log('数据被访问了')
+        //         return count
+        //     },
+        //     set(newValue) {
+        //         count = value
+        //         render()
+        //         console.log('数据变化了')
+        //     }
+        // })
+        // Object.defineProperty(obj,'value',{
+        //     get:function(){
+        //         console.log('数据被访问了')
+        //         return value
+        //     },
+        //     set(newValue) {
+        //         value = newValue // 更新内部数据
+        //         render()
+        //         console.log('数据变化了')
+        //     }
+        // })
+        
+        ['count','value'].forEach(key => {
+            // 直接使用obj[key] 会导致递归调用，堆栈溢出
+            let internalValue = obj[key]
+            Object.defineProperty(obj,key,{
+                get:function() {
+                    console.log(`${key}数据被访问了`);
+                    return internalValue
+                },
+                set:function(newValue){
+                    internalValue = newValue
+                    render()
+                    console.log(`${key}数据被访问了`);
+                }
+            })
+        })
+
+        document.getElementById('button').addEventListener('click',function(){
+            obj.count++
+            // render()
+        })
+        document.getElementById('btn').addEventListener('click',function(){
+            obj.value *= 2
+        })
+
+    </script>
+</body>
+</html>
