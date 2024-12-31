@@ -13,7 +13,7 @@ const proxy = new Proxy({},{
 
 proxy.name = '123';
 
-proxy.name = '456';// 不会触发set
+proxy.name = '456';// set修改name
 
 // console.log(name);
 console.log(proxy.name);
