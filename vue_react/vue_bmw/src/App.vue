@@ -7,13 +7,13 @@ const change = () => {
   width.value += 100
 }
 
-const count = ref(0)
 const showComponent = ref(true) // 组件显示状态
 // 包装成响应式对象
 const toggleComponent = () => {
   showComponent.value = !showComponent.value
 }
 
+const count = ref(0)
 const incrementCount = () => {
   count.value++
 }
