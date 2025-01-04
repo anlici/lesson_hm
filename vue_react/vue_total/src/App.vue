@@ -10,9 +10,9 @@ const name = "小猪琪琪"
           <h3 class="brand">{{ name }}</h3>
           <header>
           <nav class="menu"> 
-              <router-link to="/">首页</router-link><br>
-              <router-link to="about">关于</router-link><br>
-              <router-link to="posts">post</router-link><br>
+              <router-link class="menu-item" to="/">首页</router-link>
+              <router-link class="menu-item" to="about">关于</router-link>
+              <router-link class="menu-item" :to="{name:'postIndex'}">post</router-link><br>
           </nav>
           </header>
           <main class="page-body">
@@ -22,6 +22,8 @@ const name = "小猪琪琪"
    </div>
 </template>
 
-<style scoped>
-
+<style lang="stylus" scoped>
+.page
+  display: flex
+  padding 32px
 </style>

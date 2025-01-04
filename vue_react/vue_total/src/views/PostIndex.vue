@@ -1,13 +1,16 @@
 <template>
     <div>
-        <p>内人</p>
+        postIndex嘿嘿嘿
+       {{ sort }}
     </div>
 </template>
 
 <script setup>
-import { useRoute } from 'vue-router';
-const root = useRoute()
-const {postId} = root.params
+import {defineProps} from 'vue'
+const props = defineProps({
+    sort:String,
+})
+const {sort} = props
 
 </script>
 
