@@ -5,7 +5,7 @@ const name = "小猪琪琪"
 
 <template>
     <div>
-        <p>首页贡嘎山</p>
+        Home
     </div>
 </template>
 

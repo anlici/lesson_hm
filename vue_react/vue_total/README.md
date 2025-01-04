@@ -40,4 +40,7 @@
 
 - 使用router.push() 入栈
   栈顶是当前路由，显示组件；前进或是后退 -》 导航
-  
+
+- meta: {
+            requireAuth: true
+        } 路由鉴权配置项
