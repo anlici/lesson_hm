@@ -1,18 +1,11 @@
-<script setup>
-import Counter from './components/Counter.vue'
-import HelloWorld from './components/HelloWorld.vue';
-import Weather  from './components/Weather.vue';
-</script>
-
 <template>
-   <div>
-    <Counter /> 
-   <!-- <HelloWorld /> --> 
-   <!-- <Weather /> -->
-   
-   </div>
+    <div>
+        <!-- 子给方法让父进行使用 -->
+        <Parent />
+    </div>
 </template>
 
-<style scoped>
+<script setup>
+import Parent from './components/Parent.vue';
+</script>
 
-</style>
