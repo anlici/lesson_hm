@@ -17,31 +17,29 @@
     // vue 挂载前，在内存中，实例化，会先把模版编译成render函数
     // function compile(template,data) {
         
-    //     // let reg = /\{\{(\w+)\}\}/g
-    //     // return template.replace(reg,(...args)=>{
-    //     //     return data[args[1]]
-    //     // })
-
-    //     let reg = /\{\{([a-z]+)\}\}/g
+    //     // let reg = /\{\{([a-z]+)\}\}/g
+    //     // // return template.replace(reg,(...args)=>{
+    //     // //     return data[args[1]]
+    //     // // })
     //     // return template.replace(reg,(match,path) => {
     //     //     console.log(match,path);
-    //     //     // 
     //     //     return path in data ? data[path] : ''
     //     // })
 
-    //     // let reg = /\{\{([a-z]+)\}\}/
-    //     // // console.log(template.match(reg));
-    //     // // exec 执行一次，返回的是一个数组
+    //     //let reg = /\{\{([a-z]+)\}\}/
+    //     // console.log(template.match(reg));
+    //     // exec 执行一次，返回的是一个数组
 
-    //     // while(reg.test(template)) {
-    //     //     let arr = reg.exec(template)[1];
-    //     //     let value = data[arr]
-    //     //     template = template.replace(reg,value)
-    //     // }
-    //     // return template
+    //     let reg = /\{\{(\w+)\}\}/
+    //     while(reg.test(template)) {
+    //         let arr = reg.exec(template)[1];
+    //         let value = data[arr]
+    //         template = template.replace(reg,value)
+    //     }
+    //     return template
        
     // }
-    // 递归，如果还能匹配到，执行
+    // // 递归，如果还能匹配到，执行
     function compile(template,data) {
         let reg = /\{\{([a-z]+)\}\}/
         // [object RegExp] 正则表达式对象，
@@ -55,10 +53,10 @@
          }else {
             return template
          }
-
     }
-    console.log(compile(str,person));
     
+    console.log(compile(str,person));
+    // document.innerHTML = compile(str,person)
 </script>
     
 </body>
