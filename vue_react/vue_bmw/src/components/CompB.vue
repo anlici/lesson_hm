@@ -1,4 +1,4 @@
-<!-- <template>
+<!-- <!-- <template>
     <button @click="add">B点我{{ count }}</button>
   </template>
   
@@ -24,14 +24,12 @@
 
 <template>
   <div>
-    hhdsa1哈哈吧
+    {{ isLogin }}
   </div>
 </template>
 
 <script>
-
+import  {User,toRefs} from './store/user'
+const User = User()
+const {isLogin} = toRefs(User)
 </script>
-
-<style lang="scss" scoped>
-
-</style>

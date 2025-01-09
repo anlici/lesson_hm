@@ -1,10 +1,11 @@
 // 中央管理store 
 import {defineStore} from 'pinia'
-import {ref} from 'vue'
+import {ref,reactive} from 'vue'
 export const useCounterStore = defineStore('counter',{
     state:()=>{
         return {
-            count:ref(0)
+            count:ref(0),
+            isLogin:ref(false),
         }
     },
     actions:{
@@ -13,3 +14,5 @@ export const useCounterStore = defineStore('counter',{
         }
     }
 })
+
+

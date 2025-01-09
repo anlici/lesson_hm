@@ -1,6 +1,7 @@
 <template>
   <button @click="counterStore.add">A点我{{ counterStore.count }}</button>
-  <CompSubA :count="count"/> 
+  {{ counterStore.isLogin }}
+  <CompSubA :count="count" v-if="isLogin"/> 
   <!-- <CompSubA /> -->
 </template>
 
