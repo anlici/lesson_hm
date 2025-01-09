@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>跨域</title>
+    
+</head>
+<body>
+    <div id="list"></div>
+   <ul id="list2"></ul>
+    <!-- <script>
+        // 定义回调函数
+        function handleResponse(data) {
+            const container = document.getElementById('list');
+            container.innerHTML = `
+                <p>姓名: ${data.name}</p>
+                <p>年龄: ${data.age}</p>
+                <p>城市: ${data.city}</p>
+            `;
+        }
+        let list = document.getElementById('list')
+       // fetch('http://127.0.0.1:3000')
+        function callBack(data) {
+            // console.log(data);
+             handleResponse(data)
+            
+        }
+        // script 阻塞式加载，会阻塞页面渲染;
+        // html 和dom树先解析
+        //callBack()
+    </script>
+    <script src="http://localhost:3000/"></script> -->
+    <script>
+        //callback()
+        function handleResponse(data) {
+            const container = document.getElementById('list');
+            container.innerHTML = `
+                <p>姓名: ${data.name}</p>
+                <p>年龄: ${data.age}</p>
+                <p>城市: ${data.city}</p>
+            `;
+        }
+       
+        let list2 = document.getElementById('list2')
+        let jsonp = function(url,callback) {
+            // 1. 创建script标签
+            let script = document.createElement('script')
+            // 2. 给script标签添加src属性
+            script.src = url
+            // 3. 给script标签添加回调函数
+            window.callback =  callback
+            // handleResponse()
+            // 4. 将script标签添加到页面中
+            document.body.appendChild(script)
+        }
+        
+        jsonp('http://localhost:3000/',
+            (data) => {
+                list2.innerHTML = data.map(item => {
+                    return `<li>${item}</li>`
+                }).join('')}
+       )
+
+    </script>
+</body>
+</html>
