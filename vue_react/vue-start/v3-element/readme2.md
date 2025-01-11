@@ -22,6 +22,13 @@
   - items prop 表单域的key
   - formRef.validate() 校验表单
 
+- ElSubMenu
+  - index 子菜单的索引
+  -<template #title>
+        我的
+    </template>
+    具名插槽，named slot 某个位置
+
 
 - formItem 单个表单域，
   label 标签
