@@ -1,14 +1,13 @@
 import { createApp } from 'vue'
-import './style.css'
 import App from './App.vue'
-import {
-   ElButton,
-} from 'element3'
-import 'element3/lib/theme-chalk/index.css'
+import { ElButton, ElForm, ElInput, ElFormItem } from 'element-plus'
+import 'element-plus/dist/index.css'
 import router from './router'
-
 
 createApp(App)
    .use(router)
    .use(ElButton)
+   .use(ElForm)
+   .use(ElInput)
+   .use(ElFormItem)
    .mount('#app')

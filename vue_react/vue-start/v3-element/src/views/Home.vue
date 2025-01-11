@@ -1,12 +1,11 @@
 <template>
     <div>
-       home
-       <p>我是home</p>
+       Home
     </div>
 </template>
 
 <script setup>
-
+console.log('我是home');
 </script>
 
 <style lang="scss" scoped>
