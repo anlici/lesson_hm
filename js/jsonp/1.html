@@ -21,10 +21,9 @@
         }
         let list = document.getElementById('list')
        // fetch('http://127.0.0.1:3000')
-        function callBack(data) {
+        function callback(data) {
             // console.log(data);
              handleResponse(data)
-            
         }
         // script 阻塞式加载，会阻塞页面渲染;
         // html 和dom树先解析
@@ -61,7 +60,6 @@
                     return `<li>${item}</li>`
                 }).join('')}
        )
-
     </script>
 </body>
 </html>

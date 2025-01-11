@@ -1,10 +1,9 @@
-<!-- <!-- <template>
+<!-- <template>
     <button @click="add">B点我{{ count }}</button>
   </template>
   
-  <script setup>
+<script setup>
   import { ref,defineEmits,defineProps } from 'vue'
-  
   const props = defineProps({
     count: {
       Number:String,
@@ -16,11 +15,9 @@
     console.log('B点我');
     emit('add')
   }
-  </script>
+</script> -->
+
   
-  <style scoped>
-  </style>
-   -->
 
 <template>
   <div>
