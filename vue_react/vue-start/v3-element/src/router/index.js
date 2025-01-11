@@ -1,12 +1,11 @@
 import {createRouter,createWebHistory} from 'vue-router'
-// import Home from '../views/Home.vue'
-// import Acticle from '../views/Acticle.vue'
-// import Login from '../views/Login.vue'
 
+// 路由配置数组
 const routes =[
     {
         path:'/',
         name:'home',
+        // 路由懒加载
         component:() => import('../views/Home.vue'),
         meta:{
             title:'首页',
@@ -30,10 +29,11 @@ const routes =[
         component:() => import('../views/Login.vue'),
         meta:{
             title:'登录',
-            requireLogin: false // 是否需要登录 requrireLogin: true
+            requireLogin: true // 是否需要登录 requrireLogin: true
         }
     }
 ]
+// 实例化路由对象
 const router = createRouter({
     history:createWebHistory(),
     routes
@@ -43,17 +43,19 @@ router.beforeEach((to,from,next) =>{
     // 默认标题
     document.title = to.meta.title || 'vue3-element3'
     if(to.meta.requireLogin){
-        if(localStorage.getItem('token')){
-            next()
-        }else{
-            next({
-                path:'/login',
-                query:{
-                    // 
-                    redirect:to.fullPath // 登录成功后跳转的页面
-                }
-            })
-        }
+        next('/home')
+        return
+        // if(localStorage.getItem('token')){
+        //     next()
+        // }else{
+        //     next({
+        //         path:'/login',
+        //         query:{
+        //             // 
+        //             redirect:to.fullPath // 登录成功后跳转的页面
+        //         }
+        //     })
+        // }
     }else{
         next()
     }
