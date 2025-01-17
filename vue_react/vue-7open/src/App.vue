@@ -6,7 +6,8 @@
 </template>
 
 <script setup>
-import MousePos from './components/MousePos.vue';
+// import MousePos from './components/MousePos.vue';
+
 import {ref} from 'vue'
 
 const showMouse = ref(true)
