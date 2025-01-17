@@ -43,7 +43,8 @@ const rules = {
         { min: 5, max: 10, message: '长度在5-10个字符', trigger: 'blur' }
     ]
 }
-
+// bfs ,发送token 在浏览器缓存？
+// 后面请求，都携带token这个凭证；服务器收到请求，验证token是否正确
 const onSubmit = async () => {
     loading.value = true
     await formRef.value.validate((valid) => {

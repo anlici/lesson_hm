@@ -30,3 +30,15 @@
     按需加载页面级别组件 import函数引入方式 () => import('')
   - 路由守卫 url 记录用户已经访问的页面login?redirect=/home
 
+# web 进行登入
+  - http 请求 + 响应简单协议 用户状态
+  - 会话？session
+  - cookie
+    浏览器本地存储
+    服务器返回的cookie 会存储在浏览器中
+  - 服务器知道这次请求是谁发起，解析请求cookie，所带有的数据
+  - 用户携带身份证明
+  - avatar
+
+- ref 做dom响应式对象，也给元素或是子组件注册引用
+  使得我们可以在父组件访问子组件的实例formRef，
