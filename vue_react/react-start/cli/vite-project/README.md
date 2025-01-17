@@ -1,8 +1,7 @@
-# React + Vite
+# 为啥最近学react
+- 生态完善，从Facebook 复杂项目，
+- 最近火了，UI 组件界面工程完善
+- vue 上手快，语法简单；react因为AI的影响，语法复杂
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- jsx 唯一标签，
+  相比于vue，jsx 更灵活，不在原生js进行解析，使用babel进行解析
