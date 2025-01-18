@@ -23,7 +23,7 @@
 
 <script setup>
 import { reactive, ref } from 'vue'
-
+import {login} from '../api/'
 const formRef = ref(null)
 
 const form = reactive({
@@ -47,8 +47,11 @@ const rules = {
 // 后面请求，都携带token这个凭证；服务器收到请求，验证token是否正确
 const onSubmit = async () => {
     loading.value = true
+    // 模版中直接访问，脚本.value
     await formRef.value.validate((valid) => {
         if (valid) {
+            // 发送请求
+            login(form)
             console.log('提交成功');
         } else {
             console.log('提交失败');
