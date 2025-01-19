@@ -48,3 +48,22 @@
   - 调用api/login 接口
     - 项目多了一层目录 api 管理应用搜易接口
   - 统一axios 实例 发送请求
+
+# 动态路由使用，在项目里
+ 
+  addRoute({路由对象})
+
+## https/http
+
+- http:超文本传输协议，
+  支持客户端和服务器之间的请求和响应
+  无连接，无状态；只需要请求方法和路径，比如get，post
+  灵活：允许传输任何类型对象，content-type标记
+  url: http://[主机/ip][:端口]/文件位置
+        协议名://域名:端口/路径   重定向 隐藏真实路径
+- https:
+
+
+## jwt 登入
+   - npm i jsonwebtoken json?+web+令牌
+   - sign 

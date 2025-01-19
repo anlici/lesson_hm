@@ -51,8 +51,15 @@ const onSubmit = async () => {
     await formRef.value.validate((valid) => {
         if (valid) {
             // 发送请求
-            login(form)
-            console.log('提交成功');
+            const res = login(form)
+            const {data} = res
+            if(res.data.code==200) {
+                console.log('提交成功');
+                console.log(data.data);//res.data.data 
+                
+            }else {
+                console.log(data.message);
+            }
         } else {
             console.log('提交失败');
         }

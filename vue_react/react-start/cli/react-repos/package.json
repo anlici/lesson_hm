@@ -21,6 +21,9 @@
     "eslint-plugin-react": "^7.34.2",
     "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-react-refresh": "^0.4.7",
-    "vite": "^5.3.1"
+    "vite": "^5.3.1",
+    "@bable/cli": "^7.23.4",
+    "@bable/core": "^7.26.0",
+    "@bable/preset-env": "^7.26.0"
   }
 }
