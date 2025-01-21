@@ -11,7 +11,7 @@
 var printWarning = function() {};
 
 if ("development" !== 'production') {
-  var ReactPropTypesSecret = require('./lib/ReactPropTypesSecret');
+  var ReactPropTypesSecret = require('./lib/ReactPropTypesSecret.js');
   var loggedTypeFailures = {};
   var has = Function.call.bind(Object.prototype.hasOwnProperty);
 
@@ -112,7 +112,7 @@ module.exports = checkPropTypes;
 
 'use strict';
 
-var ReactPropTypesSecret = require('./lib/ReactPropTypesSecret');
+var ReactPropTypesSecret = require('./lib/ReactPropTypesSecret.js');
 
 function emptyFunction() {}
 function emptyFunctionWithReset() {}
@@ -181,8 +181,8 @@ module.exports = function() {
 var ReactIs = require('react-is');
 var assign = require('object-assign');
 
-var ReactPropTypesSecret = require('./lib/ReactPropTypesSecret');
-var checkPropTypes = require('./checkPropTypes');
+var ReactPropTypesSecret = require('./lib/ReactPropTypesSecret.js');
+var checkPropTypes = require('./checkPropTypes.js');
 
 var has = Function.call.bind(Object.prototype.hasOwnProperty);
 var printWarning = function() {};
@@ -775,11 +775,11 @@ if ("development" !== 'production') {
   // By explicitly using `prop-types` you are opting into new development behavior.
   // http://fb.me/prop-types-in-prod
   var throwOnDirectAccess = true;
-  module.exports = require('./factoryWithTypeCheckers')(ReactIs.isElement, throwOnDirectAccess);
+  module.exports = require('./factoryWithTypeCheckers.js')(ReactIs.isElement, throwOnDirectAccess);
 } else {
   // By explicitly using `prop-types` you are opting into new production behavior.
   // http://fb.me/prop-types-in-prod
-  module.exports = require('./factoryWithThrowingShims')();
+  module.exports = require('./factoryWithThrowingShims.js')();
 }
 
 },{"./factoryWithThrowingShims":2,"./factoryWithTypeCheckers":3,"react-is":10}],5:[function(require,module,exports){

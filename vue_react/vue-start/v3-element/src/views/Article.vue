@@ -6,7 +6,8 @@
 </template>
 
 <script setup>
-
+import { onMounted  } from 'vue';
+// 为啥挂载后请求？
 </script>
 
 <style lang="scss" scoped>

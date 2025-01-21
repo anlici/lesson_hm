@@ -6,6 +6,13 @@ const secret = 'g10bqw2345';
 // api 端口配置
 export default [
   {
+    url:'/api/login/getUserInfo',
+    method: 'get',
+    response: req => {
+      const token = req.headers.authorization.split(' ')[1];
+    }
+  },
+  {
     url: '/api/login',
     method: 'post',
     timeout: 2000,

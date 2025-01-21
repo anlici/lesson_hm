@@ -53,21 +53,21 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
     // 默认标题
     document.title = to.meta.title || 'vue3-element3'
-    // if (to.meta.requireLogin) {
-    //     if (localStorage.getItem('token')) {
-    //         next()
-    //     } else {
-    //         next({
-    //             path: '/login',
-    //             query: {
-    //                 redirect: to.fullPath // 登录成功后跳转的页面
-    //             }
-    //         })
-    //     }
-    // } else {
-    //     next()
-    // }
-    next()
+    if (to.meta.requireLogin) {
+        if (localStorage.getItem('token')) {
+            next()
+        } else {
+            next({
+                path: '/login',
+                query: {
+                    redirect: to.fullPath // 登录成功后跳转的页面
+                }
+            })
+        }
+        
+    } else {
+        next()
+    }
 })
 
 export default router
