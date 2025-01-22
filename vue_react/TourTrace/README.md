@@ -50,3 +50,38 @@
         VantResolver()
       ]VantResolver解释器，是vant ui 组件库的解释器
       通过vite插件中自动导入组件
+
+## home页面
+- w-screen：设置元素的宽度为 100vw，这意味着元素将占据整个视口的宽度。vw 是一个视口单位，表示视口宽度的百分比
+- <van-search
+        v-model="searchField"
+        placeholder="请输入搜索关键字"
+        show-action 
+        shape="round"
+        background="transparent"
+        class="w-full"
+      >
+        <template #action>
+          <div class="text-white justify-center items-center flex">
+            <van-icon name="like" size="1.25rem" />
+          </div>
+        </template>
+      </van-search>
+
+      show-action 显示右侧按钮;
+      背景透明，w-full 占满整个屏幕；
+      class="text-white justify-center items-center flex"：设置图标的样式，包括白色文字、居中对齐和弹性布局。
+- keep-alive 缓存组件
+  适用选项卡切换，路由导航，不会频繁进行销毁和重建组件
+  被 keep-alive 缓存的组件会有额外的生命周期钩子：
+  activated：组件被激活时调用。
+  deactivated：组件被停用时调用。
+  include 要，exclude 不要
+
+-  <PopularDestinationsCard :items="PopularDestinations" />
+  父组件传递子组件
+  子组件：使用了 van-swipe 组件来实现幻灯片效果，并且支持自动播放和懒加载。
+   <van-swipe :autoplay="2500" lazy-render relative >
+  每2500ms 滑动，lazy-render 懒加载
+  van-swipe-item 组件，用于定义幻灯片的每一项内容。
+- 改进：切换时候，可以鼠标修改
