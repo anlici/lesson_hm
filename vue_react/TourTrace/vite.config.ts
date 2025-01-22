@@ -1,4 +1,4 @@
-import { defineConfig } from 'vite'
+import { defineConfig } from 'vite' // 定义vite 配置，获得ts类型提示
 import vue from '@vitejs/plugin-vue'
 // 预先加载ui 组件
 import Components from 'unplugin-vue-components/vite'

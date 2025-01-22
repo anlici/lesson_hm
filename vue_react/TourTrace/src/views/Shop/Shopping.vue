@@ -38,8 +38,16 @@
           <section class="topbar flex justify-around my-[0.5rem]">
             <div
             class="topbar-item flex flex-col items-center"
+    
             v-for="item in topBarState"
             :key="item.title"
+            >
+            <div class="topbar-item__icon">
+              <van-icon :name="item.icon" size="2rem" />
+            </div>
+            <div class="topbar-item__text text-xs font-bold">
+              {{ item.title }}
+            </div>
           >
             <div class="topbar-item__icon">
               <van-icon :name="item.icon" size="2rem" />
@@ -66,6 +74,7 @@
               :title="items.title"
               v-for="items in recommendItemState"
             >
+            <!-- 根据showRec判断是否显示，推荐的 -->
               <div v-for="item in items.items"  class="item" :class="item.type">
                 <div v-if="showRec(item.type)" class="text my-2 py-1 flex bg-gray-100 rounded-lg " >
                   <div class="item-img w-[10rem] h-[8rem] overflow-hidden rounded-lg">
@@ -93,6 +102,9 @@
   import { ref,toRefs } from 'vue';
   import { useShopStore } from "@/stores/shopStore";
 
+  // 渲染active,默认第一个tab
+  const active = ref(0);
+
   const shopStore = useShopStore();
   const { topBarState, recommendItemState } = toRefs(shopStore);
 
@@ -102,10 +114,10 @@
     { text: "厦门", value: "3" },
   ];
   const fieldValue = ref(columns[0].text);
-  const showPicker = ref(false);
+  const showPicker = ref(false); // 显示弹出层
   const onConfirm = ({ selectedOptions }) => {
     showPicker.value = false;
-    fieldValue.value = selectedOptions[0].text;
+    fieldValue.value = selectedOptions[0].text;// 选中的值
     console.log(selectedOptions);  
 
     action.value = selectedOptions[0].value;

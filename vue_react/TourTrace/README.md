@@ -6,18 +6,15 @@
 - stylus 之后，css 领域里的重大突破 
 - **原子**类 
 - 类名带有解释性， text-lg  对prompt engineering 有帮助 AIGC 
-
-## 安装tailwind
-
 - css 编译器
   开发时候用tailwindcss 生成css 
   stylus -> css   
-  npm i tailwindcss postcss autoprefixer -D 
+  第一：npm i tailwindcss postcss autoprefixer -D 
 
-- npx tailwindcss init -p
+- 第二： npx tailwindcss init -p
   tailwindcss 初始化
-- tailwind.config.js 配置文件
-  content
+- 添加tailwind.config.js 配置文件
+  修改content
 
 ## 扩展vite 工程化
 - shims-vue.d.ts 解决 vue 文件中使用 ts 报错问题
@@ -42,3 +39,14 @@
 - 泛型？<>
   ts 里面创建可复用，类型安全的代码工具，
   允许定义函数，类或接口，使用类型变量，在调用时动态指定具体类型
+
+- tiwalndcss 原子类
+  h-[8rem] 相对根元素高度8rem
+  bg-cover 缩放覆盖整个容器
+
+- :key="item.id" 识别每个节点，更新dom高效重用和重排
+- v-model:active="active" 双向绑定，处于激活状态，自动更新active值
+-  resolvers: [
+        VantResolver()
+      ]VantResolver解释器，是vant ui 组件库的解释器
+      通过vite插件中自动导入组件
