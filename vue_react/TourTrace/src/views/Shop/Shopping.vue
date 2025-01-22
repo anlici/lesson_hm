@@ -31,29 +31,93 @@
         >
         </van-search>
       </header>
-    </div>
-  
-      
-  </template>
+      <main class="menu">
+        <header
+          class="min-h-18 rounded-2xl p-2 shadow-md mx-4 my-4 border bg-white bg-opacity-80"
+        >
+          <section class="topbar flex justify-around my-[0.5rem]">
+            <div
+            class="topbar-item flex flex-col items-center"
+            v-for="item in topBarState"
+            :key="item.title"
+          >
+            <div class="topbar-item__icon">
+              <van-icon :name="item.icon" size="2rem" />
+            </div>
+            <div class="topbar-item__text text-xs font-bold">
+              {{ item.title }}
+            </div>
+          </div>
+          </section>
+        </header>
+        <body>
+          <section
+          class="recommend mx-4 p-2 text-sm text-black bg-white bg-opacity-80 rounded-2xl shadow-md"
+          >
+          <div class="flex justify-between items-center">
+            <h2 class="title font-bold text-lg flex items-center">
+              专属推荐</h2>
+              <p class="ml-2 text-xs justify-center mr-2 mb-2">
+                <van-tag type="warning">{{ fieldValue }}</van-tag>
+              </p>
+          </div>
+          <van-tabs v-model:active="active" class="">
+            <van-tab
+              :title="items.title"
+              v-for="items in recommendItemState"
+            >
+              <div v-for="item in items.items"  class="item" :class="item.type">
+                <div v-if="showRec(item.type)" class="text my-2 py-1 flex bg-gray-100 rounded-lg " >
+                  <div class="item-img w-[10rem] h-[8rem] overflow-hidden rounded-lg">
+                    <van-image :src="item.image" class="w-full h-full object-cover"></van-image>
+                  </div>
+                  <div class="ml-1 mt-2 ">
+                    <div class="font-bold text-md text-left">{{item.title}}</div>
+                    <div class="text-mms text-left mt-2 text-gray-800 line-clamp-2 w-28">{{ item.place }}</div>
+                    <div class=" text-left font-semibold mt-4">￥{{ item.price }}元</div>
+                    <div class="text-ls text-left text-gray-500 ">已售{{ item.market }}份</div>
+                  </div>
+                  <van-icon name="cart-o" color="#1989fa" class="relative bottom-[-6.5rem] right-[-1rem]" size="1.5rem" />
+                </div>
+                
+              </div>
+            </van-tab>
+          </van-tabs>
+          </section>
+        </body>
+      </main>
+    </div> 
+</template>
   
   <script setup lang="ts">
-  import { ref } from 'vue';
-  const showPicker = ref(false);
-  
+  import { ref,toRefs } from 'vue';
+  import { useShopStore } from "@/stores/shopStore";
+
+  const shopStore = useShopStore();
+  const { topBarState, recommendItemState } = toRefs(shopStore);
+
   const columns = [
     { text: "北京", value: "1" },
     { text: "杭州", value: "2" },
     { text: "厦门", value: "3" },
   ];
   const fieldValue = ref(columns[0].text);
-  
+  const showPicker = ref(false);
   const onConfirm = ({ selectedOptions }) => {
     showPicker.value = false;
     fieldValue.value = selectedOptions[0].text;
     console.log(selectedOptions);  
+
+    action.value = selectedOptions[0].value;
+    console.log(action.value);
   };
-  
-  const searchField = ref('')
+
+  const searchField = ref("");
+  const action = ref('1');
+  let showRec=(val)=>{
+    console.log(val,action.value,val===action.value);
+    return val==action.value
+  }
   </script>
   
   <style scoped>

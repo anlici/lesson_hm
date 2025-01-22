@@ -19,7 +19,7 @@
 - tailwind.config.js 配置文件
   content
 
-## 
+## 扩展vite 工程化
 - shims-vue.d.ts 解决 vue 文件中使用 ts 报错问题
 - redirect 重定向 /home 直接在浏览器输入地址，会重定向到 /home 页面
 - vant UI 库
@@ -36,5 +36,9 @@
 - 路径别名@ alias
   @ 表示 / src 
 - __dirname 当前执行脚本所在的目录的绝对路径
-    resolve 拼接路径
-    join 拼接路径
+    resolve 路基活路基片段解析为绝对，当没有参数时，返回当前工作目录
+    join 不解释.. . 只根据路径分隔符拼接
+
+- 泛型？<>
+  ts 里面创建可复用，类型安全的代码工具，
+  允许定义函数，类或接口，使用类型变量，在调用时动态指定具体类型
