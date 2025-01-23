@@ -13,6 +13,7 @@ declare module 'vue' {
     ShareTourTraceCard: typeof import('./src/components/Home/ShareTourTraceCard.vue')['default']
     TabBar: typeof import('./src/components/Home/TabBar.vue')['default']
     VanBackTop: typeof import('vant/es')['BackTop']
+    VanButton: typeof import('vant/es')['Button']
     VanCell: typeof import('vant/es')['Cell']
     VanIcon: typeof import('vant/es')['Icon']
     VanImage: typeof import('vant/es')['Image']
