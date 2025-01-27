@@ -9,7 +9,7 @@ function App() {
      <header>
        <nav>
          <NavLink to="/" className={"首页"}>Home</NavLink>
-         <NavLink to="/about">About</NavLink>
+         <NadavLink to="/about">About</NavLink>
        </nav>
      </header>
      <Outlet />
