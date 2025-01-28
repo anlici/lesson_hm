@@ -17,6 +17,7 @@ import { ref, onMounted } from "vue";
 import { useRoute } from "vue-router";
 
 const active = ref<number>(1);
+// 监听路由变化
 onMounted(() => {
   const route = useRoute();
   console.log(route.fullPath)
