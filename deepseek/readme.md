@@ -35,3 +35,9 @@
   可以本地部署 ，本地访问大模型因为deepseek
   ollama pull deepseek-r1:1.5b 拉取搭配本地 offline 调用
   模型微调 自己业务
+  const add = (x,y) => x+y
+  transfomer机制+nlp
+
+### 后端server配置
+- 为啥不用fetch，用axios
+    
