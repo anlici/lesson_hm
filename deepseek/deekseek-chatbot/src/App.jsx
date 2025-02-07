@@ -1,42 +1,103 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import './App.css';
 
-function App() {
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+const chatApi = async (message) => {
+  try {
+    const response = await axios.post('http://localhost:3000/chatai', message, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    return response.data; // 假设 response.data 结构为 { message: 'response' }
+  } catch (error) {
+    console.error('Error in chatApi:', error);
+    throw error;
+  }
+};
 
-  const fetchData = async () => {
+const App = () => {
+  const [question, setQuestion] = useState('');
+  const [conversation, setConversation] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const storedConversation = localStorage.getItem('conversation');
+    if (storedConversation) {
+      setConversation(JSON.parse(storedConversation));
+    }
+  }, []);
+
+  const askQuestion = async () => {
+    if (!question.trim()) {
+      return;
+    }
+
+    setConversation((prevConversation) => [
+      ...prevConversation,
+      {
+        question: question,
+        answer: '等待回答...'
+      }
+    ]);
+
+    setLoading(true);
+
     try {
-      const response = await axios.post('http://localhost:3000/chatai', {
-        key: 'value' // 替换为你的请求体数据
-      }, {
-        headers: {
-          'Content-Type': 'application/json'
-        }
+      const message = `你是一个聪明的机器人, 我想知道${question}`;
+      const response = await chatApi({ message });
+      setConversation((prevConversation) => {
+        const newConversation = [...prevConversation];
+        newConversation[newConversation.length - 1].answer = response.message; // 假设 response 结构为 { message: 'response' }
+        localStorage.setItem('conversation', JSON.stringify(newConversation));
+        return newConversation;
       });
-
-      setData(response.data);
-    } catch (err) {
-      setError(err);
+    } catch (error) {
+      console.warn(error);
+      setConversation((prevConversation) => {
+        const newConversation = [...prevConversation];
+        newConversation[newConversation.length - 1].answer = '网络错误，请稍后再试！';
+        return newConversation;
+      });
     } finally {
       setLoading(false);
+      setQuestion('');
     }
   };
 
-  useEffect(() => {
-    fetchData();
-  }, []); // 空数组作为依赖项，确保只在组件挂载时运行一次
-
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error.message}</p>;
-
   return (
-    <div>
-      <h1>DeepSeek Chatbot</h1>
-      <pre>{JSON.stringify(data, null, 2)}</pre>
+    <div className="chat-container" style={{ position: 'relative' }}>
+      <p className="chat-title">我是ollama + deepseek 本地大模型</p>
+      {
+        conversation.map((item, index) => (
+          <div key={index} className="chat-message">
+            <div className="chat-question">
+              <span className="el-tag el0tag--large">me:</span> {item.question}
+            </div>
+            <div className="chat-answer">
+              {item.answer}
+              <span className="el-tag el-tag--large">ai:</span>
+            </div>
+          </div>
+        ))
+      }
+      <div className="chat-input">
+        <input 
+          type="text" 
+          value={question} 
+          onChange={(e) => setQuestion(e.target.value)}
+          onKeyUp={(e) => e.key === 'Enter' && askQuestion()}
+          style={{ width: '80%' }} 
+        />
+        <button onClick={askQuestion}>提交</button>
+      </div>
+      { loading && (
+        <div className="loading-container">
+          <p>加载中...</p>
+        </div>
+      )}
     </div>
   );
-}
+};
 
 export default App;

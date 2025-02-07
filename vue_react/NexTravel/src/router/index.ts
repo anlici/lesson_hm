@@ -19,9 +19,20 @@ const rootRoutes:RouteRecordRaw[] = [
         title: 'ai助手',
         cache:true
     },
-    component: () => import('@/views/Assistant/Assistant.vue')
-  }
-  ,{
+    component: () => import('@/views/Assistant/Assistant.vue'),
+    
+  },
+  
+  {
+    path: 'write',
+    name: 'Write',
+    meta: {
+      title: '旅游笔记',
+      cache: true
+    },
+    component: () => import('@/views/Assistant/Write.vue')
+  },
+  {
     path:'shopping',
     name: 'Shopping',
     meta:{

@@ -8,6 +8,8 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     AIReply: typeof import('./src/components/AI/AIReply.vue')['default']
+    Image: typeof import('./src/components/My/Image.vue')['default']
+    Lagin: typeof import('./src/components/My/Lagin.vue')['default']
     PopularDestinationsCard: typeof import('./src/components/Home/PopularDestinationsCard.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
@@ -18,6 +20,8 @@ declare module 'vue' {
     VanBackTop: typeof import('vant/es')['BackTop']
     VanButton: typeof import('vant/es')['Button']
     VanCell: typeof import('vant/es')['Cell']
+    VanField: typeof import('vant/es')['Field']
+    VanForm: typeof import('vant/es')['Form']
     VanIcon: typeof import('vant/es')['Icon']
     VanImage: typeof import('vant/es')['Image']
     VanLoading: typeof import('vant/es')['Loading']
@@ -31,5 +35,7 @@ declare module 'vue' {
     VanTabbarItem: typeof import('vant/es')['TabbarItem']
     VanTabs: typeof import('vant/es')['Tabs']
     VanTag: typeof import('vant/es')['Tag']
+    VanUploader: typeof import('vant/es')['Uploader']
+    Write: typeof import('./src/components/Assistant/Write.vue')['default']
   }
 }

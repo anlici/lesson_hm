@@ -40,4 +40,10 @@
 
 ### 后端server配置
 - 为啥不用fetch，用axios
-    
+
+- 跨域问题
+  cors(跨域资源共享)机制允许服务器通过特定http响应头来告知浏览器，哪些源的请求应该被允许访问该资源。
+  jsonp
+  <script src="http://example.com/api?callback=handleResponse"></script>
+  function handleResponse(data) {
+}

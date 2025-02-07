@@ -1,8 +1,8 @@
-# React + Vite
+### deepseek系列
+- v-model 双向绑定
+  react 单向绑定 并且使用函数监听 实现双向
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+- vue支持事件修饰符，@onKey  api友好
+  react 不支持，需要自己实现
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- pnpm i koa-bodyparser 解析post请求，请求体

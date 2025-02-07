@@ -5,16 +5,17 @@
   >
     <!-- 顶部 -->
     <div
-      class="chat-header h-[calc(10vh)] w-full flex items-center justify-between bg-transparent px-4 border-b border-white rounded-xl"
+      class="chat-header h-[calc(10vh)] w-full flex items-center 
+        justify-between bg-transparent px-4 border-b border-white rounded-xl"
     >
-      <div class="talk">
+      <div class="talk" @click="navigateToWrite" placeholder="行程安排">
         <van-icon name="chat-o text-black" size="1.5rem" />
       </div>
       <div class="title">
-        <h2>AI 旅小痕</h2>
+        <h2>AI 旅小艺</h2>
       </div>
       <div class="avatar">
-        <van-icon name="user-o text-black" size="1.5rem" />
+        <van-icon name="user-o text-black" size="2.5rem" />
       </div>
     </div>
     <!-- 聊天记录 -->
@@ -50,7 +51,7 @@
         </template>
       </van-search>
     </div>
-    <div v-show="!type">
+    <div >
       <van-loading vertical class="text-black">
         <template #icon>
           <van-icon name="star-o" size="30" color="black" />
@@ -58,6 +59,8 @@
         加载中...
       </van-loading>
     </div>
+    <!-- 行程安排 -->
+    <!-- <Write /> -->
   </div>
 </template>
 
@@ -65,9 +68,12 @@
 import UserQuery from "@/components/AI/UserQuery.vue";
 import AIReply from "@/components/AI/AIReply.vue";
 import Start from "@/components/Assistant/Start.vue";
+import Write from "@/components/Assistant/Write.vue";
+
 import { ref, onMounted } from "vue";
 import getCozeData from "@/apis/index";
 import { showToast } from "vant";
+import { useRouter } from "vue-router"; // 导入 useRouter
 
 type msgItem = {
   type: number; // 1:AI 2:用户
@@ -93,8 +99,8 @@ const SubmitEvent = async () => {
     msgController.value.push({
       type: 1, // 1:AI 2:用户
       content: "请输入您的问题",
-    })
-    return; 
+    });
+    return;
   }
   const msg = searchField.value;
   type.value = false; // 隐藏搜索框
@@ -108,18 +114,18 @@ const SubmitEvent = async () => {
     content: "✨✨✨\n小痕收到！ 我已经了解到您的需求，请稍等片刻！！！🌟",
   });
   searchField.value = "";
-  try{
-    const datas = await getCozeData(msg)
+  try {
+    const datas = await getCozeData(msg);
     type.value = true;
     console.log(datas);
     const result = datas.data.message;
     // 每种输出结果
-    result.forEach((item:any) => {
-      if(item.type == 'answer'){
+    result.forEach((item: any) => {
+      if (item.type == 'answer') {
         msgController.value.push({
           type: 1,
           content: item.content,
-        }); 
+        });
       }
     });
 
@@ -131,6 +137,12 @@ const SubmitEvent = async () => {
     type.value = true;
     return;
   }
+}
+
+const router = useRouter(); // 初始化 router
+
+const navigateToWrite = () => {
+  router.push({ name: 'Write' }); // 假设 Write 组件的路由名称为 'Write'
 }
 </script>
 
