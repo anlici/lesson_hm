@@ -99,3 +99,11 @@
   - grid 布局
   - transition 过渡
   - css 面向对象
+- js 
+  - 用户体验
+    - 阻止默认行为，
+      - e.preventDefault();
+  - promise 使用
+    - async await 后面是 promise 或是实例；
+      fetch 返回Promise
+   - then 的链式调用，
