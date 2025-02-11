@@ -107,3 +107,22 @@
     - async await 后面是 promise 或是实例；
       fetch 返回Promise
    - then 的链式调用，
+   - es6+
+     promise + async await
+     处理函数返回是promise 链式调用
+     不是，promise.resolve 
+   - 阻止默认行为，表单submit，
+   - slice 数组截取，
+- 剪贴板功能 
+## BOM 
+- 声音录制等
+- navigator 浏览器信息
+  navigator.userAgent 
+  带有 操作系统 浏览器版本 内核
+  navigator.clipboard 剪贴板
+- localStorage 浏览器缓存
+  5M 4096kb 
+  4M cookie kb 一般请求都带上
+  getItem(null) null 
+
+- 
