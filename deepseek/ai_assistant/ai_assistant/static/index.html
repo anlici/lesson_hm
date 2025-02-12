@@ -32,6 +32,23 @@
       <button class="button secondary">新对话<i class="fas fa-redo-alt"></i></button>
       <button class="button secondary">保存对话<i class="fas fa-save"></i></button>
     </nav>
+    <!-- 对话历史 -->
+    <div class="conversation-list">
+      <div class="input-group">
+        <label for="temperature">创意度（0-1.5）</label>
+        <input type="number" id="temperature" 
+          placeholder="请输入创意度值"
+          step="0.1" min="0" max="1.5">
+      </div>
+      <div class="input-group">
+        <label for="model">模式选择：</label>
+        <select id="model">
+          <option value="deepseek-chat">对话模式</option>
+          <option value="deepseek-coder">编码模式</option>
+        </select>
+      </div>
+    </div>
+
   </div>
 </div>
 <script src="js/common.js"></script>

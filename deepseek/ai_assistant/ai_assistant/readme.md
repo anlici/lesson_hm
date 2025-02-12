@@ -113,6 +113,12 @@
      不是，promise.resolve 
    - 阻止默认行为，表单submit，
    - slice 数组截取，
+
+- html5
+  - 语义化标签
+  - form 增强 number range text 
+  - placeholder 提示
+  - 无障碍访问： label for 绑定 id值
 - 剪贴板功能 
 ## BOM 
 - 声音录制等
@@ -125,4 +131,9 @@
   4M cookie kb 一般请求都带上
   getItem(null) null 
 
-- 
+### 设想需求
+- 先输出一段内容，后面用户可以自己输入
+
+- 聊天历史：localStorage
+  - 保存：
+  
