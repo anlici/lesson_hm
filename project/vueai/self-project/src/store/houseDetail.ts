@@ -1,0 +1,99 @@
+import { defineStore } from 'pinia'
+import { ref } from 'vue'
+import type { HouseMenu,HouseDetail } from '../types/house'
+
+export const useHouseStore = defineStore('housemenu', ()=> {
+    const houseMenuState =ref<HouseMenu[]>([
+        {
+            title:"推荐"
+        },
+        {
+            title:"新房"
+        },
+        {
+            title:"二手房"
+        },
+        {
+            title:"租房"
+        },
+        {
+            title:"商业地产"
+        },
+        {
+            title:"装修"
+        },
+        {
+            title:"海外地产"
+        },
+       
+    ])
+    const HouseDetailState = ref<HouseDetail[]>([
+        {
+            name:'白金翰宫，全新楼盘，欢迎咨询',
+            price:18.88,
+            img:'https://img0.baidu.com/it/u=2811421533,3758625601&fm=253&fmt=auto&app=138&f=JPEG?w=600&h=412',
+            describe:'一室一厅一卫'
+        },
+        {
+            name:'白金翰宫，全新楼盘，欢迎咨询，高端人士的高级复式公寓，欢迎您的入住，超级漂亮',
+            price:18.88,
+            img:'https://img2.baidu.com/it/u=1291864518,645184260&fm=253&fmt=auto&app=138&f=JPEG?w=758&h=500',
+            describe:'一室一厅一卫'
+        },
+        {
+            name:'白金翰宫，全新楼盘，欢迎咨询',
+            price:18.88,
+            img:'https://img2.baidu.com/it/u=3777888687,2261982632&fm=253&fmt=auto&app=138&f=JPEG?w=450&h=300',
+            describe:'一室一厅一卫'
+        },
+        {
+            name:'白金翰宫，全新楼盘，欢迎咨询',
+            price:18.88,
+            img:'https://img1.baidu.com/it/u=3680646604,3433328429&fm=253&fmt=auto&app=138&f=JPEG?w=737&h=500',
+            describe:'一室一厅一卫'
+        },
+        {
+            name:'白金翰宫，全新楼盘，欢迎咨询',
+            price:18.88,
+            img:'https://img0.baidu.com/it/u=287924933,2569277908&fm=253&fmt=auto&app=138&f=JPEG?w=450&h=300',
+            describe:'一室一厅一卫'
+        },
+        {
+            name:'白金翰宫，全新楼盘，欢迎咨询',
+            price:18.88,
+            img:'https://img1.baidu.com/it/u=3621357615,4289245375&fm=253&fmt=auto&app=138&f=JPEG?w=750&h=500',
+            describe:'一室一厅一卫'
+        },
+        {
+            name:'白金翰宫，全新楼盘，欢迎咨询',
+            price:18.88,
+            img:'https://img0.baidu.com/it/u=2811421533,3758625601&fm=253&fmt=auto&app=138&f=JPEG?w=600&h=412',
+            describe:'一室一厅一卫'
+        },
+        {
+            name:'白金翰宫，全新楼盘，欢迎咨询',
+            price:18.88,
+            img:'@/image/222.jpg',
+            describe:'一室一厅一卫'
+        },
+        {
+            name:'白金翰宫，全新楼盘，欢迎咨询',
+            price:18.88,
+            img:'@/image/222.jpg',
+            describe:'一室一厅一卫'
+        },
+        {
+            name:'白金翰宫，全新楼盘，欢迎咨询',
+            price:18.88,
+            img:'@/image/222.jpg',
+            describe:'一室一厅一卫'
+        },
+        {
+            name:'白金翰宫，全新楼盘，欢迎咨询，高端人士的高级复式公寓，欢迎您的入住，超级漂亮',
+            price:18.88,
+            img:'@/image/222.jpg',
+            describe:'一室一厅一卫'
+        }
+    ])
+    return { HouseDetailState,houseMenuState }
+})
