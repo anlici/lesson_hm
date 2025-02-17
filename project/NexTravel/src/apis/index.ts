@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const url = 'https://api.coze.cn/open_api/v2/chat';
 const apiKey = 'pat_cTfedNkJoUs8nYc4oYZFYNm1ZLXMxQUgNNbBiOvG1BfGcBCWSPAyvjyGyX73XsgG';
-const botId = '7398905353180184614';
+const botId = '7470833492394704905'; // 修改成自己的
 
 import type { FetchDataRequest } from '@/types/cozeConfig';
 

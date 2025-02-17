@@ -1,12 +1,15 @@
-import { useState } from 'react'
+import * as React from 'react';
+import { useState } from 'react';
 
-
-function App() {
+function APP() {
+  const clickTap = (value) => {
+    console.log(value)
+  }
+  const value = "hello"
   return (
     <>
-      哈多
+      <div onClick={() => {clickTap(value)}}>{value}</div>
     </>
   )
 }
-
 export default App

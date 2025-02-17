@@ -3,15 +3,16 @@
  *  请求....
  * 不出问题， 最快的时机（onLoad 早）
  */
-// 配置参数，最大显示 50条记录
+// 常量配置
 const MESSAGE_LIMIT = 50;
+
 document.addEventListener('DOMContentLoaded', function() {
   // console.log('DOMContentLoaded')
   const backToTopButton = document.getElementById('back-to-top');
   const chatLogElement = document.getElementById('chat-log');
+  const conversationListElement = document.getElementById('conversation-list');
   const messageInput = document.getElementById('message');
   const loadingIndicator = document.querySelector('.loading-indicator');
-  
   // scrollTop 
   chatLogElement.addEventListener('scroll', () => {
     if (chatLogElement.scrollTop > 300) {
@@ -19,12 +20,12 @@ document.addEventListener('DOMContentLoaded', function() {
     } else {
       backToTopButton.style.display = 'none';
     }
-  }) 
-  // 回到顶部
+  })
+
   backToTopButton.addEventListener('click', () => {
     chatLogElement.scrollTo({
       top: 0,
-      behavior: 'smooth' // 平滑滚动
+      behavior: 'smooth'
     })
   })
   // 打字机效果
@@ -42,66 +43,65 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     }, 50)
   }
-   // 获取本地存储的聊天记录
+  // 添加复制按钮
+  const addCopyButton = (messageWrapper, content) => {
+    const copyButton = document.createElement('button');
+    copyButton.innerHTML = '<i class="fas fa-copy"></i>';
+    copyButton.classList.add('copy-button');
+
+    copyButton.addEventListener('click', () => {
+      // BOM Browser Object Model 浏览器对象模型
+      // 向剪贴板中写入内容
+      navigator.clipboard.writeText(content)
+        .then(() => {
+          alert('内容已复制到剪贴板');
+        })
+        .catch(err => {
+          console.error('无法复制文本：', err);
+          alert('复制失败，清尝试手动选择并复制。');
+        })
+    })
+
+    messageWrapper.appendChild(copyButton);
+  }
+  // 保存聊天记录
   const saveChatLog = (role, content) => {
-   // parse 字符串转成对象
-    const chatLog = JSON.parse(localStorage.getItem('chatLog') )|| [];
+    // localStorage 字符串 JSON.stringify JSON.parse
+    const chatLog = JSON.parse(localStorage.getItem('chatLog')) || [];
     chatLog.push({
       role,
       content
     })
-    // stringify 对象转成字符串
-    localStorage.setItem('chatLog', JSON.stringify(chatLog));
+    localStorage.setItem('chatLog', JSON.stringify(chatLog))
   }
+
   // 添加消息 chat-log
-  const appendMessage = (role, content,type='save') => {
+  const appendMessage = (role, content, type='save') => {
     const messageWrapper = document.createElement('div');
     messageWrapper.classList.add('message', role); 
 
     const bubble = document.createElement('div');
     bubble.classList.add('bubble', `${role}-bubble`);
-    // 复制按钮
-    const addCopyButton = (messageWrapper, content) => {
-      const copyButton = document.createElement('button');
-      copyButton.innerHTML = '<i class="fas fa-copy"></i>'
-      copyButton.classList.add('copy-button');
-
-      copyButton.addEventListener('click',() => {
-        // BOM browser object model 浏览器对象模型
-        // 向剪贴板 写入内容
-        navigator.clipboard.writeText(content)
-          .then(() => {
-            alert('复制成功！');
-          }).catch(err => {
-            alert('复制失败！');
-          })
-      })
-      // 添加到消息包装器
-      messageWrapper.appendChild(copyButton);
-
-    }
+    
     if (role === 'assistant') {
       // 流式输出
       typeMessage(
-        bubble,
+        bubble, 
         content, 
-        ()=> addCopyButton(messageWrapper, content)
+        ()=>addCopyButton(messageWrapper, content)
       )
     } else {
       bubble.textContent = content;
       messageWrapper.appendChild(bubble);
-      
     }
     messageWrapper.appendChild(bubble);
     chatLogElement.appendChild(messageWrapper);
     chatLogElement.scrollTop = chatLogElement.scrollHeight;
-    
-    // bug 修复
-    if(type === 'save') {
-      saveChatLog(role,content);
+    if (type === 'save') {
+      saveChatLog(role, content) // bug 原因
     }
     
-  }
+  } 
   // 发送消息 调用接口
   const sendMessage = (message) => {
     // fetch promise 的实例
@@ -140,6 +140,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
+  
+
   // 发送消息
   document.querySelector('.send-icon').addEventListener('click', async () => {
     const messageText = messageInput.value.trim();
@@ -169,20 +171,89 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   })
 
-  // 对话历史加载
- const loadChatLog = () => {
-  const chatLog = JSON.parse(localStorage.getItem('chatLog')) || [];
-  // 反向遍历
-  chatLog.slice( - MESSAGE_LIMIT ).forEach(
-    ({role, content}) => {appendMessage(role, content,'init');
- })
- }
- const main = () => {
-  loadChatLog();
- }
- main();
+  // 对话历史加载 
+  const loadChatLog = () => {
+    const chatLog = JSON.parse(localStorage.getItem('chatLog')) || [];
+    // 负值， 后面开始
+    chatLog.slice(-MESSAGE_LIMIT).forEach(
+      ({ role, content }) => appendMessage(role, content, 'init')
+    )
+  }
+  // 保存当前对话 to be continue 
+  const saveCurrentConversation = () => {
+    const currentChatLog = JSON.parse(localStorage.getItem("chatLog")) || [];
+    const chatHistory = JSON.parse(localStorage.getItem("chatHistory")) || [];
+    const timestamp = new Date().toLocaleString();
+    chatHistory.push({
+      // 产品需求 实现
+      name: `对话 ${chatHistory.length + 1} (${timestamp})`,
+      messages: currentChatLog
+    })
+    localStorage.setItem('chatHistory', JSON.stringify(chatHistory));
+  }
+
+  // 创建新的对话
+  const startNewConversation = () => {
+    // console.log('new conversation')
+    saveCurrentConversation();
+    localStorage.removeItem('chatLog');
+    chatLogElement.innerHTML = '';
+  }
+
+  const loadConversationList = () => {
+    const chatHistory = JSON.parse(localStorage.getItem('chatHistory')) || [];
+    chatHistory.forEach((conversation, index) => {
+      const button = document.createElement('button');
+      button.setAttribute('data-index', index);
+      button.innerHTML = `${conversation.name} <span class="delete-btn" data-index="${index}">x</span>`;
+      // 性能不好
+      // button.onclick = function() {
+      //   console.log(this.innerHTML);
+      // }
+      conversationListElement.appendChild(button);
+    })
+  }
+
+  const loadConversation = (index) => {
+    const chatHistory = JSON.parse(localStorage.getItem('chatHistory')) || [];
+    const conversation = chatHistory[index].messages || [];
+    chatLogElement.innerHTML = '';
+    conversation.slice(-MESSAGE_LIMIT).forEach(({
+      role,
+      content
+    }) => appendMessage(role, content));
+    localStorage.setItem('chatLog', JSON.stringify(conversation)); 
+  }
+  // 删除聊天历史
+  const deleteChatHistory = (index) => {
+    // to be continue
+  }
+
+  conversationListElement.addEventListener('click', function(event) {
+    console.log(event.target);
+    const index = event.target.getAttribute('data-index') || 0;
+    // remove history 删除历史 
+    if (event.target.nodeName === 'SPAN') {
+      // console.log('/////')
+      deleteChatHistory(index);
+      return;
+    }
+    // 加载历史
+    
+    loadConversation(index);
+  })
+
+  const main = () => {
+    loadChatLog();
+    loadConversationList();
+  }
+
+  main();
+
+  window.startNewConversation = startNewConversation;
+  window.saveCurrentConversation = saveCurrentConversation;
 })
- /* 所有的资源加载完了 */
+/* 所有的资源加载完了 */
 // window.addEventListener('load', function(event) {
 //   // 当所有资源（包括样式表、图片等）加载完毕后执行的代码
 //   // console.log('All resources finished loading');
