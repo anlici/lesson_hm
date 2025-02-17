@@ -7,24 +7,20 @@
        bg-cover bg-center"
     >
       <div class="text-center text-lg text-white font-bold pt-[2rem] ">
-        
         个人中心
       </div v-if="imgUrl">
       <!-- 头像 -->
-      <!-- <img
+      <img
         @click="openFilePicker"
-        
         :src="imgUrl"
         alt=""
         class="rounded-full w-20 h-20 mx-auto border-2 border-white shadow-md shadow-gray-400 absolute bottom-0 left-5 transform translate-y-[3rem]"
-      /> -->
-      <!-- <Image /> -->
+      />
+     
     </div>
     <!-- 页面主体 -->
     <main class="mine-main">
-      <!-- 登录注册 -->
-        如果没有登入，需要先登入体验更多功能
-        isLagin && <Lagin />
+      
       <!-- 菜单栏 -->
       <section
         class="rounded-xl mt-[1rem] pb-[0.5rem] shadow-md bg-gray-90 mx-2 border"
@@ -106,7 +102,8 @@
 <script setup>
 import Lagin from '@/components/My/Lagin.vue';
 import { ref } from 'vue';
-import Image from '@/components/My/Image.vue';
+
+
   const topBarState=  [
     { title: '我的订单', icon: 'a-dingdan' },
     { title: '我的优惠', icon: 'a-youhui' },
@@ -115,19 +112,30 @@ import Image from '@/components/My/Image.vue';
   ];
   const isLagin = false;
   const settingsVisible= false;
-  const imgUrl = ref('');
+  const imgUrl = ref('/1.1.png');
     function openFilePicker() {
-      // 打开文件选择器的逻辑
-      const input = document.createElement('input');
-      input.type = 'file';
-      input.accept = 'image/*'; // 只接受图片文件
-      input.onchange = (event) => { // 选择文件后的回调
+      const file = document.createElement('input');
+      file.type = 'file';
+      file.accept = 'image/*';
+      file.onchange = (event) => {
         const file = event.target.files[0];
-        // 处理选择的文件
-        console.log('Selected file:', file);
+        if (file) {
+          const reader = new FileReader();
+          // 读取文件内容
+          reader.onload = (e) => {
+            imgUrl.value = e.target.result;
+            // 保存localstorage
+            localStorage.setItem('imgUrl', imgUrl.value)
+          };
+          reader.readAsDataURL(file);
+        }
+        file.onerror = () => {
+          console.error('Failed to read file');
+        };
       };
-      input.click(); // 触发文件选择器
-      console.log('Open file picker');
+      // 触发文件选择器
+      file.click();
+
     }
     function uploadRecord() {
       // 上传记录的逻辑

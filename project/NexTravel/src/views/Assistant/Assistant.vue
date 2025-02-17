@@ -43,6 +43,8 @@
         shape="round"
         background="transparent"
         class="mt-0.5"
+        
+        @search="SubmitEvent"
       >
         <template #action>
           <div class="text-white transform translate-y-1" @click="SubmitEvent">
@@ -51,7 +53,7 @@
         </template>
       </van-search>
     </div>
-    <div >
+    <div v-if="isLoading">
       <van-loading vertical class="text-black">
         <template #icon>
           <van-icon name="star-o" size="30" color="black" />
@@ -83,6 +85,7 @@ type msgItem = {
 const searchField = ref("");
 // 控制进入组件
 const showShadow = ref(true);
+const isLoading = ref(false); // 加载中
 
 const msgController = ref<msgItem[]>([
   {
@@ -104,6 +107,7 @@ const SubmitEvent = async () => {
   }
   const msg = searchField.value;
   type.value = false; // 隐藏搜索框
+  isLoading.value = true; // 开始加载
   msgController.value.push({
     type: 2,
     content: msg,
@@ -136,6 +140,9 @@ const SubmitEvent = async () => {
     });
     type.value = true;
     return;
+  } finally {
+    type.value = true;
+    isLoading.value = false; // 结束加载
   }
 }
 
