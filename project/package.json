@@ -1,0 +1,35 @@
+{
+  "name": "self-project",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc -b && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "axios": "^1.7.3",
+    "lib-flexible": "^0.3.2",
+    "pinia": "^2.2.0",
+    "swiper": "^8.4.7",
+    "v-lazy": "^0.9.5",
+    "vant": "^4.9.3",
+    "vue": "^3.4.29",
+    "vue-awesome-swiper": "^5.0.1",
+    "vue-lazyload": "^3.0.0",
+    "vue-router": "^4.4.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.2",
+    "@vant/auto-import-resolver": "^1.2.1",
+    "@vitejs/plugin-vue": "^5.0.5",
+    "autoprefixer": "^10.4.19",
+    "postcss": "^8.4.40",
+    "tailwindcss": "^3.4.7",
+    "typescript": "^5.2.2",
+    "unplugin-vue-components": "^0.27.3",
+    "vite": "^5.3.1",
+    "vue-tsc": "^2.0.21"
+  }
+}
