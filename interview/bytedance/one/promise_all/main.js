@@ -46,6 +46,7 @@ const readFilesPromise = (url) => {
 
 
 // es8 async await
+
 (async () => {
     try {
         const data1 = await readFilesPromise('./a.txt')

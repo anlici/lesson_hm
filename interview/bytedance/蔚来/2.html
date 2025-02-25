@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>白屏时间计算</title>
+  <script>
+  // 前端对白屏的影响 开始 
+  window.pageStartTime = Date.now();
+  </script>
+  <link rel="stylesheet" href="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-assets/ionicons/2.0.1/css/ionicons.min.css~tplv-t2oaga2asx-image.image">
+  <link rel="stylesheet" href="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-assets/asset/fw-icon/1.0.9/iconfont.css~tplv-t2oaga2asx-image.image">
+  
+  <script>
+  // head 解析完了
+  window.firstPaint = Date.now();
+  console.log(`白屏时间：${window.firstPaint - window.pageStartTime}`)
+  </script>
+</head>
+<body>
+  <div class="container"></div>
+</body>
+</html>

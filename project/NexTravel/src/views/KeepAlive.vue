@@ -1,5 +1,6 @@
 <template>
     <div>
+        <!-- 插槽获取当前路由组件 -->
         <router-view v-slot="{ Component }">
             <keep-alive :include="cachedComponents">
                 <component :is="Component" />
@@ -16,11 +17,10 @@ import TabBar from '@/components/Home/TabBar.vue';
 import { computed } from 'vue';
 import { useRouter } from 'vue-router';
 const router = useRouter();
-// 进行过滤，获取需要缓存的组件
-const cachedComponents=computed(()=>{
-    return router.getRoutes().filter(route=>route.meta.cache).map(route=>route.name)
-})
-
+// 获取需要缓存的组件
+const cachedComponents = computed(() => {
+    return router.getRoutes()
+        .filter(route => route.meta.keepAlive)
+        .map(route => route.name)
+});
 </script>
-
-<style lang="scss" scoped></style>

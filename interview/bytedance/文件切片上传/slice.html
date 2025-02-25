@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <h2>slice使用</h2>
+        <input type="file" id="fileInput" accept="image/*">
+        <button id="sliceButton">slice使用方法</button>
+        <br>
+        <img id="slicedImg" style="display: none;" height="200px" width="300px" />
+    </div>
+    <script>
+        document
+            .getElementById('sliceButton')
+            .addEventListener('click', function () {
+                var fileInput = document.getElementById('fileInput');
+                var file = fileInput.files[0];
+                var imgElement = document.getElementById('slicedImg');
+
+                // 使用slice方法进行图片切片(前100kb)
+                var sliceBlod = file.slice(0,100*1024,file.type)
+
+                // fileRead 读取
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    // 将文件内容作为DataURL加载到img元素中
+                    imgElement.src = e.target.result;
+                    imgElement.style.display = 'block';
+                };
+                reader.readAsDataURL(sliceBlod);
+            });
+    </script>
+</body>
+</html>

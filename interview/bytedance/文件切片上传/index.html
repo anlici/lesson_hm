@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <input type="file" id="fileInput" onchange="handleFiles()" multiple>
+    <script>
+      function handleFiles() {
+        var input = document.getElementById("fileInput");
+        var files = input.files; // FileList对象
+
+        for (var i = 0; i < files.length; i++) {
+          var file = files[i]; // File对象
+          console.log("文件名:", file.name);
+          console.log("文件大小:", file.size);
+          console.log("文件类型:", file.type);
+          console.log("最后修改时间:", file.lastModifiedDate);
+        }
+      }
+    </script>
+  </body>
+</html>
+
+

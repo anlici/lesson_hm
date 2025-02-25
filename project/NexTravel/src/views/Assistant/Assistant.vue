@@ -8,8 +8,11 @@
       class="chat-header h-[calc(10vh)] w-full flex items-center 
         justify-between bg-transparent px-4 border-b border-white rounded-xl"
     >
-      <div class="talk" @click="navigateToWrite" placeholder="行程安排">
-        <van-icon name="chat-o text-black" size="1.5rem" />
+      <div class="talk flex items-center gap-2 cursor-pointer
+       hover:bg-blue-300/50 px-3 py-1.5 rounded-lg transition-all duration-300" 
+          @click="navigateToWrite" title="点击进入行程安排">
+        <van-icon name="notes-o text-black" size="1.5rem" />
+        <span class="text-sm font-medium text-black whitespace-nowrap">行程安排</span>
       </div>
       <div class="title">
         <h2>AI 旅小艺</h2>
@@ -91,7 +94,7 @@ const msgController = ref<msgItem[]>([
   {
     type: 1,
     content:
-      "✨✨✨\n \t尊敬的旅者们👋，欢迎使用AI小助手！我是您的专属智能导游——小痕🤖。\n\t现在，让我们一起踏上这场激动人心的旅程吧！🚀",
+      "✨✨✨\n \t尊敬的旅者们👋，欢迎使用AI小助手！我是您的专属智能导游——小艺🤖。\n\t现在，我们一起踏上了这场激动人心的旅程吧！🚀",
   },
 ]);
 
