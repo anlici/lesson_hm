@@ -27,3 +27,5 @@
 - width: calc（100px-100%）
 - pnpm i postcss-pxtorem -D 将像素转化为rem
 
+### 组件封装
+- 公用

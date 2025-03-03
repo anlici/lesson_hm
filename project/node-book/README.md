@@ -120,3 +120,74 @@
   &.active 选中的样式,& 同级
   npm install classnames --save 
 - 使用:global 样式，全局冲破mudule限制，
+## 静态开发
+
+- nth-of-type(n) 伪类，选择器，
+- align-self baseline 基线对齐，主轴是
+
+- react 和 vue slot 插槽，props.children 区别
+  - modal 组件为例，通用组件，
+  - content 表单，jsx 插槽，slot （插槽，具名插槽）
+  - 
+
+- 首页 静态开发
+  - 用户账单列表 
+    - 按照事件排序 倒序
+    - 按照类型查询，月份查询
+  - 整个页面统计，按照日期分组，
+  - 开发时间：分析模块，交互细节，
+
+## 实现登录，解决跨域(vite代理，开发环境)
+- 通过配置 vite.config.js 中的 server.proxy 实现反向代理
+- 设置baseurl，所以请求都会带上baseurl
+  cors 
+  assess control allow origin 跨域控制，允许跨域访问，
+  浏览器请求/api/login，vite 代理转发，代理到后端服务器，
+  changeOrigin:true 伪造host 头，让目标服务器认为请求是同源
+  rewrite 路径重写，/api/login -> /login
+
+- 流程：
+  - 前端login 组件触发submit
+  - api/login 请求的配置位置， /api/login{username,password} 
+  - 使用utils/axios 请求后端服务器，
+    设置baseurl，所以请求都会带上baseurl ，/api/login 变成 /login
+  - /api 后端提供接口地址标志，前后端分离
+    不带 /api，系统认为react-router-dom 管理
+  - axios 请求 被vite 配置server 拦截
+    proxy 解决跨域问题，rewrite 路径重写，/api/login -> /login
+    后端提供接口
+   
+- useEffect 订阅事件或启动定时器后，
+  return 返回函数，取消订阅或清除定时器（进行清除操作）
+  空依赖，在组件挂载和卸载时执行
+- autho ，后端verify token ，jwt token 令牌，
+
+## 修改用户slogan
+- 前端修改表单，后端 update + mvc
+  - 先后端：
+    - 提供修改slogan 接口，
+    - 中间件 鉴权 _jwt
+      - 拦在控制器前，token -> verify user 挂在ctx，next（
+      - 洋葱模型，一层执行完next，再执行下一层，
+      - restful api ，
+    - service 
+      - model 创建
+      - orm sequelize 
+    - 使用orm 对象，sequelize ,15:05
+      crud? 表单
+      配置数据库连接，
+    - cookie 和 session ，安全？
+  - 前端，
+    - 路由
+    - api userInfo 获取用户信息，
+    - userInfo 组件
+
+## debug
+- debug 为啥后端测试正确，还是显示400，密码或账号不存在。
+  前端在登入页面，使用login，不是依次传入账号和密码，而是使用对象整个传递导致错误。
+  - const {data} = await login( username, password );
+  - 用时1h13分钟，从后端找到前端
+  - 结果是因为上课不在状态
+- 文件上传，后端正确存储并且设置了默认值，
+  但是前端没有显示默认，响应拦截显示上传成功，打印为/upload/default.png
+  发现后端是存储在以c盘开头的临时目录，而不是静态资源目录，不能通过url
