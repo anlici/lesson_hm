@@ -1,193 +1,96 @@
-### react notebook 全栈
-- pnpm i react-router-dom -S
-  --save 一直依赖 react-router-dom@7
-  --save-dev -D 开发阶段依赖
+# 我的 React 全栈项目开发笔记
 
-- 项目阶段
-  - 开发阶段 development vite
-  - 测试阶段 test 没有环境 npx
-  - 上线阶段 production webpack
-  - 打包 npm run build 生成dist
-     -> 项目部署->dns -> 上线
+## 一、项目搭建
 
-- 页面级别
+### 1.1 依赖安装
 
-- es6 module 
-  import React {useState as useState,} from 'react'
-  import * as React from 'react'
-  as 别名
+- **安装 react-router-dom**：用 pnpm 安装这个库来管理路由，命令是`pnpm i react-router-dom -S`，它能让我在项目里方便地实现页面跳转和展示不同的内容。
+- **开发依赖**：对于一些只在开发阶段用的工具，比如样式导入插件`vite-plugin-style-import`，我会用`pnpm i vite-plugin-style-import`来安装，这样在开发时就能利用它们提升效率。
 
--  pnpm i zarm@3.1.2 选择版本
-- 引入button 组件，样式，
-  配置ConfigProvider primaryColor 定制theme 
-- build 打包 静态文件assets，index.html 引入
-    - css js
-    性能 http 并发数 
-- size gzip 大小 http 主动启动gzip 压缩传输
-- 应用层 表示层 会话层 传输层 网络层 数据链路层 物理层 
+### 1.2 项目阶段划分
 
-- pnpm install vite-plugin-style-import    
+- **开发阶段**：用 vite 工具来开发，它启动快，还有热更新功能，我写代码的时候能马上看到效果，特别方便。
+- **测试阶段**：目前没专门配测试环境，一般用`npx`命令跑一些临时脚本做测试，检查功能是不是正常。
+- **上线阶段**：用 webpack 打包，它能把代码优化、压缩，生成适合上线的文件。
+- **打包上线**：运行`npm run build`命令，生成 dist 文件夹，里面是上线用的静态文件，把这些文件部署到服务器上，配置好域名，就能让别人访问到我的项目了。
 
-- 路由功能，性能优化（gzip）
-- less css stylus 预编译器
-  - 快 使用变量和进行嵌套 、函数
-### vite less
-- 工程化，里面有编译插件，能够识别less，jsx等
-- less 是css 的预编译器，
-- class 是类组件里面使用，使用 className
-- module css 模块化
-  style.module.css 
-  vite 申明 less ->解析
+## 二、技术亮点
 
-- lib-flexible 适配
-- PostCSS 允许开发者通过一系列插件来处理和增强 CSS 文件，使其具备更高的可维护性、兼容性和性能。
+### 2.1 ES6 Module
 
-- vite 使用插件，比如：createStyleImportPlugin 按需导入
-  使用css 模块化，
-  alias 路径别名配置，
+我用 ES6 模块化语法来写代码，比如`import React, { useState } from 'react'`，这样导入导出模块更清晰，代码也好维护。还用`as`给一些模块或变量起别名，方便在代码里使用。
 
-- util 文件下，设置接口
-  index 统一配置；
-  return res.data;
-- cookie 一段字符串，4kb 存储，document.cookie 显示，分号隔开；
-  httpOnly 只允许http请求，不允许js操作，只读
-  cookie 设定令牌过去，不能使用了
-  每次请求默认带上cookie，http 1.0
-  如果比较大，每次都带上，http无状态，数据桢，
-  网络传输速度慢，不同浏览器对cookie 大小进行限制，超出后可能被截断；
-- 只能访问到当下域名的cookie，
-- domain 域名，
-  exprire 过期时间，
-  path 路径，限制有效路径，cookie/api 
-- httpOnly 只在请求时带上，安全；
-  只secure https 访问，不会在http请求带上，安全；
-  jwt token 令牌，
+### 2.2 组件库与主题定制
 
-- XXR 把js 脚本插入到页面，
-  跨站脚本攻击，攻击者通过伪造用户请求，
-  利用用户在目标网站的身份认证cookie，进行跨站请求，获取用户敏感信息，执行恶意代码等。
+- 我安装了 zarm 组件库（版本是 3.1.2），用它的 button 组件，样式也挺好看，能快速搭建项目界面。
+- 通过配置`ConfigProvider`的`primaryColor`属性，我定制了项目主题颜色，让项目看起来更独特。
 
-- 防止：csrf token 令牌，
-  遇到敏感请求，加入随机csrf token 令牌，
-  服务器生成一个唯一token，存在session中，嵌入到页面；
-  再次请求时，服务器验证token，如果一致，则继续执行；
-- httpOnly ，防止js读取cookie，
-  设置secure 保证 https 访问，不会在http请求带上，安全；
+### 2.3 性能优化
 
-### 业务开发
-- NarBar 组件
-  使用zarm 库，封装组件
-  - components 公共组件
-  - zarm TabBar 底部导航 使用 TabBar.Item
-  - change setActiveKey 切换
--  pnpm add prop-types 安装 prop-types
-   函数式组件对象 propTypes 
+- 打包的时候，对静态文件进行 gzip 压缩，这样文件体积变小，传输速度更快，项目性能也就更好了。
+- 我用 less 作为 CSS 预编译器，能用变量、嵌套这些功能，写样式更方便，代码也更简洁。
 
-- router 路由,useNavigate 导航跳转
-  放到组件内部，router 里面
-  路由包过一切，将app 包起来，
-- routes 放在app里面， SPA 单页面应用，
-  hashRouter 监听hash变化，
-  historyRouter 监听history 变化，hashChange pushState
-- <> </> 文档碎片，fragment 不会增加一层
+## 三、功能实现
 
-### 页面设计
-- css
-  - react module css 模块化，
-  - less css 预编译器，
-  - icon 图标，zarm 内置
-  - linear-gradient 线性渐变，替代图片
+### 3.1 路由管理
 
-- icon 图标，zarm 内置
-- 设置showNavBar 控制导航栏显示
-  先写伪代码，使用useEffect 监听pathname路径，
-  使用useLocation 进行解构pathname路径，
-- memo 缓存组件，useMemo 缓存计算结果
-  useCallback 缓存函数
-- react-router-dom
-  BrowserRouter 监听hashChange
-  HashRouter 监听hashChange
+我用 react-router-dom 来管理路由，在项目里设置好路由路径和对应的组件，这样就能实现不同页面之间的跳转了。比如用`BrowserRouter`来监听路由变化，在开发环境用`HashRouter`，这样更方便调试。
 
-- 线性渐变，css 渐变，
-  background-image:linerg-gradient(to right,red,blue);
+### 3.2 组件开发
 
-## 登入页面
-- 登入->注册
-  登入： 账号密码，验证码，记住密码，登入按钮，
-  注册： 账号密码，确认密码，验证码，
-  切换：点击到放大字体，
-- >span
-  &.active 选中的样式,& 同级
-  npm install classnames --save 
-- 使用:global 样式，全局冲破mudule限制，
-## 静态开发
+- 我写了 NarBar 这样的公共组件，用 zarm 的 TabBar 做底部导航，通过`change`事件和`setActiveKey`方法来切换导航项，组件复用性挺高。
+- 还用 prop-types 来检查组件的属性类型，这样能保证组件接收到的参数是符合预期的，代码更健壮。
 
-- nth-of-type(n) 伪类，选择器，
-- align-self baseline 基线对齐，主轴是
+### 3.3 登录功能
 
-- react 和 vue slot 插槽，props.children 区别
-  - modal 组件为例，通用组件，
-  - content 表单，jsx 插槽，slot （插槽，具名插槽）
-  - 
+- 我实现了登录和注册功能，包括输入账号密码、验证码验证这些。登录页面里能切换登录和注册表单，样式上用了`:global`来突破模块化限制。
+- 前端用 axios 和后端通信，配置 vite 的反向代理解决跨域问题，把前端请求的`/api`路径代理到后端服务器，这样前后端数据交互就正常了。
 
-- 首页 静态开发
-  - 用户账单列表 
-    - 按照事件排序 倒序
-    - 按照类型查询，月份查询
-  - 整个页面统计，按照日期分组，
-  - 开发时间：分析模块，交互细节，
+## 四、项目结构
 
-## 实现登录，解决跨域(vite代理，开发环境)
-- 通过配置 vite.config.js 中的 server.proxy 实现反向代理
-- 设置baseurl，所以请求都会带上baseurl
-  cors 
-  assess control allow origin 跨域控制，允许跨域访问，
-  浏览器请求/api/login，vite 代理转发，代理到后端服务器，
-  changeOrigin:true 伪造host 头，让目标服务器认为请求是同源
-  rewrite 路径重写，/api/login -> /login
+```
+project-root/
+  ├── src/
+  │   ├── components/      # 公共组件，像 NarBar 这些
+  │   ├── utils/           # 工具文件，放接口配置、axios 这些
+  │   ├── routes/          # 路由配置文件
+  │   ├── assets/          # 静态资源，比如图片、样式文件
+  │   ├── App.jsx          # 项目入口组件
+  │   └── index.html       # 项目入口 HTML 文件
+  ├── vite.config.js       # Vite 配置文件
+  ├── package.json         # 项目依赖和脚本配置
+  └── README.md            # 项目说明文件
+```
 
-- 流程：
-  - 前端login 组件触发submit
-  - api/login 请求的配置位置， /api/login{username,password} 
-  - 使用utils/axios 请求后端服务器，
-    设置baseurl，所以请求都会带上baseurl ，/api/login 变成 /login
-  - /api 后端提供接口地址标志，前后端分离
-    不带 /api，系统认为react-router-dom 管理
-  - axios 请求 被vite 配置server 拦截
-    proxy 解决跨域问题，rewrite 路径重写，/api/login -> /login
-    后端提供接口
-   
-- useEffect 订阅事件或启动定时器后，
-  return 返回函数，取消订阅或清除定时器（进行清除操作）
-  空依赖，在组件挂载和卸载时执行
-- autho ，后端verify token ，jwt token 令牌，
+## 五、性能优化与安全
 
-## 修改用户slogan
-- 前端修改表单，后端 update + mvc
-  - 先后端：
-    - 提供修改slogan 接口，
-    - 中间件 鉴权 _jwt
-      - 拦在控制器前，token -> verify user 挂在ctx，next（
-      - 洋葱模型，一层执行完next，再执行下一层，
-      - restful api ，
-    - service 
-      - model 创建
-      - orm sequelize 
-    - 使用orm 对象，sequelize ,15:05
-      crud? 表单
-      配置数据库连接，
-    - cookie 和 session ，安全？
-  - 前端，
-    - 路由
-    - api userInfo 获取用户信息，
-    - userInfo 组件
+### 5.1 性能优化
 
-## debug
-- debug 为啥后端测试正确，还是显示400，密码或账号不存在。
-  前端在登入页面，使用login，不是依次传入账号和密码，而是使用对象整个传递导致错误。
-  - const {data} = await login( username, password );
-  - 用时1h13分钟，从后端找到前端
-  - 结果是因为上课不在状态
-- 文件上传，后端正确存储并且设置了默认值，
-  但是前端没有显示默认，响应拦截显示上传成功，打印为/upload/default.png
-  发现后端是存储在以c盘开头的临时目录，而不是静态资源目录，不能通过url
+- 我用 memo 缓存组件，useMemo 缓存计算结果，useCallback 缓存函数，这样能减少组件不必要的重新渲染，性能就提升了。
+- 对于大型项目，还可以用代码分割、懒加载这些技术，进一步优化加载速度。
+
+### 5.2 安全防护
+
+- 处理用户敏感信息时，我用 httpOnly 和 secure 属性设置 cookie，防止 XSS 和 CSRF 攻击，保证用户数据安全。
+- 用 jwt token 令牌做用户认证，服务器验证 token 有效性，保证请求合法安全。
+
+## 六、其他说明
+
+### 6.1 开发工具与插件
+
+- 我用 vite 作为开发服务器，它模块热更新快，插件生态丰富，开发效率高。
+- 还安装配置了 vite-plugin-style-import 插件，能按需导入样式，样式文件体积更小。
+
+### 6.2 样式管理
+
+- 我用 CSS 模块化（style.module.css）管理组件样式，避免样式冲突，好维护。
+- 用 less 预编译器写样式，变量、嵌套这些功能用起来很方便。
+
+### 6.3 适配与增强
+
+- 我引入了 lib-flexible 库做设备适配，项目在不同屏幕尺寸设备上都能正常显示。
+- 用 PostCSS 处理增强 CSS 文件，提高兼容性、可维护性和性能。
+
+## 七、总结
+
+这个项目从搭建到功能实现，再到性能优化和安全防护，我都尽量做到最好。开发过程中，我不断学习新技术，提升自己的开发能力。通过这个项目，我掌握了 React 全栈开发的流程，也积累了宝贵的经验。以后我还会继续优化这个项目，添加更多功能，让它变得更好。

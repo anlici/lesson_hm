@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>字符串多行截断</title>
+    <style>
+        
+        .truncate-multiline {
+            width: 200px;
+            
+            overflow: hidden;
+            text-overflow:ellipsis;/*省略号*/
+            /* 浏览器内核 前缀 */
+            display: -webkit-box; /*弹性 box 模型*/
+            -webkit-box-orient:vertical; /*水平*/
+            -webkit-line-clamp:3; /*行数*/
+            
+        }
+
+    </style>
+</head>
+<body>
+    <div class="truncate-multiline">
+        <p>这是一个很长的文本示例， 他将被截断并用省略号显示。这是一个很长的文本示例， 他将被截断并用省略号显示。这是一个很长的文本示例， 他将被截断并用省略号显示。这是一个很长的文本示例， 他将被截断并用省略号显示。
+        </p>
+    </div>
+    <textarea>这是一个很长的文本示例， 他将被截断并用省略号显示。这是一个很长的文本示例， 他将被截断并用省略号显示。这是一个很长的文本示例， 他将被截断并用省略号显示。这是一个很长的文本示例， 他将被截断并用省略号显示。
+    </textarea>
+</body>
+</html>

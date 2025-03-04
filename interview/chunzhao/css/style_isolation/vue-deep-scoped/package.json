@@ -1,5 +1,5 @@
 {
-  "name": "fuwen-vue",
+  "name": "vue-deep-scoped",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -8,7 +8,6 @@
     "build": "vite build",
     "preview": "vite preview"
   },
-  
   "dependencies": {
     "vue": "^3.4.29"
   },
@@ -17,14 +16,3 @@
     "vite": "^5.3.1"
   }
 }
-<<<<<<< HEAD
-"dependencies": {
-  "vue": "^3.2.0",    // 你的本地修改
-  "axios": "0.21.1"
-}
-=======
-"dependencies": {
-  "vue": "^3.3.0",    // 远程仓库的修改
-  "lodash": "4.17.21"
-}
->>>>>>> origin/main
