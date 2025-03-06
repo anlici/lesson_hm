@@ -1,4 +1,5 @@
-<template>
+<!-- <template>
+
   <div class="container" ref="containerRef">
     <div class="home">
       <div class="content">
@@ -94,4 +95,50 @@ let selectColor = (color: string) => {
     margin: 10px ;
   }
 }
+</style> -->
+
+<template>
+  <div>
+    <Childrenone :msg1="msg1" :msg2="msg2"></Childrenone>
+    <ParentOne></ParentOne>
+    <ExposeParent />
+    <VModelParent />
+    <ProvideParent />
+  </div>
+</template>
+
+<script  name="App">
+import Childrenone from './components/Childrenone.vue';
+import ParentOne from './components/ParentOne.vue';
+import ExposeParent  from './components/ExposeParent.vue';
+
+import VModelParent from './components/VModelParent.vue';
+import ProvideParent from './components/ProvideParent.vue';
+
+
+export default {
+  data() {
+    return {
+      msg1:'传给子组件的信息1'
+    }
+  },
+  setup() {
+    const msg2 = '传给子组件的信息2'
+    return {
+      msg2
+    }
+  },
+  components: {
+    Childrenone,
+    ParentOne,
+    ExposeParent,
+    VModelParent,
+    ProvideParent
+  }
+
+}
+</script>
+
+<style scoped>
+
 </style>

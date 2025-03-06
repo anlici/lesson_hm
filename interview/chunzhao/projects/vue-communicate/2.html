@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <nav id="nav">
+        <ul>
+            <li>
+                <a href="#/page1">1</a>
+            </li>
+            <li>
+                <a href="#/page2">2</a>
+            </li>
+            <li>
+                <a href="#/page3">3</a>
+            </li>
+        </ul>
+    </nav>
+    <main>
+        <div id="page1">
+            <h1>page1</h1>
+        </div>
+    </main>
+    <footer>
+        
+    </footer>
+    <script>
+        window.addEventListener('nav',e => {
+            console.log(event.target.href)
+        }) 
+    </script>
+</body>
+</html>
