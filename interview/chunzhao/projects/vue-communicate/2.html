@@ -9,28 +9,71 @@
     <nav id="nav">
         <ul>
             <li>
-                <a href="#/page1">1</a>
+                <a href="#/page1">Page 1</a>
             </li>
             <li>
-                <a href="#/page2">2</a>
+                <a href="#/page2">Page 2</a>
             </li>
             <li>
-                <a href="#/page3">3</a>
+                <a href="#/page3">Page 3</a>
             </li>
         </ul>
     </nav>
     <main>
-        <div id="page1">
-            <h1>page1</h1>
-        </div>
+        <div id="container"></div>
     </main>
-    <footer>
-        
-    </footer>
     <script>
-        window.addEventListener('nav',e => {
-            console.log(event.target.href)
-        }) 
+        class HashRouter {
+            constructor() {
+                // 路由配置
+                this.routes = {};
+                // this.currentUrl = ''
+                // bind 方法用于创建一个新函数，this 绑定到指定的对象上，这里是hashRouter
+                window.addEventListener('hashchange',this.load.bind(this),false);
+                // this.load(); // 初始化时执行一次
+            }
+            // 默认 注册路由
+            register(hash,callback = function () { })  {
+                this.routes[hash] = callback; 
+            }
+            registerIndex(callback = function () {}) {
+                this.routes['/index'] = callback;
+                console.log('index');
+            }
+             // 防止this 指向window或其他对象
+             load() {
+                // console.log('hashchange',this);
+                // console.log('哈希变化',window.location.hash);
+                let hash = window.location.hash.slice(1) || '/index';
+                let callback = this.routes[hash]|| (() => this.render404());
+                // container 切换，拿到所有路由配置，this 指向 hashRouter
+                callback.call(this);
+            }
+            render404() {
+                document.getElementById('container').innerHTML = '<h1>404 Not Found</h1>';
+                console.log('404')
+            }
+        }
+        const router = new HashRouter();
+        router.registerIndex(() => container.innerHTML = '我是首页')
+
+        // 注册路由
+        router.register('/page1', function () {
+            console.log('page1');
+            document.getElementById('container').innerHTML = '<h1>Page 1 Content</h1>';
+        });
+
+        router.register('/page2', function () {
+            console.log('page2');
+            document.getElementById('container').innerHTML = '<h1>Page 2 Content</h1>';
+        });
+
+        router.register('/page3', function () {
+            console.log('page3');
+            document.getElementById('container').innerHTML = '<h1>Page 3 Content</h1>';
+        });
+        router.load(); // 初始化执行一次
+        
     </script>
 </body>
 </html>
