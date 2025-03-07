@@ -84,3 +84,88 @@ self.onmessage = function(e) {
 ## 10万数据渲染
 - event loop
   
+```js
+const arr = [
+  {
+    id: 1,
+    isActive: true
+    math:78,
+    eglish:89,
+  },
+  {
+    id: 2,
+    isActive: false
+    math:88,
+    eglish:98,
+  },
+  {
+    id: 3, 
+    isActive: true
+    math:98,
+    eglish:88,
+  }
+]
+const totol = arr
+  .filter(item => item.isActive)
+  .reduce((sum,item) => sum + it
+  em.math + item.eglish,0)
+```
+```js
+const arr1 = [
+  {a:1,b:{c:{d:{e:1}}}}
+]
+const arr2 = [
+  {a:1,b:{c:{d:{e:1}}}}
+]
+// 比较 递归
+function compare(arr1,arr2) {
+  if(arr1.length !== arr2.length) {return false}
+  for(let i = 0; i < arr1.length; i++) {
+    if(arr1[0][key] !== arr2[0][key]) {return false}
+    if(typeof arr1[0][key] === 'object') {
+      compare(arr1[0][key],arr2[0][key])
+    }
+  }
+  return true
+}
+// 使用isEqual
+const _ = require('lodash/isEqual')
+const isEqual = _.isEqual(arr1,arr2)
+console.log(isEqual)
+
+```
+console.log(JSON.stringify(obj1)); // 输出: {"a":1,"b":2}
+console.log(JSON.stringify(obj2)); // 输出: {"b":2,"a":1}
+虽然 obj1 和 obj2 的属性值相同，但由于属性顺序不同，生成的 JSON 字符串也不同。因此，比较这两个字符串的结果是 false：
+
+- git hooks
+  - pre-commit 阻止提交
+  - pre-push 阻止推送
+  - pre-rebase 阻止rebase，
+  - pre-receive 阻止push到远程仓库
+  - post-receive 推送到远程仓库后执行
+  - post-checkout 切换分支后执行
+  - post-merge 合并分支后执行
+  - post-commit 提交后执行
+- git merge 冲突解决：
+ - git checkout -b patch-branch main 基于main分支，创建临时补丁分支
+ - git checkout main 切回main分支
+ - git merge --no - ff patch -branch 补丁合并到mian分支
+
+- git 提交冲突
+  - 手动解决
+    - git status 查看冲突文件
+    - 打开冲突文件<<<<<<< HEAD
+这是 current_branch 上的内容
+=======
+这是其他分支（如另一种分支）的内容
+>>>>>>> branch_name
+ * `<<<<<<< HEAD`上面是当前分支（当你执行`git pull`等操作时，当前分支是你正在工作的分支）的相关内容，而`=======`下面是另一个分支（如你在拉取时有冲突的分支）的内容。
+3. 手动编辑解决冲突
+* 根据实际情况，手动编辑文件，决定保留哪一部分内容或者对两部分进行整合。例如，如果是一个文本文件，你可能需要对比两部分内容的逻辑，选择合适的句子或者段落进行保留或者重新组织语言。
+* 如果是一个代码文件，比如 Java 文件，你可能需要考虑代码的功能实现，判断哪种实现方式是正确的，或者如何将两者的修改合并到一起以实现期望的功能。
+标记冲突已解决
+当完成文件的修改后，使用git add <file>将解决冲突后的文件添加到暂存区，这相当于告诉 Git 该文件的冲突已经解决。
+提交解决后的文件
+最后，使用git commit -m "解决冲突的相关描述"命令提交解决冲突后的文件。
+
