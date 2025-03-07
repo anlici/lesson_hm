@@ -62,7 +62,6 @@ self.onmessage = function(e) {
 }
 ```
 
-
 ## 路由模式
 - hash 路由 history 路由
   使用spa单页面，前端路由：SPA只需要更新需要资源，不会刷新整个页面，减少白屏渲染时间，提高用户体验。
