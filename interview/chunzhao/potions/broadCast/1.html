@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="sendInput" placeholder="输入信息">
+    <button id="sendButton">发生信息</button>
+    <script>
+        // 创建广播
+        const channel = new BroadcastChannel('my-channel');
+        const messageInput = document.getElementById('sendInput');
+        const sendButton = document.getElementById('sendButton');
+
+        // 点击使发送
+        sendButton.addEventListener('click',()=> {
+            const message = messageInput.value;
+            if(message) {
+                channel.postMessage(message) // 获取输入框内容
+                console.log('发送成功',message);
+            }
+        })
+    </script>
+</body>
+</html>

@@ -13,7 +13,5 @@ const str = 'hello'
 //     return reversed;
 // }
 
-function reverseStr3(str) {
-    // 正则
-    return str.replace(/./g)
-}
+
+console.log(reverseStr3(str));

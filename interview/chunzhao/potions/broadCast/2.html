@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>接收信息</h2>
+    <div id="msg"></div>
+    <script>
+        // 创建广播
+        const channel = new BroadcastChannel('my-channel')
+        // 获取显示区域 msg
+        const msg = document.getElementById('msg')
+        // 监听消息
+        channel.onmessage = (event) => {
+            const message = event.data; // 接收消息
+            const newMessage = document.createElement('p')
+            newMessage.textContent = `接收到消息：${message}`;
+            msg.appendChild(newMessage) // 添加到显示区域
+            console.log('接收到消息',message)
+        }
+    </script>
+</body>
+</html>
