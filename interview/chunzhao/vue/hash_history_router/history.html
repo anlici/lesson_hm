@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>history 路由模式</title>
+</head>
+<body>
+    <ul>
+        <li>
+            <a href="/">首页</a>
+        </li>
+        <li>
+            <a href="/about">关于</a>
+        </li>
+    </ul>
+    <div id="app"></div>
+    <script>
+        const routes = [
+            {
+                path: '/',
+                component: {
+                    template: `<div>首页</div>`
+                }
+            },
+            {
+                path: '/about',
+                component: {
+                    template: `<div>关于</div>`
+                }
+            }
+        ]
+        // 监听前进后退按钮：触发
+        window.addEventListener('popstate',function () {
+            routerView()
+        })
+        // 获取 所有a 标签
+        let links = document.querySelectorAll('a')
+        // 每个a标签都绑定点击事件
+        links.forEach(link => {
+            link.addEventListener('click',function (e) {
+                // 阻止默认跳转
+                e.preventDefault()
+                // 使用history.pushState()方法，修改url地址，并触发poststate事件
+                /**
+                 * history.pushState(state, title, url)
+                 * state: 状态对象
+                 * title: 标题
+                 * url: url地址
+                 */
+                history.pushState(null,'',this.getAttribute('href'))
+                // 调用routerView函数
+                routerView()
+            })
+        })
+        const app = document.getElementById('app')
+        // 核心路由：根据当前路径显示对应内容
+        function routerView() {
+            // 路由表查找匹配
+            const index = routes.findIndex(item => {
+                return item.path === location.pathname
+            })
+            if(index !== -1) {
+                app.innerHTML = routes[index].component.template
+            } else {
+                app.innerHTML = `<h1>404</h1>`
+            }
+        }
+    </script>
+</body>
+</html>

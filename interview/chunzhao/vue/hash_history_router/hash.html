@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hash路由底层</title>
+</head>
+<body>
+    <ul>
+        <li>
+            <a href="#/home">首页</a>
+        </li>
+        <li>
+            <a href="#/about">关于</a>
+        </li>
+    </ul>
+    <div id="app">内容显示区域：</div>
+    <script>
+        // 路由配置
+        const routes = [
+            {
+                path: '/home',
+                component: () => {
+                    return '<h2>首页</h2>'
+                }
+            },
+            {
+                path: '/about',
+                component: () => {
+                    return '<h2>关于</h2>'
+                }
+            }
+        ]
+        // 首次加载：读取hash并且显示内容
+        window.addEventListener('DOMContentLoaded',() => {
+            // location.hash 格式是 #/home 带有#
+            routerView(location.hash)
+        })
+        // 监听hash变化： 当点击链接或手动修改hash 触发
+        window.addEventListener('hashchange',() => {
+            routerView(location.hash)
+        })
+        // 获取内容容器元素
+        const app = document.getElementById('app')
+        // 核心路由函数： 根据hash值显示内容
+        function routerView(localHash) {
+            // 路由表 查找匹配当前hash 项
+            const index = routes.findIndex((item) => {
+                // 拼接'#/path' 形式进行比较
+                return '#'+item.path === localHash
+            })
+            // 匹配成功，显示内容
+            if(index !== -1) {
+                app.innerHTML = routes[index].component()
+            }else {
+                app.innerHTML = '<h2>404</h2>'
+            }
+        }
+    </script>
+</body>
+</html>
