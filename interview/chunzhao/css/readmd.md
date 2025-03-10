@@ -18,13 +18,16 @@
   - completion/ chat stream:true
   - 大模型思考 输出流式数据
     基于token 神经网络一个一个token输出，后面基于前面token 的预测结果
+  - 大模型不是专有流式，只是stream 增强用户体验
 - 网络层：
   http 0.9 
   1.0 
   1.1 
   2.0  服务器推送 服务器伺服状态
   3.0  
+- tcp/ip UDP（数据暴露，适合视频、直播）
+  响应头 text/event-stream keep-alive
+  ctx.res.write(`data: ${chunk}\n\n`)
   
-    
 - AGI ：人工智能 多模态能力
   软件+硬件 + 算法 + 数据

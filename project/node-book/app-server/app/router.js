@@ -22,4 +22,9 @@ module.exports = app => {
   router.patch('/user/signature', _jwt, controller.user.editSignature)
   // 获取用户信息
   router.get('/user/getUserInfo', _jwt, controller.user.getUserInfo)
+  
+  // 账单模块 restful
+  router.post('/bill',_jwt,controller.bill.add); // 添加账单
+
+  
 };
