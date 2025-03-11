@@ -36,7 +36,6 @@ app.use(async (ctx, next) => {
  */
 app.use(bodyParser())
 
-
 // 新建 / 路由
 router.get('/', async (ctx) => {
   // 响应体

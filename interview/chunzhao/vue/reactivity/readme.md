@@ -74,7 +74,10 @@
   - 
   
 ## get post 区别
-- 
+- 形式上：get 是将信息使用查询字符串query string 放在URL中，post 是讲信息放在请求体body中，post 请求可以包含更复杂的数据，如文件上传等。
+- 安全性：get 请求信息在url 中明文暴露，post 在请求体中加密，使用抓包才能查看到
+- get 上传信息可能受到浏览器截断，post 理论上没有限制，但服务器会对请求体有限制
+- get 请求可以缓存，下一次浏览器访问同一个页面先会再缓存中查找，post 不可以缓存
 
 ## 深拷贝 节流，手写
 ```js
@@ -92,6 +95,23 @@ function throttle(fn,delay=1000) {
 ```
 - 浅拷贝，加上递归
   复杂对象或数组，包含嵌套属性
+```js
+function deepClone() {
+  let clone = obj instanceof Array ? []:{}
+  for(let key in obj) {
+    // 判断是否是自身属性
+    if(obj.defineProperty(key)) {
+      // 判断是否是引用类型（数组、对象）
+      if(obj[key] instanceof Object) {
+        clone[key] = deepClone(obj[key])
+      } else{
+        clone[key] = obj[key]
+      }
+    }
+  }
+  return clone
+}
+```
 ```js
 function deepClone(obj) {
     let clone = obj instaceof Array ? []:{}
@@ -115,3 +135,11 @@ function deepClone(obj) {
 - history 使用history.pushState() 用于修改url 地址，并且不触发页面刷新；通过监听popstate事件，监听浏览器前进和后退操作，动态更新页面内容
 - hash 路由通话url 中 # 实现，不会发生到服务器；
   history 路由通过js 里面使用query string 查询字符串操作url，会到服务器；url 美观，支持seo，兼容性差
+
+## 跨域
+- 同源策略：浏览器的安全机制，禁止不同源进行访问
+  如：协议、端口、域名不同，http https
+- 解决：1，jsonp：利用script 标签不受同源策略影响，通过动态创建src 属性向服务端提供接口，并且带上回调函数名，服务器返回回调函数并且携带js代码
+- 2，cors： 设置请求头（Access-Control-Allow-Origin） 
+  浏览器发起跨域请求检查响应头是否允许本次请求
+- 3，nginx：设置代理，将请求转发到目标服务器，并且设置允许跨域请求
