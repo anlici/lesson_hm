@@ -1,5 +1,6 @@
-# Vue 3 + Vite
-
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
-
-Learn more about IDE Support for Vue in the [Vue Docs Scaling up Guide](https://vuejs.org/guide/scaling-up/tooling.html#ide-support).
+## proxy
+- 项目里面，响应式对象很多，但reactiveMap 只有一个 会有性能问题？
+  - 按 router-view 切换，使用weakMap，能够垃圾回收
+  - 一个对象，方便找到对应的响应式对象
+- get 
+  set 

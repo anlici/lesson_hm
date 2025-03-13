@@ -14,6 +14,8 @@ import {
 const state = reactive({
   num:0
 })
+console.log(state.num);
+
 let val;
 // effect(() => {
 //   // 依赖地图 tragetMap
