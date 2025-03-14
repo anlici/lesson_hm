@@ -36,11 +36,11 @@ export default defineConfig({
         // 重写路径， 表示去掉请求路径中的 /api 前缀，以便正确匹配目标服务器的路由
         rewrite: (path) => path.replace(/^\/api/, '')
       },
-      '/upload': {
-        target: 'http://localhost:7001',
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/upload/, '/upload')
-      }
+      // '/upload': {
+      //   target: 'http://localhost:7001',
+      //   changeOrigin: true,
+      //   rewrite: (path) => path.replace(/^\/upload/, '/upload')
+      // }
     }
   }
 })

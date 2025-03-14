@@ -1,3 +1,10 @@
-import { Icon } from 'zarm';
+import React  from "react";
 
-export default Icon.createFromIconfont('//at.alicdn.com/t/font_2236655_w1mpqp7n1ni.js')
+const CustomIcon = ({ type }) => {
+    return (
+        <svg className="icon" aria-hidden="true">
+            <use xlinkHref={`#icon-${type}`}></use>
+        </svg>
+    )
+}
+export default CustomIcon

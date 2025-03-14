@@ -17,14 +17,15 @@ module.exports = app => {
   // 用户模块
   router.post('/register', controller.user.register); // 登录
   router.post('/login', controller.user.login); // 注册
-  router.post('/upload', controller.upload.index); // 上传文件
+  // router.post('/upload', controller.upload.index); // 上传文件
   // 部分修改资源 put 完全替换（文件）   patch 部分
   router.patch('/user/signature', _jwt, controller.user.editSignature)
   // 获取用户信息
   router.get('/user/getUserInfo', _jwt, controller.user.getUserInfo)
   
-  // 账单模块 restful
+  // 账单模块 restful 
   router.post('/bill',_jwt,controller.bill.add); // 添加账单
-
-  
+  router.patch('/bill/:id',_jwt,controller.bill.update); // 修改账单
+  router.delete('/bill/:id',_jwt,controller.bill.delete); // 删除账单
+  router.get('/bill/:id',controller.bill.detail); // 获取账单详情
 };

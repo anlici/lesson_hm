@@ -20,8 +20,6 @@ class BillController extends Controller {
       return
     }
 
-  
-
     try {
       let user_id = ctx.user.id;
       const result = await ctx.service.bill.add({
@@ -44,17 +42,18 @@ class BillController extends Controller {
       }
     } 
   }
-
+  // 修改
   async update() {
     const { ctx, app } = this;
+    const {id} = ctx.params; // 获取路由参数
     const {
-      id,
+      
       amount,
       type_id,
       type_name,
       date,
       pay_type,
-      remark = ''
+      remark 
     } = ctx.request.body
     if (!id || !amount ||!type_id ||!type_name ||!date ||!pay_type) {
       ctx.body = {
@@ -87,6 +86,36 @@ class BillController extends Controller {
       }
     }
   }
+  async delete() {
+    const { ctx, app } = this;
+    
+  }
+  async detail() {  
+    const { ctx, app } = this;
+    let { id } = ctx.params;
+    if (!id) {
+      ctx.body = {
+        code: 400,
+        msg: '参数错误'
+      }
+      return
+    }
+    try {
+      const result = await ctx.service.bill.detail(id)
+      ctx.body = {
+        code: 200,
+        msg: '获取成功',
+        data: result
+      }
+    } catch(err) {
+      ctx.body = {
+        code: 500,
+        msg: '服务器内部错误'
+      }
+      return
+    }
+  }
+
 }
 
 module.exports = BillController;

@@ -1,5 +1,6 @@
 # 我的 React 全栈项目开发笔记
-
+- style-components css-in-js使用
+- cx 引入，使用classnames 库，动态绑定css 类名
 ## 一、项目搭建
 
 ### 1.1 依赖安装
@@ -95,6 +96,18 @@ project-root/
   - sql 建表
   - mvc 
     - model 使用AI生成prompt 基于sql，使用egg.js sequelize orm
-## 七、总结
+    - controller
+    - service
+      - app.model.Bill.create() 新增
+      - app.model.Bill.update({},{
+        where:{id:1}
+      }) 修改
 
-这个项目从搭建到功能实现，再到性能优化和安全防护，我都尽量做到最好。开发过程中，我不断学习新技术，提升自己的开发能力。通过这个项目，我掌握了 React 全栈开发的流程，也积累了宝贵的经验。以后我还会继续优化这个项目，添加更多功能，让它变得更好。
+- 后端建好路由，设置动态路由，使用restful 添加路由
+      控制器 detail 解析参数param，校验参数id；
+      在conroller中，解析id，调用service 根据id 查找数据，返回前端，完成接口开发
+      前端添加detail，设置路由，使用接口，拿到数据，页面进行响应式更新
+- 拿到id 看到路由里面pathname里面有 detail/1
+  使用useLocation拿到pathname 等路由；第三方库 query-string 解析？后面的参数，拿到id
+  ？id=1 拿到id 1
+  使用useParams拿到id,在react-router-dom里面，使用useParams拿到路由参数
