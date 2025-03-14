@@ -46,3 +46,16 @@ for (let i = 0; i < newChildren.length; i++) {
       patch(null, newVNode, container, anchor)
    }
 }
+
+// 遍历旧节点 删除
+for(let i = 0; i < oldChildren.length; i++) {
+  const oldVNode = oldChildren[i]
+  // 拿旧 去新children 寻找相同节点
+  const has = newChildren.find(
+    (vnode) => vnode.key === oldVNode.key
+  )
+  if(!has) {
+    // 如果没有找到相同节点，则移除
+    unmount(oldVNode)
+  }
+}

@@ -21,6 +21,8 @@
 - react 比较：
   React.createElement(type,props,children)
   
+  e.el 存储真实dom 使用nextSibling 获取下一个真实dom
+  
   SSR  
 
 ## diff 算法

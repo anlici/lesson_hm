@@ -23,7 +23,20 @@ res = [1,2,3,6,9,8,7,4,5]
 - proxy 对象代理
 - 收集依赖，订阅？（effect）
 
-## 依赖地图 effect 
+## 依赖地图 effect proxy优势
+- 懒代理，默认代理第一层
+  访问某个属性后触发get 拦截器，对嵌套对象的属性进行代理，实现嵌套数据的响应式
+  if (isObject(res)) {
+    return reactive(res); // 深代理
+}
+  递归 
+- 为了性能，使用浅代理
+  shallowReactive
+
+- ref 简单数据类型，使用get set 进行响应拦截
+  复杂数据类型，回到reactive 对象代理
+  
+- defineProperty 必须一次性完成深度代理
 
 ## vue 与 react 区别
 - 设计理念与特性：

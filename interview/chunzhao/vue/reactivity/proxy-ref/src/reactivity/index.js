@@ -1,4 +1,4 @@
 // 学习源码 优质编程风格 
-export {reactive} from './reactive'
+export {reactive,shallowReactive} from './reactive'
 
 export {effect} from './effect'

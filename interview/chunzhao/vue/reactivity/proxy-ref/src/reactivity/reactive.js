@@ -1,9 +1,11 @@
 // map es6 新增数据结构 弱引用 hashMap 
 // key取value json 的key 只能是字符串，map 可以是对象
 import {
-    mutableHandlers
+    mutableHandlers,
+    shallowHandlers
 } from './baseHandlers'
 export const reactiveMap = new WeakMap(); // 全局依赖地图
+export const shallowReactiveMap = new WeakMap(); // 浅依赖
 
 // target: 代理的目标对象 
 export const reactive = (target) => {
@@ -23,4 +25,7 @@ function createReactiveObject(target,proxyMap,proxyHandlers) {
     const proxy = new Proxy(target,proxyHandlers)
     proxyMap.set(target,proxy)
     return proxy
+}
+export const shallowReactive = (target) => {
+    return createReactiveObject(target,shallowReactiveMap,shallowHandlers)
 }
