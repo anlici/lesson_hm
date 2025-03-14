@@ -21,7 +21,7 @@ let val;
 //   // 依赖地图 tragetMap
 //   val = state.num 
 // })
-console.log(val); // 0 effect 立即执行
+// console.log(val); // 0 effect 立即执行
 
 </script>
 

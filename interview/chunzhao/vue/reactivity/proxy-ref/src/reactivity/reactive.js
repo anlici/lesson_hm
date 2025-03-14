@@ -12,7 +12,7 @@ export const reactive = (target) => {
 }
 // proxyMap 代理地图 proxyHandlers 代理处理函数
 function createReactiveObject(target,proxyMap,proxyHandlers) {
-    if (target !== 'object') {
+    if (typeof target !== 'object') {
         console.warn('target must be an object');
         return target
     }

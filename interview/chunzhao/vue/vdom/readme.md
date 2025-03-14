@@ -79,4 +79,33 @@ function tholle(fn,delay) {
 
 ## koa 你怎么使用
 
-
+## 手写promise.all 
+```js
+function myPromiseAll(promises) {
+  return new Promise((resolve, reject) => {
+    if (!Array.isArray(promises)) {
+      return reject(new TypeError('arguments must be an array'))
+    }
+    let result = []
+    let count = 0
+    promises.forEach((promise,index) => {
+      Promise.resolve(promise)
+        .then(res => {
+          result[index] = res
+          count++; // 统计成功个数
+          // 全部成功才成功
+          if (count === promises.length) {
+            resolve(result)
+          }
+        })
+        .catch(err => {
+          reject(err) // 有一个失败就失败
+        })
+    });
+    // 如果没有传入promise，直接返回
+    if (promises.length === 0) {
+      resolve(result)
+    }
+  })
+}
+```

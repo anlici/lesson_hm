@@ -18,9 +18,11 @@ for (let i = 0; i < newChildren.length; i++) {
         if (j < lastIndex) { // 旧vnode 数组下标在上一个index之前
             const prevVNode = newVNode[i-1]
             if(prevVNode) {
+              // 将当前节点插入到前一个节点的后面
                 const anchor = prevVNode.el.nextSibling
                 insert(newVNode.el, container, anchor)
             } else {
+              // 如果是第一个节点，插入到最前面
                 insert(newVNode.el, container,container.firstChild)
             }
         } else {
