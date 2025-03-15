@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>This is parent window</h1>
+  <input type="text" class="inp">
+  <button class="send">发送信息到iframe</button>
+  <div class="contents">
+    <p>接收到的信息</p>
+    <ul class="messages"></ul>
+  </div>
+  <iframe src="child.html" height="600" widht="800" 
+  class="child-iframe" frameborder="0"></iframe>
+
+  <script>
+    window.addEventListener('message', (e) => {
+        console.log('接收到消息', e.data);
+    })
+    const win = document.querySelector('.child-iframe').contentWindow;
+    document.querySelector('.send').addEventListener('click',() => {
+        const message = document.querySelector('.inp').value;
+        // h5 跨域通信
+        win.postMessage(message,'*');
+    })
+  </script>
+</body>
+</html>

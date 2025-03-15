@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    var xhr = new XMLHttpRequest();
+    // 复杂跨域 
+    xhr.open('PUT','http://localhost:3000/data',true) // true 表示异步
+    xhr.send(JSON.stringify({key:'value'})) // 带上请求体
+    xhr.onreadystatechange = function() {
+        if(xhr.readyState === 4) {
+            if(xhr.status >= 200 && xhr.status < 300) {
+                console.log('cors 成功',xhr.responseText)
+            }else {
+                console.log('请求失败,cors preflight failed',xhr.status)
+            }
+        }
+    }
+
+</script>
+</body>
+</html>
