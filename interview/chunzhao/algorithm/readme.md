@@ -27,5 +27,4 @@ const PromiseAll = (promises) => {
     })
   })
 }
-
 ```

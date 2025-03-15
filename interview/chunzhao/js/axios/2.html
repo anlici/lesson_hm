@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+function simpleAxios({ baseURL = '' } = {}) {
+    const interceptors = {
+        request: [],
+        response: []
+    };
+
+    const useRequestInterceptor = (interceptor) => {
+        interceptors.request.push(interceptor);
+    };
+    // 响应拦截器
+    const useResponseInterceptor = (interceptor) => {
+        interceptors.response.push(interceptor);
+    };
+
+    const executeInterceptors = (interceptors, config) => {
+        return interceptors.reduce((chain, interceptor) => {
+            return chain.then(interceptor);
+        }, Promise.resolve(config));
+    };
+
+    return {
+        useRequestInterceptor,
+        useResponseInterceptor, // axios 上的拦截器
+        // 发送请求
+        get(url) {
+            return this.sendRequest('GET', `${baseURL}${url}`);
+        },
+        post(url, data) {
+            return this.sendRequest('POST', `${baseURL}${url}`, data);
+        },
+        sendRequest(method, url, data) { // 封装请求,实际请求位置
+            // 1. 执行请求拦截器
+            return executeInterceptors(interceptors.request, { method, url, data })
+                .then(({ method, url, data }) => new Promise((resolve, reject) => {
+                    const xhr = new XMLHttpRequest();
+                    xhr.open(method, url, true);
+
+                    // 判data 是否为对象，是则设置请求头，否则不设置
+                    if (method === 'POST' && data) {
+                        xhr.setRequestHeader('Content-Type', 'application/json');
+                    }
+
+                    xhr.onreadystatechange = () => {
+                        if (xhr.readyState === 4) {
+                            if (xhr.status >= 200 && xhr.status < 300) {
+                                try {
+                                    const res = JSON.parse(xhr.responseText);
+                                    // 2. 执行响应拦截器并等待结果
+                                    executeInterceptors(interceptors.response, res)
+                                        .then(result => resolve(result))
+                                        .catch(reject);
+                                } catch (error) {
+                                    reject(new Error('响应数据解析失败'));
+                                }
+                            } else {
+                                reject(new Error(`请求失败，状态码： ${xhr.status}`));
+                            }
+                        }
+                    };
+                    // 发送请求
+                    xhr.send(data ? JSON.stringify(data) : null);
+                }));
+        }
+    };
+}
+
+    const axios = simpleAxios({
+        baseURL: 'https://api.github.com/'
+    });
+
+    axios.useRequestInterceptor(config => {
+        console.log('请求前拦截器', config);
+        return config;
+    });
+
+    axios.useResponseInterceptor(response => {
+        console.log('响应拦截器', response);
+        return response;
+    });
+
+    axios.get('users/shunwuyu')
+        .then(res => {
+            console.log('res 成功', res);
+        })
+        .catch(err => {
+            console.log('err 失败', err);
+        });
+    
+    axios.post('users/shunwuyu', {
+        addContent: '大厂等风也在等你'
+    })
+    .then(res => {
+        console.log('res 成功', res);
+    })
+    .catch(err => {
+        console.log('err 失败', err);
+    });
+
+    </script>
+</body>
+</html>

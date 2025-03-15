@@ -64,7 +64,7 @@ function tholle(fn,delay) {
 - 存储cookie，设置httpOnly 和secure 属性，浏览器自动携带cookie，不用手动
 
 ## 图片懒加载
-- 浏览器滚动时，图片出现在视窗内时，才加载图片、
+- 浏览器滚动时，图片出现在视窗内时，才加载图片
 - 延迟加载非关键资源，直到进入可视窗口
 - 原始 load="lazy"
 - 浏览器 intersectionObserver API

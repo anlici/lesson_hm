@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // baseURL
+        // 请求 响应 拦截 发送请求
+        // 解构赋值 + 默认值 = 函数参数
+        // config 对象
+        function simpleAxios({baseURL = ''} = {}) {
+            //console.log(baseURL);
+            const interceptors = {
+                // 请求前拦截器 callBack => config
+                // A B C 顺序执行，promise 返回值 reduce 
+                request : [],
+                response : []
+            }
+            const useRequestInterceptor = (interceptor) => {
+                interceptors.request.push(interceptor)
+                // console.log('useRequestInterceptor => ',callBack);
+            }
+            // 响应
+            const useResponseInterceptor = (interceptor) => {
+                interceptors.response.push(interceptor)
+            }
+            const executeRequest = (interceptors,config) => {
+                // console.log(config); 
+                // accumulator 累加器，每次执行返回值，作为下一次执行结果
+                // 如果设置了 initialValue，accumulator 的初始值是 initialValue，否则是 arr[0]
+                return interceptors.reduce((chain,interceptors) => {
+                    // 返回promise.resolve(value) 两段功能一样，返回promise
+                    // return chain.then(res => {
+                    //     return Promise.resolve(interceptors(res))
+                    // })
+                    return chain.then(interceptors)
+                },Promise.resolve(config)) }
+                
+            return {
+                useRequestInterceptor,
+                useResponseInterceptor,
+                get(url) {
+                    return this.sendRequest('GET',`${baseURL}${url}`)
+                },
+                post(url,data) {
+                    // 有请求体
+                    return this.sendRequest('POST',`${baseURL}${url}`,data)
+                },
+                sendRequest(method,url,data) {
+                    return executeRequest(interceptors.request,{
+                        method,
+                        url,
+                        data 
+                    }).then(({method,url,data}) => new Promise((resolve,reject) => {
+                        // console.log('拦截器啦',method,url,data);
+                        const xhr = new XMLHttpRequest();
+                        xhr.open(method,url,true) // true 表示异步
+                        // xhr.timeout = 5000 // 可以设置超时时间，防止长时间请求
+                        if(method === 'POST' && data) {
+                            // 判data 是否为对象，是则设置请求头，否则不设置
+                            xhr.setRequestHeader('Content-Type','application/json')
+                        }
+
+                        xhr.onreadystatechange = () => {
+                            if(xhr.readyState === 4) {// 4 表示请求完成
+                                if(xhr.status >= 200 && xhr.status < 300) {
+                                   // 兼容格式
+                                   const res = JSON.parse(xhr.responseText)
+                                     // 执行响应拦截器
+                                    resolve(res)
+                                }else {
+                                    reject(new Error(`请求失败，状态码： ${xhr.status}`))
+                                }
+                            }
+                        }
+                        // 发送请求 
+                        xhr.send(data ? JSON.stringify(data) : null)
+                    }))
+                }
+            }
+        }
+        // dev 开发使用,development 开发环境 本地
+        // product 生产环境 npm run start build -> 打了包 上线
+        // baseURL 统一前缀，减少重复
+        const axios = simpleAxios({
+            // baseURL:
+            // process.env = 'dev'? 'https://api.github.com/':'https://api.github.com/'
+            baseURL: 'https://api.github.com/'
+        })
+        axios.useRequestInterceptor(config => {
+            console.log('请求前拦截器 1111',config);
+            // promise 源码 promise.resolve(2) 返回简单值，不能链式调用？
+            return config
+        })
+        axios.useResponseInterceptor(config => {
+            console.log('响应式拦截器 22222',config);
+            return config
+        })
+        axios.get('users/anlici')
+            .then(res => {
+                console.log('res',res);
+            })
+            .catch(err => {
+                console.log('err',err);
+            })
+        
+        // post 响应式 
+        axios.post('users/anlici',{
+            addContent: '大厂在等你'
+        })
+            .then(res => {
+                console.log('res',res);
+            })
+            .catch(err => {
+                console.log('err',err);
+            })
+    </script>
+</body>
+</html>
