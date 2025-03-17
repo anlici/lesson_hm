@@ -20,11 +20,8 @@
   const CHUNK_SIZE = 2 * 1024 * 1024; // 2MB 切片大小
 
   input.addEventListener('change', function (e) {
-    // e  事件对象
-    // html5 js 访问文件系统的能力 安全
-    // console.log(e.target.files);
+    // e  事件对
     file = e.target.files[0];
-    // console.log(file);
     // 切片 
     createChunk(file)
   })
