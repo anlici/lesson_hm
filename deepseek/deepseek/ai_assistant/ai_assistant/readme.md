@@ -12,6 +12,24 @@
 ## font awesome 
 - 通过字体文件替代图片，减少http请求，加载速度快
 - 通过font-size，color 等属性调整图标大小和颜色。
+
+## shadecn-ui 
+- 基于tailwindcss 和react 的ui库
+  充分展示原子类和配置灵活性
+  复制粘贴代码片段，快速生成代码
+  组件代码集成到项目中，无需npm 安装额外依赖。
+- 允许高定制，
+## css 响应式布局
+- media 媒体查询
+- flex 布局，使用flex-trap 允许换行
+- grid 布局，图片库，商品列表，grid-template-columns:repeat(auto-fit,minmax(200px,1fr))
+  gap:20px
+- 百分比 布局
+## css 选择器
+- 通用* ,类类型选择 p,div ,类选择器 .class ，id #id，属性 选择器 [attr=value]
+  伪类:hover 伪元素:before
+- !important 最高，覆盖；特异： id>类/属性/伪类> 类型/伪元素 >通用
+
 ## scrollup 流式输出
   刘式输出：逐字符渲染模拟真实的打字效果，让用户感知到 AI 正在“思考”和“回复”，而不是一次性显示全部内容。这种渐进式的反馈更符合人类交互习惯，提升了真实感。
   平滑滚动：通过 behavior: 'smooth' 实现平滑滚动，避免生硬的跳转，增强视觉流畅性。
