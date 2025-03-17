@@ -1,41 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>大文件上传之切片</title>
+  <script src="node_modules/axios/dist/axios.js"></script>
 </head>
 <body>
-    <input type="file" name="文件" id="input"  />
-    <button id="upload" type="button">上传</button>
-    <!-- 进度条 -->
-    <div id="progress"></div>
-    <script>
-    let input = document.getElementById('input');
-    let upload = document.getElementById('upload');
-    let file = {}; // 文件对象
-    const CHUNK_SIZE = 1024 * 1024 * 2;
-    let chunkList = [];
-    input.addEventListener('change', (e) => {
-        // console.log(e.target.files);
-        file = e.target.files[0]; // h5 通过js访问文件系统能力
-        createChunk(file)
-    })
-    // 2mb promise all 进行限流
-    function createChunk(f,size = CHUNK_SIZE) {
-        let cur = 0;
-        while(cur < f.size) {
-            // Blod 二进制 对象
-            chunkList.push({
-                file:f.slice(cur, cur + size), // slice 切片
-            })
-            
-            cur += size; // 2mb
+  <input type="file" id="input"/>
+  <button id="upload" type="button">上传</button>
+  <!-- 上传进度条 -->
+  <div id="progress">
+  </div>
+  <script>
+  let input = document.getElementById('input');
+  let upload = document.getElementById('upload');
+  let file = {} // 文件对象
+  let chunkList = []; // 存放切片数组
+  const CHUNK_SIZE = 2 * 1024 * 1024; // 2MB 切片大小
+
+  input.addEventListener('change', function (e) {
+    // e  事件对象
+    // html5 js 访问文件系统的能力 安全
+    // console.log(e.target.files);
+    file = e.target.files[0];
+    // console.log(file);
+    // 切片 
+    createChunk(file)
+  })
+  // 2MB 
+  // promise all 限流 
+  function createChunk(f, size = CHUNK_SIZE) {
+    // File 0 -> total  二进制的对象
+    let cur = 0;
+    console.log(f, '?????????????????????????')
+    while(cur < f.size) {
+      chunkList.push(
+        {
+          // Blob 二进制对象
+          file: f.slice(cur, cur + size) // slice 方法切片
         }
+      )
+      cur += size;
     }
-    upload.addEventListener('click',() => {
-        let formData = new FormData();
+  }
+
+  upload.addEventListener('click', () => {
+    const uploadList = chunkList.map(({file:blobFile}, index) => {
+      return {
+        file: blobFile, 
+        size: blobFile.size,
+        percent: 0,
+        chunkName: `${file.name}-${index}`,
+        fileName: file.name,
+        index
+      }
     })
-    </script>
+    // console.log(uploadList);
+    uploadFile(uploadList)
+  })
+
+  async function uploadFile(list) {
+    const requestList = list.map(({ file, fileName, index, chunkName }) => {
+      //  上传 html5 提供的 FormData 类
+      //  表单数据
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('fileName', fileName);
+      formData.append('chunkName', chunkName);
+      return {
+        formData,
+        index
+      }
+    })
+    .map(({formData, index}) => axios.post('http://localhost:3000/upload', formData))
+    
+    // console.log(requestList);
+    await Promise.all(requestList)
+    console.log('上传成功！！！')
+  }
+  </script>
 </body>
 </html>
