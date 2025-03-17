@@ -15,7 +15,7 @@
     - 允许跨域域名数组
     - req.headers.origin
     - indexOf 判断是否包含
-    - 服务器设置响应头，Access-Control-Allow-Origin:  origin || *
+    - 服务器设置响应头content-type ，Access-Control-Allow-Origin:  origin || *
   Access-Control-Allow-Methods: GET,POST,PUT,DELETE
   Access-Control-Allow-Headers: Content-Type
   Access-Control-Allow-Credentials: true  允许跨域携带cookie

@@ -26,7 +26,6 @@ export function track(target,type,key) {
         // 没有depsMap 创建一个Map
         targetMap.set(target,depsMap = new Map())
     }
-    // console.log(depsMap,'depsMap????');
 
     let dep = depsMap.get(key);
     if (!dep) {

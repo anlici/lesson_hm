@@ -5,9 +5,22 @@
 import { track,trigger} from "./effect.js"
 import {reactive} from "./reactive.js"
 import { isObject } from "../shared/index.js";
+
+
+const get = createGetter(); // 创建get方法
+const set = createSetter(); 
+export const mutableHandlers = {
+    get,
+    set
+}
+
+const shallowReactiveGet = createGetter(true)
+export const shallowReactiveHandlers = {
+    get:shallowReactiveGet,
+    set
+}
 // 收集 shallow 浅显 
 function createGetter(shallow = false) {
-
     // {a:1,b:2,c:{d:{e:1,f:2}} 递归
     return function get(target,key,receiver) {
         console.log('get------',target,key);
@@ -27,17 +40,4 @@ function createSetter() {
         trigger(target,"set",key);
         return res;
     }
-}
-
-const get = createGetter(); // 创建get方法
-const set = createSetter(); 
-export const mutableHandlers = {
-    get,
-    set
-}
-
-const shallowReactiveGet = createGetter(true)
-export const shallowReactiveHandlers = {
-    get:shallowReactiveGet,
-    set
 }

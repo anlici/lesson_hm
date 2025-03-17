@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<body>
+  <div id="app"></div>
+  <script type="module">
+    import { reactive, effect } from './reactivity.js';
+
+    const state = reactive({
+      counter: 0,
+      user: {
+        name: '小明'
+      }
+    });
+
+    // 注册副作用
+    effect(() => {
+      document.getElementById('app').innerHTML = `
+        <h1>${state.user.name}的计数器：${state.counter}</h1>
+      `;
+    });
+
+    // 测试响应式
+    setInterval(() => {
+      state.counter++;
+      if(state.counter % 5 === 0) {
+        state.user.name = state.user.name === '小明' ? '小红' : '小明';
+      }
+    }, 1000);
+  </script>
+</body>
+</html>

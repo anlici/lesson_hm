@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="file" name="文件" id="input"  />
+    <button id="upload" type="button">上传</button>
+    <!-- 进度条 -->
+    <div id="progress"></div>
+    <script>
+    let input = document.getElementById('input');
+    let upload = document.getElementById('upload');
+    let file = {}; // 文件对象
+    const CHUNK_SIZE = 1024 * 1024 * 2;
+    let chunkList = [];
+    input.addEventListener('change', (e) => {
+        // console.log(e.target.files);
+        file = e.target.files[0]; // h5 通过js访问文件系统能力
+        createChunk(file)
+    })
+    // 2mb promise all 进行限流
+    function createChunk(f,size = CHUNK_SIZE) {
+        let cur = 0;
+        while(cur < f.size) {
+            // Blod 二进制 对象
+            chunkList.push({
+                file:f.slice(cur, cur + size), // slice 切片
+            })
+            
+            cur += size; // 2mb
+        }
+    }
+    upload.addEventListener('click',() => {
+        let formData = new FormData();
+    })
+    </script>
+</body>
+</html>
