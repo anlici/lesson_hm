@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
       behavior: 'smooth'
     })
   })
-  // 打字机效果
+  // 打字机效果 setInterval 模拟
   const  typeMessage = (bubble, content, callback) => {
     let index = 0;
     const intervalId = setInterval(() => {

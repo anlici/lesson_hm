@@ -29,7 +29,7 @@ def chat():
             logging.error("Missing required fields in request")
             return jsonify({"error": "缺少必要的字段"}), 400
 
-        # 获取API密钥和基础URL
+        # 获取API密钥和基础URL 1
         api_key = os.getenv('OPENAI_API_KEY')
         base_url = os.getenv('DEEPSEEK_BASE_URL')
 
