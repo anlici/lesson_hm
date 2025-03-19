@@ -11,5 +11,4 @@ export const getProducts = () => {
             resolve(_products)
         }, 100)
     })
-
 }

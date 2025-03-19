@@ -80,6 +80,7 @@ function tholle(fn,delay) {
 -
 
 ## koa 你怎么使用
+## ssr
 
 ## 手写promise.all 
 ```js
