@@ -9,3 +9,10 @@ export const getProducts = async() => {
     await new Promise((resolve) => setTimeout(resolve, 1000));
     return _products;
 }
+export const searchProductsByQuery = async(keyword: string) => {
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    return _products.filter(
+        // 需要1再改下
+       (product) => product.title.toLocaleLowerCase().indexOf(keyword.toLocaleLowerCase()) >= 0
+    );
+}

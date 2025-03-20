@@ -49,3 +49,10 @@
     相比客户端，爬虫无需解析js，能解析页面关键信息
   - 页面完整性高，SSR完整，不想csr只有HTML空白
   - 首屏加载快，seo 对页面评估高
+
+## 防抖 utils 
+- js 工具函数，复用
+- hooks 封装响应式业务 
+- await new Promise((resolve) => setTimeout(resolve, 1000)); 
+  **模拟sleep**
+- map 里面的key 
