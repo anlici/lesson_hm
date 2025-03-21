@@ -56,3 +56,6 @@
 - await new Promise((resolve) => setTimeout(resolve, 1000)); 
   **模拟sleep**
 - map 里面的key 
+- watchEffect 监听state变化，执行回调,
+  自动追踪依赖并执行，复杂逻辑（如查看是否还有库存）
+  立即执行一次，当依赖变化时，重新执行
