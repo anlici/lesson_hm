@@ -1,0 +1,16 @@
+{
+  "name": "ai_search",
+  "version": "1.0.0",
+  "description": "- 模糊查询 select like 容错，部分匹配\r - 自然语义搜索 embedding 嵌入\r   - 足够维度数学 \r   - 余弦相似度，夹角越小，越相似",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "openai": "^4.89.0"
+  }
+}

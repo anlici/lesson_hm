@@ -59,3 +59,11 @@
 - watchEffect 监听state变化，执行回调,
   自动追踪依赖并执行，复杂逻辑（如查看是否还有库存）
   立即执行一次，当依赖变化时，重新执行
+
+## AI 搜索
+- koa-router  @koa/cors koa-bodyparser
+- 使用koa 处理后端openai 进行AI搜索 embending 处理posts.json 数据
+- 
+
+- 回文+递归
+- 选择技术栈，
