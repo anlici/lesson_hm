@@ -1,6 +1,6 @@
 import fs from 'fs/promises';
 import {client} from './app.service.mjs'
-
+// 读取 使用模型 生成相似度 
 const inputFilePath = './data/posts.json';
 const outputFilePath = './data/posts_with_embeddings.json';
 

@@ -67,3 +67,14 @@
 
 - 回文+递归
 - 选择技术栈，
+
+## 亮点
+- 搜索功能，结合AI embedding 接口，拿到搜索关键字向量表达，将这个和所有其他向量进行距离计算，
+  余弦相似度比较，返回前三位，基于语义搜索
+- zsandard 做状态管理，里面也有持久化功能；
+  search hooks 封装响应式业务，路由，设计组件，hooks，store，
+  请求包含loading，error，data，
+- 提供product，设置posts.json 数据，
+- react 记账，实现hooks 
+- 使用fs/promises 读取posts.json 数据，结合promise和await 简化异步逻辑
+  fs/promises进行读写,删除等
