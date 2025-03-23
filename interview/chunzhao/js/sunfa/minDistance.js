@@ -1,5 +1,4 @@
 // 编辑距离
-
 function minDistance(word1, word2) {
     const m = word1.length;
     const n = word2.length;
@@ -21,4 +20,5 @@ function minDistance(word1, word2) {
             }
         }
     }
+    return dp[m][n];
 }

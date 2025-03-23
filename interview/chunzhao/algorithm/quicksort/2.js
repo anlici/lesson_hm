@@ -13,5 +13,6 @@ function bubbleSort(arr) {
     }
     return arr
 }
+
 const arr = [3,4,1,2]
 console.log(bubbleSort(arr));

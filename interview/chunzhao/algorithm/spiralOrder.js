@@ -15,13 +15,13 @@ function spiralOrder(matrix, n) {
             res.push(matrix[i][right])
         }
         right--;// 左边一列
-        if(top <= bottom) {
+        if(top <= bottom) { // 如果top > bottom break出来
             for(let i = right;i>=left;i--) {
                 res.push(matrix[bottom][i])
             }
         }
         bottom--;// 上一行
-        if(left <= right) {
+        if(left <= right) { 
             for(let i = bottom;i>=top;i--) {
                 res.push(matrix[i][left])
             }
@@ -30,5 +30,4 @@ function spiralOrder(matrix, n) {
     }
     return res;
 }
-
-console.log(spiralOrder([[1,2,3],[4,5,6],[7,8,9]],3))
+console.log(hh([[1,2,3],[4,5,6],[7,8,9]],3))

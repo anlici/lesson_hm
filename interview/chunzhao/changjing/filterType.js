@@ -19,7 +19,7 @@ function filterByType(arr,type) {
         if(type === 'object') {
             return isObject(item)
         } else{
-            return typeof item === type;
+            return typeof item === type; // 函数 简单数据
         }
     })
 }

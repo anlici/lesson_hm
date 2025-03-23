@@ -15,6 +15,7 @@ function ImageMessage(message,sender) {
 }
 var message = new TextMessage('hello','zhangsan');
 var image = new ImageMessage('world','lisi');
+
 console.log(message.message,message.msgText);
 console.log(image.message,image.msgText);
 
