@@ -1,4 +1,3 @@
-
 function bubbleSort(arr) {
     const len = arr.length;
     for(let i = 0; i < len-1; i++){ // len-1 , 下面len-i-1 后i+1已经排好

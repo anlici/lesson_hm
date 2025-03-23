@@ -1,4 +1,5 @@
-Object.create2 = function (proto,propertyObject=undefined) { // proto 原型对象，
+// 模拟 Object.create
+Object.create = function (proto,propertyObject=undefined) { // proto 原型对象，
     if(typeof proto !== 'object' && typeof proto !== 'function') {
         throw new TypeError('Object prototype may only be an Object or null'+ proto);
     }

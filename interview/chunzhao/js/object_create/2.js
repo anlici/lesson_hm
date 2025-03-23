@@ -2,9 +2,10 @@
 function myNew(Constructor,...args) {
     const obj = Object.create(Constructor.prototype);
     // bind 立即执行，返回新对象
-    const result = Constructor.apply(obj,args); // 执行构造函数, this指向obj,
+    const result = Constructor.apply(obj,args);
     return result instanceof Object ? result : obj;
 }
+
 
 function ObjectFactory() {
     var obj = new Object(); // 函数 创建一个空的对象
