@@ -50,8 +50,29 @@ const preOrder = (root) => {
 
     return res;
 }
+// 层序遍历
+const levelOrder = (root) => {
+    if (!root) return [];
+    let res = []; 
+    // 队列 用于存储当前层的节点
+    let queue = [root];
+    while (queue.length) {
+        const levelSize = queue.length;
+        const currentLevel = [];
+        for (let i = 0;i<levelSize;i++) {
+            const node = queue.shift(); 
+            currentLevel.push(node.val)
+            // 找左右
+            node.left && queue.push(node.left);
+            node.right && queue.push(node.right);
+        }
+        res.push(currentLevel)
+    }
+    return res;
+}
 
 // 测试代码
 const arr = [1, 2, 3, 4, 5, 6, 7];
 const treeRoot = arrayToTree(arr);
-console.log(preOrder(treeRoot)); // 输出: [1, 2, 4, 5, 3, 6, 7]
+// console.log(preOrder(treeRoot)); // 输出: [1, 2, 4, 5, 3, 6, 7]
+console.log(levelOrder(treeRoot));
