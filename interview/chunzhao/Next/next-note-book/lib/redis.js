@@ -1,6 +1,7 @@
 import Redis from 'ioredis';
-
+import { v4 as uuidv4 } from 'uuid';
 const redis = new Redis() 
+
 
 // nosql 数据库初始化  非关系性数据库
 const initialData = {
@@ -16,6 +17,22 @@ export async function getAllNotes() {
     } 
     return await redis.hgetall('notes');
 
+}
+
+export async function addNote(data) {
+    const uuid = uuidv4(); // 生成唯一id
+    await redis.hset("notes",[uuid],data)
+
+}
+export async function getNote(uuid) {
+    return JSON.parse(await redis.hget("notes",uuid))
+}
+
+export async function delNote(uuid) {
+    return  redis.hdel("notes",uuid) // ? why await
+}
+export async function updateNote(uuid,data) {
+    await redis.hset("notes",[uuid],data)
 }
 redis.on('connect',() => {
     console.log('redis connect success');

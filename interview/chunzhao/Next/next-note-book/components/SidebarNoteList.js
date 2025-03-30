@@ -1,5 +1,4 @@
-"use client"
-import dayjs from 'dayjs'
+import SidebarNoteItem from './SidebarNoteItem.js'
 export default async function SidebarNoteList({notes}) {
     const arr = Object.entries(notes)
     
@@ -10,15 +9,7 @@ export default async function SidebarNoteList({notes}) {
                 const {title,updateTime} = JSON.parse(note)
                 return (
                     <li key={noteId}>
-                        {/* <a href={`/note/${noteId}`}>
-                            <p>{title}</p>
-                            <p>{updateTime}</p>
-                        </a> */}
-                        <header className="sidebar-note-header">
-                            <strong>{title}</strong>
-                            <br/>
-                            <small> {dayjs(updateTime).format('YYYY-MM-DD hh:mm:ss')} </small>
-                        </header>
+                       <SidebarNoteItem title={title}  noteId={noteId} note={JSON.parse(note)} />
                     </li>
                 )
             })}
