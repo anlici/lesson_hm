@@ -1,29 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>requestIdleCallback</title>
-    <style>
-        .progress-bar {
-            background-color: green;
-        }
-
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>requestAnimationFrame</title>
+  <style>
+  .progress-bar {
+    background-color: green;  
+    height: 50px; 
+    width: 0px;
+  }
+  
+  </style>
 </head>
 <body>
-    <h1>requestIdleCallback</h1>
-    <div id="controls">
-      <button id="startBtn">开始处理100000个数据项</button>
-      <button id="animateBtn">开始动画</button>
-    </div>
-    <div id="status">准备就绪</div>
-    <div id="progress">
-      <div id="bar"></div>
-    </div>
-    <div id="animation" style="width:50px; height:50px; background:red; position:relative;"></div>
-    <script>
-        const statusEl = 
-    </script>
+  <div id="box" class="progress-bar"></div>
+  <button id="start">开始动画</button>
+  <script>
+  let btn = document.getElementById('start')
+  let box = document.getElementById('box')
+  let start = 0;
+  let allInterval = [];
+
+  const progress = () => {
+    box.style.width = box.offsetWidth + 1 + 'px'
+    box.innerHTML = (box.offsetWidth) + '%'
+    if (box.offsetWidth < 100) {
+      let current = Date.now();
+      allInterval.push(current - start);
+      start = current;
+      requestAnimationFrame(progress)
+    } else {
+      console.log(allInterval);
+    }
+    
+  }
+
+  btn.addEventListener('click', () => {
+    // UI 更新
+    // for (let i = 0; i < 10000000; i++) {
+    //   box.style.width = box.offsetWidth + 1 + 'px'
+    // }
+
+    
+    let current = Date.now();
+    start = current
+    // 
+    requestAnimationFrame(progress);
+    console.log(allInterval);
+  })
+  </script>
 </body>
 </html>

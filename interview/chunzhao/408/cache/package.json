@@ -1,0 +1,11 @@
+{
+  "name": "cache",
+  "version": "1.0.0",
+  "description": "- 缓存静态资源，减少服务器压力",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
