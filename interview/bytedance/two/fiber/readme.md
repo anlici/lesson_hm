@@ -8,7 +8,12 @@
   requestAnimationFrame 
   文档碎片
 - 组件复杂，响应也复杂，层级深 渲染慢
+- 渲染更新 在一定时间停下
+  用户交互和时间处理，优先级搞
+
 - 主线程有时间处理其他任务，react 性能优化 
+  fiber 机制 时间切片
+- 
 
 ## requestIdleCallback 
 - 浏览器空闲时间执行低优先级任务，
