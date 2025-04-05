@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 线程不能访问dom 元素，只能postMessage
+        // 线程之间通信
+        const myWorker = new Worker('./webWorker.js');
+        // event bus 消息机制
+        myWorker.addEventListener('message',(e) => {
+            console.log(e.data);
+        })
+        myWorker.postMessage({
+            type:'start',
+            data:{name:'zhangsan'}
+        })
+    </script>
+    
+</body>
+</html>
