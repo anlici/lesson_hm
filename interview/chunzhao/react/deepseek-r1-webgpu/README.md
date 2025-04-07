@@ -1,8 +1,8 @@
-# React + Vite
+## llm
+- webwork 
+- 进度条组件，要求动态显示加载进度和已经加载数据的大小，处理不同数据单位的转换。
+- UI Component = f(state) 组件UI + 父组件进渲染
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- initail 
+## 设计progress 需要的响应式数据
+- 
