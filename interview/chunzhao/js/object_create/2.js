@@ -15,3 +15,12 @@ function ObjectFactory() {
     
     return typeof ret === 'object' ? ret||obj : obj;
 }
+
+function myNew() {
+    let obj = new Object();
+    Constructor = [].shift.call(arguments);
+    obj.__proto__ = Constructor.prototype;
+    let ret = Constructor.apply(obj,arguements);
+
+    return typeof ret === 'object' ? ret||obj : obj;
+}

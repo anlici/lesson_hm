@@ -14,6 +14,7 @@ function flatter2(arr,res = []) {
     })
     return res
 }
+
 // 队列 层级展开； 栈模拟也行（下面展示队列的思路）
 function flatter3(arr) {
     const queue = [...arr]
