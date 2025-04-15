@@ -57,4 +57,14 @@
 - 特别的属性：少 深入 
   backface-visibility 3d 切换
   
-
+## bfc
+- 块级格式化上下文，设置独立进行元素之间隔离
+- 产生条件：
+  - float left | right
+  - 定位postion : 除了static，
+  - display:inline-block、table、flex 
+  - overflow:hidden | auto | scroll 
+- 效果：
+  - 父元素不会坍塌
+  - 浮动元素被计算
+  - 
