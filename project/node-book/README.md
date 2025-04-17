@@ -39,7 +39,7 @@
 
 ### 3.2 组件开发
 
-- 我写了 NarBar 这样的公共组件，用 zarm 的 TabBar 做底部导航，通过`change`事件和`setActiveKey`方法来切换导航项，组件复用性挺高。
+- 写了 NarBar 这样的公共组件，用 zarm 的 TabBar 做底部导航，通过`change`事件和`setActiveKey`方法来切换导航项，组件复用性挺高。
 - 还用 prop-types 来检查组件的属性类型，这样能保证组件接收到的参数是符合预期的，代码更健壮。
 
 ### 3.3 登录功能
