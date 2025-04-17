@@ -1,18 +1,22 @@
-function isValid(s) {
-    let stack = [];
-    let map = {
-        '(':')',
-        '{':'}',
-        '[':']'
-    }
+// const preh = (arr) => {
+//     if(arr.length <= 1) return arr;
 
-    for(let char of s) {
-        if(char in map) {
-            stack.push(map[char]); // 记录右边括号
-        } else {
-            if(stack.pop() !== char) return false;
-        }
-    }
+//     if(root) return root;
+//     node.left && preh(node.left);
+//     node.right && preh(node.right);
+// }
 
-    return !stack.length; // 栈为空，则为true
-}
+const preh = (root) => {
+    const res = [];
+    const stack = [root];
+    
+    while(stack.length) {
+        const node = stack.pop();
+        if(node) {
+            res.push(node.val);
+            stack.push(node.right);
+            stack.push(node.left);
+        } 
+    }
+    return res.reverse();
+} 

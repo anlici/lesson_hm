@@ -41,6 +41,7 @@
   - sessionStorage：会话级别，关闭浏览器即失效
   - localStorage：本地存储，关闭浏览器不失效
   - setItem(key,value)
+
 - websocket和http的区别：
   - 心跳：ping pong 桢，确认连接状态，在长轮询也是用的
   - http 一个主动请求对应一个被动响应
@@ -51,3 +52,22 @@
   这种机制确保了客户端能够实时获取最新的数据更新，而不会因为等待而错过新数据。
 
   - 适合股票，**天气**
+
+## 左右侧边固定，中间剩余空间
+- css flexbox
+  -  flex-grow: 1;
+  -  flex-shrink: 1;
+-  css grid
+   - grid-template-columns:20px 1fr 20px;
+   - 最新的，考虑兼容性问题
+- 绝对定位：外部使用relative，内部使用absolute；
+
+- **absolute ：脱离文档流，相对position为static的其他最近的祖先进行定位**
+
+## tailwindcss 原理：
+- 原子类css、postcss 一个插件
+- 配置文件：tailwind.config.js，配置内容路径和主题
+
+- postcss： 用js转成css 工具
+  postcss解析css 文件，生成AST 抽象语法树；如果tailwindcss插件，解析AST，生成所需的原子类，最终输出css文件
+- jit：just-in-time 通过扫描html，vue等文件，提取类名并且按需加载css
