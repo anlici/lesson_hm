@@ -12,7 +12,7 @@
 - 图片占位图
   <img src="" data-src="真正地址" >
 - scroll 事件判断图片是否到达视口
-
+  考虑节流
 - getBoundingClientRect 获取元素的位置和可视区域
   
 - intersection observer 监听元素是否进入可视区域 （html5 新特性）
@@ -60,5 +60,15 @@ Performance API 是浏览器提供的性能监控工具，可用于监听页面�
       - etag 性能开销大，last-modified 性能开销小
 - 缓存位置：
   - 内存 memory cache：
-    - 
   - disk cache 磁盘：
+  - service worker：pwa progress web appliaction 
+    离线缓存 类似app
+
+
+## 渲染进程
+- 主线程进行
+  - html 字符串进行解析，类型判断，生成dom树
+  - css 字符串进行解析，生成cssom树
+  - 合并dom树和cssom树，生成render树
+  - 布局render树，计算每个节点的位置
+- 主现场之外
