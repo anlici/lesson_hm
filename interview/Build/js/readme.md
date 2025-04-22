@@ -36,9 +36,27 @@
 - 词法作用域：函数定义时确定
 - 执行上下文：函数调用时创建
 - 变量提升与暂时性死区
-- 闭包：函数和其词法环境的组合
-- 内存泄漏问题及解决方案
+- 闭包：闭包是由函数和创建改该数的**词法环境**组合而成，类似一个背包。
+  **包含函数创建时作用域的所有变量**。
+  函数执行完后，该函数的作用域链被销毁，但是闭包的作用域链还在。
 
+- 闭包可以访问其词法作用域中的变量。
+  闭包可以延长变量的生命周期，避免全局变量污染。
+  闭包可以实现封装和私有变量。
+- 内存泄漏问题及解决方案
+  - 表现：
+    - 函数作为返回值，如useEffect；
+    - 函数作为参数传递
+    - 立即执行函数
+    - 节流函数，事件处理器（addEventListener）
+
+  - 闭包内存泄漏：循环引用、闭包引用外部变量、定时器、事件监听器、大型数据结构（占用大量内存）
+  - 解决：
+    - 循环引用：使用 WeakMap/WeakSet 解决循环引用问题
+    - 定时器：使用 clearTimeout/clearInterval 清除定时器
+    - 事件监听器：使用 removeEventListener 移除事件监听器
+    - 手动清除：使用 null 或 undefined 清除闭包引用
+   
 ## 4. 原型与继承
 
 - 对象创建方式：字面量、构造函数、Object.create()
@@ -111,3 +129,72 @@
 - Promise、async/await：异步编程
 - Proxy 和 Reflect：元编程
 - Map、Set、WeakMap、WeakSet：新的数据结构
+
+## 比较规则
+- es6里面，symbol和bigint 不推荐使用new 构建？会报错。
+  - 报错：报不能是构建函数
+  - symbol 是定义对象唯一属性建
+  - bigint 表达当数字超过number 数据类型支持时，使用大整数，使用 BigInt()创建；
+  - 最简单：数字后 ‘n’
+  - 但是不支持一元加减，10+10n，会报错（number + numbern）
+
+
+## typeof 和 instanceof
+- typeof 对原始类型除null 外，对引用类型除function 外，正确显示
+- instanceof 是判断**对象**是否属于某个类，是通过原型链来判断的;
+- 当然，instanceof 还可以使用Symbol.hasInstance()判断原始类型是否属于某个类;
+```js
+class PrimitiveNumber {
+  // 静态方法 primitiveNumber 检查是否数字类型
+  static [Symbol.hasInstance](x) {
+    return typeof x === 'number';
+  }
+}
+console.log(111 instanceof PrimitiveNumber); // true
+```
+## async and defer
+- 两者都是在html解析时异步加载，
+- async ，会在脚本加载完成后暂停html解析，立即执行脚本，然后继续解析html
+- defer ，绘制html解析完成后，在domcontentloaded 事件之前，加载脚本，然后执行脚本，最后绘制html
+
+4. **Object.is和===的区别？**
+Object在严格等于的基础上修复了一些特殊情况下的失误，具体来说就是+0和-0，NaN和NaN。
+源码如下：
+```js
+function is(x, y) {
+  if (x === y) {
+    //运行到1/x === 1/y的时候x和y都为0，但是1/+0 = +Infinity， 1/-0 = -Infinity, 是不一样的
+    return x !== 0 || y !== 0 || 1 / x === 1 / y;
+  } else {
+    //NaN===NaN是false,这是不对的，我们在这里做一个拦截，x !== x，那么一定是 NaN, y 同理
+    //两个都是NaN的时候返回true
+    return x !== x && y !== y;
+  }
+}
+```
+ 
+[] == ![] // true 
+console.log("true" == true); // false  字符串“true” 转nan
+
+## 继承
+- 借助call，父类原型上有方法，子类不能继承
+```js
+function Parent() {
+  this.name = 'parent';
+  this.getName = function() {
+    console.log(this.name);
+} 
+}
+function Child() {
+ Parent.call(this);
+ this.name = 'child'; 
+}
+Child.prototype = new Parent();
+Child.prototype.constructor = Child;
+var child = new Child();
+child.getName(); // parent
+```
+有问题，找对应高点赞的文章；
+脑子混乱，写篇文章整理
+有激情，代码写的漂亮，
+有深度，
