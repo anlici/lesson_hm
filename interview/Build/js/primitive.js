@@ -1,8 +1,7 @@
 var a = {
     value: 0,
     valueOf: function() {
-        this.value ++;
-        return this.value;
+      return ++this.value;
     }
 }
 console.log(a == 1 && a == 2); // true
@@ -21,6 +20,8 @@ var obj = {
   }
   console.log(obj + 1); // 输出7
   
-// ![] 逻辑非，[] 作为引用类型转true，![] 取反为false
+// [] 引用转true， ![] 则为false，
+//  [] == false， 继续隐式类型转，false = 0, 
+// [] == 0,[] 使用toSting 转“”， “” 转 0， 0 == 0， 所以[] ==![] 为true
 console.log([] == ![]); // true 
 console.log("" == ! ""); // false

@@ -3,7 +3,8 @@
 根据提供的文件内容，浏览器缓存主要分为以下几种实现方式：
 
 ## 1. HTTP 缓存
-
+- 为文件名添加hash 值或者版本号，如：`/static/js/app.js?v=1.0.0`
+  
 ### 1.1 强缓存
 
 强缓存允许浏览器直接从本地缓存中读取资源，不需要向服务器发送请求。
@@ -11,10 +12,10 @@
 - **Expires (HTTP 1.0)**
   - 设置资源过期的绝对时间
   - 例如：`res.setHeader('Expires', new Date(Date.now() + 20000).toGMTString())`
-  - 缺点：依赖客户端时间，可能不准确
+  - 缺点：**依赖客户端时间**，可能不准确
 
 - **Cache-Control (HTTP 1.1)**
-  - 使用相对时间控制缓存
+  - 使用**相对时间**控制缓存
   - 常用指令：
     - `max-age=秒数`：资源在多少秒内有效
     - `public/private`：是否可被代理服务器缓存
@@ -27,9 +28,10 @@
 当强缓存失效后，浏览器会发送请求到服务器，验证资源是否有更新。
 
 - **Last-Modified / If-Modified-Since**
-  - 服务器返回资源时带上 `Last-Modified`（资源最后修改时间）
-  - 浏览器下次请求时带上 `If-Modified-Since`
-  - 服务器比较时间，如果资源未修改返回 304 状态码
+  - 服务器返回资源时响应头带上 `Last-Modified`（资源最后修改时间）
+  - 浏览器下次请求时带上 请求头`If-Modified-Since`将该时间戳 发送 服务器
+  - 如果资源的最后修改时间晚于 If-Modified-Since，则返回新资源。如果修改小于等于 if-modified-since,则返回 304 状态码
+  - 缺点：只能精确到秒级，无法精确到毫秒级
 
 - **ETag / If-None-Match**
   - 服务器返回资源时带上 `ETag`（资源内容的哈希值）
@@ -37,6 +39,30 @@
   - 服务器比较哈希值，如果资源未修改返回 304 状态码
   - 比 Last-Modified 更精确，优先级更高
   - 缺点：计算 ETag 可能影响服务器性能
+  
+- 计算ETag的方式：
+  - 1. 计算文件的哈希值
+  双括号包裹，强etag，弱etag（w/ 开头）
+  ```js
+    const crypto = require('crypto');
+    const fs = require('fs');
+
+    function getEtag(filePath) {
+      const fileContent = fs.readFileSync(filePath);
+      const hash = crypto.createHash('md5').update(fileContent).digest('hex');
+      return `W/"${hash}";
+    }
+  ```
+  - 2. 文件元数据:根据文件大小、修改时间等信息;这样时间不够精确，例如文件没变，但是时间变化。字符串
+  ```js
+    const fs = require('fs');
+    
+    function getMetadataEtag(filePath) {
+      const stats = fs.statSync(filePath);
+      
+      return `${stats.size}-${stats.mtime.getTime()}`;
+    }
+  ```
 
 ## 2. 浏览器本地存储
 
@@ -53,6 +79,10 @@
 - 存储容量较大（约 5MB）
 - 适合存储 token 等长期有效的数据
 - 示例：`localStorage.setItem('token', 'xxx')`
+- 安全：
+  - crypto 加密
+  - 密码账号等录等敏感信息，放到cookie中
+  - 定期清除
 
 ### 2.3 sessionStorage
 
@@ -63,13 +93,14 @@
 ### 2.4 IndexedDB
 
 - 大容量存储，存储结构化数据
-- 支持离线存储、离线更新、离线推送
+- **支持离线存储、离线更新、离线推送**
 - 适合存储大量数据
 
 ## 3. **Service Worker**
-
+- service worker 是一种独立运行在浏览器后台的线程，用于进行**拦截网络请求和管理缓存**。
 - 拦截网络请求，使用 caches 匹配响应
-- 在监听 install 事件时下载资源到本地，实现离线访问
+- 而在监听 install 事件时下载资源到本地，实现离线访问
+
 - 监听 activate 事件，对 cache 里的资源进行过滤，更新缓存
 - 实现离线缓存、离线访问、离线更新、离线推送
 
@@ -91,8 +122,9 @@
     ```
     ```
     - 预获取 ( prefetch ) ：在浏览器空闲时预先加载将来可能需要的资源
+
 - 图片懒加载：使用 IntersectionObserver 或 getBoundingClientRect
-- 合理设置缓存策略，频繁变动的资源使用协商缓存，不常变动的资源使用强缓存
+- 合理设置缓存策略，频繁变动的资源（html ，生成的json）使用协商缓存，不常变动的资源（静态资源 css、图片）使用强缓存
 
 浏览器缓存机制是前端性能优化的重要手段，合理利用各种缓存策略可以显著提升网站加载速度和用户体验。
 
