@@ -165,13 +165,6 @@
 5. 绘制 (Paint)
 6. 合成 (Composite)
 
-### 6. 浏览器缓存
-
-- Service Worker: 离线缓存、离线访问
-- HTTP 缓存:
-  - 强缓存: Cache-Control, Expires
-  - 协商缓存: ETag, Last-Modified
-
 ## 实际应用案例
 
 ### 1px 边框问题解决方案
@@ -190,30 +183,3 @@
     box-sizing: border-box;
 }
 ```
-
-### 响应式布局示例
-
-```css
-/* 移动端优先 */
-.container {
-  width: 100%;
-  padding: 15px;
-}
-
-/* 平板设备 */
-@media (min-width: 768px) {
-  .container {
-    max-width: 720px;
-    margin: 0 auto;
-  }
-}
-
-/* 桌面设备 */
-@media (min-width: 1200px) {
-  .container {
-    max-width: 1140px;
-  }
-}
-```
-
-以上是前端面试中常见的 CSS 和 HTML 相关考点总结，希望对你有所帮助！
