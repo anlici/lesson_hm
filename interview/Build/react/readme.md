@@ -23,7 +23,6 @@
     并且简化了表单处理，底层是单向数据流+事件监听语法糖
   - react： 使用useState和useEffect实现数据流和状态管理，依赖收集，数据变化时视图更新。
 
-
 ## 水合（hydration） 和 合成事件（synthetic event）
 - 水合：指的是服务器生成静态html 和客户端JavaScript 事件处理程序和状态 结合的过程。
   服务器生成的HTML 包含了事件处理程序和状态，客户端JavaScript 负责将这些信息与DOM 进行关联，
