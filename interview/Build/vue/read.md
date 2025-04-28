@@ -1,0 +1,11 @@
+## vue router两种模式原理
+- hash 模式：
+    - 监听hashchange事件，根据hash值，更新路由
+    - 使用location.hash = '#' + path，更新hash值
+- history 模式：
+    - 监听popstate事件，根据state值，更新路由
+    - 使用history.pushState(state, title, url)，更新state值
+    - pushState，replaceState方法，都是改变state值，不会触发popstate事件
+    - 需要手动
+    - 只有用户点击浏览器的前进、后退按钮或者调用 history.back()、history.forward() 等方法时才会触发popstate事件
+- history 兼容，服务器也配置了history模式，但是用户刷新页面，会404，需要服务器配置重定向，将所有请求重定向到index.html
