@@ -2,16 +2,23 @@
 - xss 页面注入恶意脚本，在用户的浏览器中执行，窃取用户数据或进行其他恶意操作。
   XSS 攻击通常发生在同一站点内，比如攻击者通过评论区、表单提交等方式将恶意脚本注入到页面中，当其他用户访问该页面时触发攻击。
   - 输入校验,是否
-  - 避免html里面直接嵌入script，对script进行编码或转义，然后输出到页面中
-  - httpOnly cookie；secure cookie 避免cookie被第三方网站窃取
+  - **避免html里面直接嵌入script，对script进行编码或转义，然后输出到页面中**
+  - **httpOnly cookie**；secure cookie 避免cookie被第三方网站窃取
   - csp 头部
 - CSRF（跨站请求伪造）是指攻击者诱导用户访问一个恶意网站，然后利用用户在目标网站上的登录状态，向目标服务器发送伪造的请求（如转账、修改密码等）。
-  - samesite cookie
+  - **samesite cookie**
   - 验证请求来源
   - 验证码
 
 - 钓鱼网站和 CSRF 的核心区别在于，CSRF 利用了用户的登录状态，而钓鱼网站是通过欺骗用户主动提供信息。
-
+### 用用户输入的内容（可能含有攻击代码）来放在template渲染或用js解析这两种展示的上下文环境上，处理方法有什么不同
+- 模板引擎：<div>{{ userInput }}</div>
+  - 转义：将用户输入的内容进行转义处理，防止恶意代码被执行。
+  - 过滤：对用户输入的内容进行过滤，只允许特定的字符或格式。
+  - 
+- js 引擎：const element = document.createElement('div'); element.innerHTML = userInput;
+  - 避免直接使用innerHTML，而是使用textContent或innerText。
+  - 对用户输入的内容进行验证和过滤，确保只包含可信任的字符或格式。（转义）
 ## html 和 静态资源区别
 - 
 - HTML 是网页的核心结构文件，定义了*页面的内容和资源加载方式*。它可以是静态的，也可以通过后端动态生成。

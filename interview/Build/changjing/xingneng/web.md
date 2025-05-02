@@ -49,3 +49,5 @@
   - 优先渲染优化（如使用 `will-change`、`requestAnimationFrame`）。
   - will-change 提前告诉浏览器变化的属性，
   - requestAnimationFrame 根据**浏览器渲染周期，避免强制同步布局**（layout thrashing）优化动画帧率，
+
+
