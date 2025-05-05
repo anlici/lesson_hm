@@ -25,11 +25,6 @@
 - 使异步代码看起来像同步代码
 - 错误处理使用 try/catch
 
-### 事件循环 (Event Loop)
-- 宏任务：script、setTimeout、setInterval、setImmediate、requestAnimationFrame
-- 微任务：Promise.then/catch、process.nextTick、MutationObserver
-- 执行顺序：同步代码 → 微任务队列 → 宏任务队列
-- 渲染引擎在宏任务之前执行
 
 ## 3. 闭包与作用域
 
@@ -64,7 +59,7 @@
 - 原型链与继承机制
 - class 语法糖（ES6）
 - instanceof 运算符原理
-- 继承方式：原型链继承、构造函数继承、组合继承、寄生组合继承
+- 继承方式：**原型链继承、构造函数继承、组合继承、寄生组合继承**
 
 ## 5. 垃圾回收机制
 
@@ -77,14 +72,10 @@
   - DOM 引用未释放
   - 使用 WeakMap/WeakSet 解决循环引用问题
 
-## 6. 模块化开发
-
-- CommonJS：Node.js 使用，同步加载
-- AMD：RequireJS 实现，异步加载
-- UMD：兼容 CommonJS 和 AMD
-- ES Module：ES6 标准，静态导入
-- 动态导入：import() 函数
-
+## const  和display
+- const不能改的是引用地址，而不是值本身，比如对象或数组，里面的值可以改变
+- display：none flex inline-block  block
+  形成bfc：display block inline-block table flex inline-flex
 ## 7. 文件处理
 
 ### 大文件上传

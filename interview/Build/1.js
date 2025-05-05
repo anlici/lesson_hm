@@ -15,6 +15,7 @@ function banben(verson1,verson2) {
     }
     return 0;
 }
+
 // 模板字符串,with 实现
 function compile(template,data) {
     const reg = template.replace(
@@ -42,6 +43,27 @@ const exprObj = {
   },
 };
 const compiledString = compile(template, exprObj);
-console.log(compiledString);
+// console.log(compiledString);
 
 
+// var ul = document.querySelector('ul');
+// ul.addEventListener('click',function(e){
+//   console.log(this);
+//   console.log(e.target);
+// })
+
+for(var i=0;i<3;i++) {
+    // (function(i){
+    //     setTimeout(function(){
+    //         console.log(i);
+    //     },0)
+    // })(i); // i 0 1 2
+
+    // setTimeout(function(i){
+    //     console.log(i);
+    // }.bind(null,i),0);
+
+    setTimeout((i) => {
+        console.log(i);
+    },0,i); // 第三个参数
+}

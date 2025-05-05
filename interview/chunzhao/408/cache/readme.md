@@ -26,21 +26,8 @@
   - dns 预解析
 
 - 强缓存
-  - 响应头 expires 到达之前，直接在浏览器本地缓存
-  - memory cache 内存缓存 -> disk cache 磁盘缓存，过期了重新请求
-  - res.setHeader('Expires',new Date(Date.now() + 20000).toGMTString())
-    缺点：服务器时间搓，使用用户时钟，不准
-    - 使用相对时间，cache control
-  - 当资源没有变化，使用协商缓存 no-cache 
-  - 如果希望资源在一定时间内直接从缓存中读取，但过期后需要验证
-  - 请求头和响应头
-    last-modified （文件修改时间戳）服务器端
-    if-modified-since 文件修改时间戳 浏览器端
-    服务器段时间不靠谱 分布式
-  - md5 计算
-    etag 文件内容hash 响应头
-    if-none-match 
-  - crypto 内置加密模块
+
+
 - redis 缓存，服务器做缓存？
 - easyshop ai technology pty ltd
 - 二进制流传输
