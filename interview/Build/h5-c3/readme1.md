@@ -25,10 +25,11 @@
   - 影响重排的盒模型属性：width、height、margin、padding、border
 
 - **定位方式**
-  - 相对定位 `position: relative`
-  - 绝对定位 `position: absolute`
-  - 固定定位 `position: fixed`
-  - 绝对定位参考点：相对于最近的已定位（非 static）祖先元素，若无则相对于 html 根元素
+  - 相对定位 `position: relative`，不影响文档流
+  - 绝对定位 `position: absolute`，脱离文档流，相对最近**已定位**祖先（非static），没有的话相对document
+  - 固定定位 `position: fixed`，相对浏览器窗口定位，侧边栏或固定头部
+  - static：默认值，文档流，不影响布局
+  - *sticky*：滚动到一定位置“黏住”，适合吸顶效果或侧边栏固定
 
 - **弹性布局 Flexbox**
   - 主轴与交叉轴
@@ -83,7 +84,7 @@
   - `background-size`: 背景图片大小控制
   - `filter`: 滤镜效果
   - `rgba`: 透明度颜色
-  - `calc()`: CSS 计算函数
+  - **`calc()`: CSS 计算函数**
 
 ### 5. 样式隔离与模块化
 

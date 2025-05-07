@@ -67,3 +67,20 @@ for(var i=0;i<3;i++) {
         console.log(i);
     },0,i); // 第三个参数
 }
+
+var setInter = function () {
+    let i = 0;
+    setTimeout(() => {
+        console.log(1);
+        if(i<3) {
+            i++;
+            setInter();
+        }
+        clearTimeout(setInter);
+    },1000)
+}
+setInter();
+
+console.log([null].toString());      // ''
+console.log([undefined].toString()); // ''
+console.log([1, null, 2].toString()); // '1,,2'

@@ -13,10 +13,10 @@ function red() {
   function light(fn,delay) {
     // setInterval(fn,delay)
     return new Promise((resolve) => {
-        setTimeout(() => {
-            fn();
-            resolve(); // Resolve the promise after the function is executed
-        },delay)
+      setTimeout(() => {
+        fn();
+        resolve();
+      },delay)
     })
   }
   async function run() {
