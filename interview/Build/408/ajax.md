@@ -30,8 +30,8 @@
     ```
 
 ## ajax fetch xmlhttpRequest
-- ajax 可以在不加载整个页面情况下，只更新部分内容，可以减少网络请求，提高性能。
-- ajax: 底层是依赖xhr，通过监听onreadystatechange 、onLoad、onprogress 等事件来处理请求的，而使用回调函数来处理异步请求结果。（基于xhr实现，基于事件驱动，基于回调函数）
+- ajax 可以在*不加载整个页面情况下，只更新部分内容*，可以减少网络请求，提高性能。
+- ajax: （传统方式）底层是依赖xhr，通过监听onreadystatechange 、onLoad、onprogress 等事件来处理请求的，而使用回调函数来处理异步请求结果。（基于xhr实现，基于事件驱动，基于回调函数）
 - ajax 需要手动解析请求和响应格式
 - ajax 使用状态码和readState 来判断请求是否成功，4 为请求和响应完成
 （全局下reload 全部更新 window.location.reload()）

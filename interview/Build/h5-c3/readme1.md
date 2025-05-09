@@ -97,14 +97,19 @@
 
 - **多行文本截断**
   ```css
-  .truncate-multiline {
-    width: 200px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3; /* 显示行数 */
-  }
+  .text {
+  /* 1.宽度隐藏 */
+  width: 固定值;
+  overflow: hidden;
+  
+  /* 2.盒子竖排 */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  
+  /* 3.行数省略 */
+  -webkit-line-clamp: 行数;
+  text-overflow: ellipsis;
+}
   ```
 
 ## HTML 考点

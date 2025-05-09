@@ -10,4 +10,11 @@
 - 可以缓存 <router-view>、列表渲染、组件缓存等。
 - 需要缓存的组件push 到include 数组中，不需要缓存的组件push 到exclude 数组中。
 
-
+## 
+- created 数据注入，为挂载dom
+- onBeforeMounted 挂载前
+- onMounted 挂载后
+- onBeforeUpdate 更新前
+- onUpdated 更新后
+- onBeforeUnmount 卸载前
+- onUnmounted 卸载后

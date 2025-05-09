@@ -5,7 +5,6 @@ function singleFlight(fn) {
         return currentPromise;
     };
 }
-
 function request(num) {
     console.log(`开始:${num}`);
     return new Promise((resolve) => {
