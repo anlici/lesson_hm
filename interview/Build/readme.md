@@ -98,14 +98,85 @@
   - 最长不重复字符
   - 
 
+- 工具
+- 知识库，prompt，长文本记忆；
+- 浮窗组件，比如怎么使用，
+- 怎么性格的人，怎么学习，怎么解决问题；
+- 技术方面，打算怎么发展？
+- 虚拟dom 概念；
+- 一个根节点，请求修改数据，子组件会跟着一起修改吗？
+- 后端交互，封装axios，怎么封装？
+- 接口交互，接口工具，apifox
+- **restful api 和 http1.1 有什么特点**，
+  - restful api，本质就是一个动词，6种状态，get post put delete patch
+  - resful 标准化，命名规范，请求包含上下文（如token+资源标识）
+  - 数据格式也是统一，json/xml,
+  - http1.1  适合强操作性，rpc操作方法随意（如get去操作删除数据，url命名也随意，如/get_data）
+- mock 数据怎么模拟？
+  - 模拟数据，使用函数写请求
+  - mockjs，生成随机数据和拦截ajax 请求
+  - json-server 快速搭建restful api 服务
+- bigint；多位数，bigNumber；
+- nextjs 干啥的？
+  - 服务端在渲染，方便seo优化，并且每次客户端不用再解析；
+  - 水合操作，
+  - SSR，SSG，
+  - 基于文件系统实现自动路由，page目录下创建对应文件，就会生成路由
+  - api目录下，就能构建后端api接口
+  - 代码分隔，懒加载等优化。
+- 问了同步是什么情景，那一定从了解的定时器、promise、async await开始分析
+- setState ，异步操作？什么时候同步？
+  - 异步：多个合并到一次更新，**性能考虑**
+  - 更新状态为最新：回调,promsie,setTimeout,
+  - **同步情景：原生dom操作，定时器（到了时间执行），promise回调**
+- **不用状态管理库，怎么实现？useState,useReducer,useContext,useRef**
+- useState 简单，useReducer 复杂逻辑。
+- useReducer 做到状态更新逻辑集中管理，相比useState减少重复渲染
+- *useReducer 通过比较action 精准控制状态更新减少不必要渲染；*
+- useReducer 集中状态管理，但每次dispatch 都执行一次reducer，可能导致性能问题；代码量也增加；
+
+- useRef 对象值变化时，不会触发组件更新，主要用在dom元素、保存可变值。
+- useRef 是破坏单向数据流的，可能导致UI不变化，代码维护可能难，调试难；
+- 并且useRef 持有引用没有及时释放，会造成内存泄漏。
+- useRef 管理计数，点击按钮更新 ref 值，但界面不会重新渲染，无法显示最新计数
+
+- context 怎么使用？
+-   - 创建context,React.createContext() 
+-   - *使用provider 提供数据，* *当value改变时，子组件会重新渲染*
+-    <UserContext.Provider value={{ user, setUser }}>
+      <ChildComponent />
+    </UserContext.Provider>
+    - useContext hooks或Context.Consumer 获取数据
+  - context 优缺点：
+  - - 优点：跨城层传递数据，避免props层层传递；无需额外状态库；
+    - 缺点：耦合度高，Context变化，所依赖的组件也可能要变化？
+    - Context 里面数据流动随着应用规模可能变得复杂，调试难度大
+    - Context 变化，可能子组件也需要变化（性能优化）
+
+- 说慢一点，表示自己需要思考。
+- 隐藏操作 
+  - display:none;重排；
+  - opacity:0;重绘；可交互
+  - visibility:hidden;重绘，不可交互
+  - transform:scale(0);重绘，不可交互，占体积
+- em，rem，
+  - font-size 
+  - em 按照父元素字体大小计算，
+- z-index 控制元素堆叠上下文
+  - 定位处理static外的
+  - 父元素z-index较低时，子元素z-index再高也无效
+  - 同级元素比较时，后出现的元素默认在上层
+- 移动端适配，
+
+
 - 项目场景
   - 1. 项目中间层抽离做什么，有没有什么思考？
   - 解耦  将通用能力（请求拦截、日志收集、权限校验）从业务代码中剥离
   - 1. 能不能把公共中间层中，针对每个项目的功能设计成可插拔的插件，有没有见过这种架构
     1. Vue CLI 的插件体系
-    1. Webpack 的 loader/plugin 机制
-    2. Babel 的 preset/plugin 方案
-    3. VS Code 的扩展系统
+    2. Webpack 的 loader/plugin 机制
+    3. Babel 的 preset/plugin 方案
+    4. VS Code 的扩展系统
 - JWT token相比正常token的区别，为什么更安全？使用cookie和localStorage存储相关密钥的实现
 - 4. 减少打包体积方法
 1. CJS和ESM区别
@@ -166,7 +237,7 @@
 -   定高，计算每个列表项的top值，然后设置transform；
 -   无限滚动，滚动到底部，计算当前，加载更多数据；
 -   
-- websocket 全双工，半双工
+- websocket 全双工，半双工 
   - **半双工**：双方发生和接收数据，但是不能同时接收和发送数据；**相当对讲机**
   - 全双工：双方发生和接收数据，可以同时接收和发送数据；**相当于电话**
   - 单个tcp，全双工（websocket），
@@ -203,6 +274,17 @@
 - md5 加密，
 
 - webscok 返回数据和post 一样吗？
+  - post，一次http请求，每次都发送请求，实时性差
 - 怎么实现一个轮播组件？
+  - html包含轮播项、左右按钮，css实现轮播动画，js实现左右按钮的点击事件，切换轮播项。
+- 预检请求：发起真正请求前，先发options请求，判断是否允许跨域请求 √
+- ts：泛型，允许你定义函数、类或接口时使用类型变量，编写可复用代码，保证安全。
+  - 泛型函数：function identity<T>(arg: T): T { return arg; 
+  }
+  - 泛型类：class Box<T> { value: T; constructor(value: T) { this.value = value; } }
+  - 泛型接口：interface Pair<T, U> { first: T; second: U; }
 
-
+- vue+nodejs
+- 开源库的源码，实战经验，
+- 前端运维、监控、部署、发布
+- 

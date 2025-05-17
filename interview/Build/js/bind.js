@@ -10,7 +10,7 @@ Function.prototype.mybind = function(context,...args) {
 
 function myNew(fn,...args) {
     const obj = Object.create(fn.prototype);
-    const res = fn.apply(obj,args);
+    const res = fn.apply(obj,args); // 执行构造函数，修改this指向
 
     return res instanceof Object ? res : obj;
 }
