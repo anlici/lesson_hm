@@ -78,6 +78,6 @@ function sum(...args) {
     innerSum.sumOf = () => total;
     return innerSum;
 }
-console.log(sum(1,2,3).sumOf()); // 6
-console.log(sum(1,4)(2).sumOf()); // 7
+// console.log(sum(1,2,3).sumOf()); // 6
+// console.log(sum(1,4)(2).sumOf()); // 7
 console.log(sum(1)(2)(3)(4).sumOf()); // 10
