@@ -15,8 +15,8 @@ const routes = [
     component: User
   },
   {
-    path: '/data',
-    component: Data
+    path: '/AiUser',
+    component: AiUser
   },
   {
     path: '/login',

@@ -8,44 +8,22 @@ const flatArr = [
     { id: '0222', parentId: '022', name: '节点2-2-2' },
     { id: '03', parentId: 0, name: '节点3' },
   ]
-function getTreeData(arr,parentId) { 
-    function loop(parentId) {
-    //    return arr.filter(item => item.parentId === parentId).map(item => {
-    //        return {
-    //            ...item,
-    //            children: loop(item.id)
-    //        }
-    //    })
-        return arr.reduce((prev,cur) => {
-            if(cur.parentId === parentId) {
-                cur.children = loop(cur.id)
-                prev.push(cur)
-            }
-            return prev;  
-        },[]);
-    }
-    return loop(parentId)
-}
+function getTreeData(arr,parentId = 0) {
+    const map = {};
+    arr.forEach(item => {
+        map[item.id] = {...item,children:[]};
+    })
+    const res = [];
+    arr.forEach(item => {
+        const cur = map[item.id];
+        if( item.parentId === parentId) {
+            res.push(cur)
+        } else {
+            map[item.parentId].children.push(cur)
+        }
+    })
 
-// function getTreeData(arr,parentId) {
-    
-//     const map = {}; // 映射表，
-//     arr.forEach(item => {
-//         map[item.id] = {item,children:[] };
-//     });
-//     const result = [];
-//     arr.forEach(item => {
-//         const node = map[item.id];
-//         if(item.parentId === parentId) {
-//             result.push(node) 
-//         } else {
-//             const parent = map[item.parentId];
-//             if(parent) {
-//                 parent.children.push(node)
-//             }
-//         }
-//     });
-//     return result;
-// }
+    return res;
+}
 const result = getTreeData(flatArr,0)
-console.log('dddd',result)
+console.log('dddd', JSON.stringify(result, null, 2));

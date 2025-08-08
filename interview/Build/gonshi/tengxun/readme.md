@@ -1,4 +1,4 @@
-## 两数之和，动态规划，防抖，异步编程
+## 两数之和，动态规划，异步编程
 - 
 
 ## 为什么不直接操作虚拟 dom 若直接确定修改真实 dom 会不会比虚拟 dom 快
@@ -13,8 +13,70 @@
 - 首次渲染，虚拟dom 需要先进行构建，再渲染，真实dom 直接渲染
 - 简单的或很少的更新的，虚拟dom 需要diff 计算，真实dom 不需要
 
+- 引导到自己会的内容上，不要慌张。
+- 类组件和函数组件区别
+  - class 继承，setState 状态（异步，在定时器或事件绑定 表现为同步）
+  - 函数 js函数，useState ，可以使用useMemo，useCallback 优化
+- setState 和 useState 区别
+- setState 是否能 异步还是同步
+- useRef useMemo
+- 路由懒加载：组件打包一个js，现在懒加载，分隔多个独立代码块，按需加载；import 按需加载对应组件代码。
+- debug 页面
+- performance 面板：性能优化：页面加载时间、资源加载时间以及各种自定义的用户交互时间。
+  - fp： 首次绘制时间，
+  - fcp：首次内容绘制时间，首屏加载速度；
+  - lcp： 视口最大元素，绘制时间
+  - ttl： 页面加载总时间
+  - domcontentloded：dom树解析完成时间
+  
 
+- **虚拟dom diff 算法，Reac和 vue区别**
+  - vue diff ：基于节点类型，类型不同，直接替换；
+    初次渲染标记静态节点，后续直接跳过这些节点，只渲染变化的节点；
+  - react diff：基于组件层级结构，同一层节点不同，进行逐层比较。所有不同层级比较困难退化成o(n^2)
+    key 属性优化队列渲染，
+
+- 闭包原理，作用域，this 指向
+- 事件捕获和事件冒泡区别和使用场景，react里面使用什么做事件捕获的
+  合成机制，将捕获全给根节点，
+- 节流函数，区别和使用场景
+- 虚拟滚动原理
+  只渲染可视区列表，非可视区不渲染；
+  计算totalHeight 列表高度，触发滚动事件根据scrollTop 值更新开始和结束索引。startIndex 
+  选择 Performance 工具，点击 Start 按钮，展开 Main 选项，会发现有很多红色的三角
+- keepalive 底层怎么实现？
+- 监听事件，怎么做addEventListener? 
+  - 捕获阶段：如果将第三个参数设置为true，则事件监听器将在捕获阶段被调用
+  - 通过**event.eventPhase属性**来判断当前事件的传播阶段
+  - 事件类似，事件处理函数
+
+- add 柯里化原理，
+- 单页面和多页面区别，seo 考虑单页面不友好，怎么进行优化？
+  - 单页面，只加载一次html，后续只加载数据，相当页面不是全部刷新
+    但是seo 可能无法动态加载内容
+  - 多页面，每次请求都加载一个新html。每个页面独立url。seo友好
+  - 优化单页面：
+    - ssr
+    - 预渲染
+    - 动态渲染，按照用户代理 判断请求来自爬虫还是用户，爬虫就给到静态html；
+
+- localStorge 和 sessionStorge 区别，sessionStorge 存储的数据会话结束即失效，
+  - localStorge 用户登入状态长期，主题切换，受到同源（协议，域名，端口）
+  - sessionStorge 存储的数据会话结束即失效。同一个标签页，
+  - indexdb 支持结构化数据，本地磁盘数据库，缓存离线文章
+
+- 有用户，并发访问等
 ## 从登入请求到登入状态存储，到下次登入。
+- 前端发送用户名和密码给后端：
+  后端验证成功后，生成一个 JWT，并通过 Set-Cookie 设置 HttpOnly Cookie
+  浏览器会存储这个 JWT，并在下次请求中发送给后端
+  当用户再次打开网页时：
+  浏览器自动携带 Cookie 到服务器
+  后端解析 Token，验证有效性
+  如果有效，返回用户信息，前端显示已登录状态。
+  *登出，后端清除 Cookie，用户登出*。
+- sessionId 是存放服务器的，后端提供http 响应头set-cookie 返回sessionId ，表面身份，防止xss 
+- csrf ：跨站请求伪造，sameSite
 
 # vue 
 ## vue 响应式原理
@@ -63,7 +125,7 @@
 ### webpack 打包流程
 - 读取配置文件，创建compiler对象：
   Webpack会读取webpack.config.js配置文件，并根据配置创建一个compiler对象。compiler对象是Webpack的核心，负责整个打包过程的调度。
-- 从入口文件开始，使用loader处理不同类型的文件：
+- 从入口文件开始，*使用loader处理*不同类型的文件：
   Webpack从配置中指定的入口文件开始，递归地解析所有依赖的模块。对于不同类型的文件（如CSS、图片等），Webpack会使用相应的loader进行处理，将其转换为JavaScript模块。
 - 将所有模块转成js，解析模块之间的依赖关系，生成依赖图谱：
   Webpack会将所有模块转换为JavaScript代码，并解析模块之间的依赖关系，生成一个依赖图谱（Dependency Graph）。这个图谱描述了模块之间的依赖关系，是后续打包的基础。
@@ -71,6 +133,11 @@
   Webpack会根据配置进行代码分隔（Code Splitting），将代码分割成多个块（chunk），以便按需加载。同时，Webpack会执行tree shaking，移除未使用的代码。最后，Webpack会对生成的代码进行压缩，以减小文件体积。
 - 将打包后的文件输出到指定的目录：
   Webpack会将打包后的文件输出到配置中指定的目录，通常是dist目录。输出的文件包括JavaScript、CSS、图片等资源。
+
+## 优化webpack 打包
+- 速度：使用多线程并行处理loader 任务；开启缓存编译结果，使用esbuild-loader 
+- 体积：代码分隔，tree  shaking 移除未使用的代码，动态按需导入，图片压缩
+- 热模块，无感刷新
 
 ### vite 打包流程
 - vite 使用esbuild 预构建依赖，不打包，直接使用浏览器原生的esm 模块，再****按需编译源文件**
@@ -118,3 +185,15 @@
     客户端通过验证证书链确认服务器的真实性。
   - 加密通信：
     双方使用协商好的对称加密算法和会话密钥进行加密通信。
+- Reac diff 区别，
+
+
+- mpa 
+- se
+- useRef 
+  useMemo 缓存 
+  indexdb 
+- 虚拟滚动
+  react 
+- addListening 
+- null，立即执行函数；

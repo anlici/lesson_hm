@@ -19,3 +19,17 @@ export const updateSignature = async (signature) => await axios.patch('/user/sig
 })
 // 账单
 export const getBillDetail = async (id) => await axios.get(`/bill/${id}`)
+
+export const fetchAIRecommendations = async (query) => {
+  const response = await fetch('/search', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ keyword: query }),
+  });
+  if (!response.ok) {
+    throw new Error('Network response was not ok');
+  }
+  return response.json();
+};

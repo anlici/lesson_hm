@@ -11,7 +11,11 @@
 - 面试：
   - 微笑 
   - 中气十足
-
+- docker部署
+  - 编写代码，设定运行环境和依赖，
+  - 构建镜像，
+  - 运行容器，
+  - 配置网络，存储等
 ## 知识点规划
 - ts 基本类型（泛型有哪些？）
   - 联合 交叉 
@@ -29,11 +33,17 @@
 - 事件循环
 - defer async 
 
-- 408：http https 状态码（307 308），tcp 三次握手
+- 408：http https 状态码（307 308）
 - 浏览器缓存，存储，service worker
 - 跨域
 - 跨域解决方案
 
+- token 窃取后怎么处理？
+  - httponly 并且短期sessionStorage 存储
+  - jwt+localStorage 存储，加上refresh token
+  - 每次请求access token，过期refresh token先刷新，再请求access token
+  - refresh token 暴露，服务器立即撤销，引导用户重新登入
+  - 抽离公共组件函数，减少重复代码（比如axios 抽离create 方法，设置请求头等） **oauth2.0 凭证式：**
 - typeof 和 instanceof，判断数据类型还有哪些方法
 - new 关键字手写
 - 性能优化
@@ -57,7 +67,7 @@
 - 手写扁平化，数组去重； 
 - object 遍历，出对象；
 - 判断两个对象是否相等，递归，深浅拷贝
-- **bfc** 怎么实现
+- **bfc** **怎么实现**
 - border-box 和 content-box 区别,border-box 好处？ 
 
 - promise 原理，promise.all 
@@ -65,7 +75,7 @@
 - yeild , async
   - yeild 在生成器函数，暂停执行并稍后回复，返一个迭代器，next()
     function  *gen() {}
-
+****
 - ref reactive 
 - proxy 和 object.defineProperty 区别
 - watch 和 computed 区别，watchEffect
@@ -73,25 +83,33 @@
 - vue3 上面周期
 - 2 3 区别
 - v-model 和 v-bind，实现底层
+  - v-model :value 和 @input 事件；
+  - v-bind ： 传递属性给子组件props，
 - 轮播组件怎么实现
 - 前端做动画怎么做
-
+- hooks
 
 - react 虚拟dom 原理
 - react fiber 原理（fiber 树，动态更新，可以中断，处理优先级高的）
-- react 状态管理：useState useReducer useContext useRef
+- react 状态管理：useState useReducer复杂状态管理swaich useContext（减少跨城props传递） useRef（可变引用对象）
 - react 生命周期（16 18）
 - react 路由（react-router-dom）
-- react 性能优化（useMemo useCallback）
+- react 性能优化（useMemo 依赖项计算 useCallback 回调函数）
 - react 事件处理（**合成事件，事件委托**）****
 - react 高阶组件（高阶组件是什么，有哪些，怎么实现）
 - setState 优化？
 - react 不同版本
 - react 底层
+- React hooks 实现源码底层逻辑；
+
 
 - 输出题
   - 并行串行
-  - ****
+  - 多次操作，执行最后一次操作
+    - // 闭包，索引 
+        // 取消请求， 使用 AbortController
+        // 防抖
+
 - 代码分析
 - 算法
   - 二叉树路径和
@@ -125,6 +143,7 @@
   - api目录下，就能构建后端api接口
   - 代码分隔，懒加载等优化。
 - 问了同步是什么情景，那一定从了解的定时器、promise、async await开始分析
+
 - setState ，异步操作？什么时候同步？
   - 异步：多个合并到一次更新，**性能考虑**
   - 更新状态为最新：回调,promsie,setTimeout,
@@ -133,10 +152,13 @@
 - useState 简单，useReducer 复杂逻辑。
 - useReducer 做到状态更新逻辑集中管理，相比useState减少重复渲染
 - *useReducer 通过比较action 精准控制状态更新减少不必要渲染；*
-- useReducer 集中状态管理，但每次dispatch 都执行一次reducer，可能导致性能问题；代码量也增加；
+- *useReducer 集中状态管理，但每次dispatch 都执行一次reducer，可能导致性能问题；代码量也增加；*
 
-- useRef 对象值变化时，不会触发组件更新，主要用在dom元素、保存可变值。
-- useRef 是破坏单向数据流的，可能导致UI不变化，代码维护可能难，调试难；
+- useRef 在函数组件中创建可变的引用对象，在整个生命周期内保持不变，值的变化不会触发组件更新；
+- 访问dom 元素，比如获取焦点，focus
+  保存可变值，比如计算器count
+  缓存数据，比如用户输入的表单数据，保存在ref 中，不会触发组件更新；
+- useRef 是*破坏单向数据流的*，可能导致UI不变化，代码维护可能难，调试难；
 - 并且useRef 持有引用没有及时释放，会造成内存泄漏。
 - useRef 管理计数，点击按钮更新 ref 值，但界面不会重新渲染，无法显示最新计数
 
@@ -236,7 +258,7 @@
 -   虚拟列表：只渲染可见区域，以及小部分列表项；减少dom节点数量；
 -   定高，计算每个列表项的top值，然后设置transform；
 -   无限滚动，滚动到底部，计算当前，加载更多数据；
--   
+-   getBoundingClientRect
 - websocket 全双工，半双工 
   - **半双工**：双方发生和接收数据，但是不能同时接收和发送数据；**相当对讲机**
   - 全双工：双方发生和接收数据，可以同时接收和发送数据；**相当于电话**

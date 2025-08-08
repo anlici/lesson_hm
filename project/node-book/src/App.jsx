@@ -13,6 +13,8 @@ import 'zarm/dist/zarm.css'; // vite-plugin-style-import 自动引入css
 import NavBar from './components/NavBar';
 import { uploadAvatar } from './api';
 import s from './App.module.less'
+import DataView from './views/Data'; // 导入新的 Data 视图
+
 export default function App() {
   const [showNav, setShowNav] = useState(false);
   const needNav = ['/','/data'];
@@ -33,6 +35,8 @@ export default function App() {
     <ConfigProvider primaryColor='#007fff'>
       <div className={s.app}>
       <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/data" element={<DataView />} />
         { routes.map(route => <Route key={route.path} path={route.path} element={<route.component />}/>)}
       </Routes>
       

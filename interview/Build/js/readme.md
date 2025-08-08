@@ -13,19 +13,19 @@
 - 动态添加的子元素也能触发事件
 
 ## 2. 异步编程
-
 ### Promise
+- es6 异步解决方案，*状态改变后不能再变*
+-  静态方法：Promise.all（接受数组，全部成功over）、Promise.race（无论成功还是失败，完成就return）、promise.allSettled(数组，无论结果，全部完成则返回) 、
+-  promise.any(数组，第一个成功返回，全部失败才失败) Promise.resolve（成功，fulfilled）、Promise.reject（rejected）
+- 解决回调地狱问题
 - Promise 状态：pending、fulfilled、rejected
 - 链式调用：then、catch、finally
-- 静态方法：Promise.all、Promise.race、Promise.resolve、Promise.reject
-- 解决回调地狱问题
 
 ### async/await
-- 基于 Promise 的语法糖
+- es8，基于 Promise 的语
 - 使异步代码看起来像同步代码
 - 错误处理使用 try/catch
-
-
+  
 ## 3. 闭包与作用域
 
 - 词法作用域：函数定义时确定
