@@ -35,8 +35,7 @@
 
 - 408：http https 状态码（307 308）
 - 浏览器缓存，存储，service worker
-- 跨域
-- 跨域解决方案
+
 
 - token 窃取后怎么处理？
   - httponly 并且短期sessionStorage 存储

@@ -20,6 +20,5 @@ function myPromiseAll(promises) {
                     reject(err);
                 })
         })
-
     })
 }
